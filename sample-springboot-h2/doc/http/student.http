@@ -1,0 +1,42 @@
+# Student 전체 카운트
+GET http://127.0.0.1:8080/student/totalcount
+
+###
+
+# Student 리스트
+GET http://127.0.0.1:8080/student/list
+
+###
+
+# Student 조회
+GET http://127.0.0.1:8080/student/1
+
+###
+
+# Student 등록
+POST http://127.0.0.1:8080/student
+Content-Type: application/json
+
+{
+  "name": "박석영",
+  "grade": 2,
+  "age": 18
+}
+
+###
+
+# Student 수정
+PUT http://127.0.0.1:8080/student/3
+Content-Type: application/json
+
+{
+  "name": "박석영",
+  "grade": 2,
+  "age": 19
+}
+###
+
+# Student 삭제
+DELETE http://127.0.0.1:8080/student/3
+
+###
