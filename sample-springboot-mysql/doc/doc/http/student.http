@@ -39,6 +39,6 @@ Content-Type: application/json
 ###
 
 # Student 삭제
-DELETE http://127.0.0.1:8082/student/12
+DELETE http://127.0.0.1:8080/student/12
 
 ###
