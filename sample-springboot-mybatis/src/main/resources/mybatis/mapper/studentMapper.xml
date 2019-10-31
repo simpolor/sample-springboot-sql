@@ -25,7 +25,7 @@
                       #{name}
                     , #{grade}
                     , #{age}
-                    , #{hobby, typeHandler=io.simpolor.mybatis.mybatis.type.StringSplitTypeHandler}
+                    , #{hobby, typeHandler=io.simpolor.mybatis.mapper.type.StringSplitTypeHandler}
                     )
     </insert>
 
@@ -34,7 +34,7 @@
            SET name = #{name}
              , grade = #{grade}
              , age = #{age}
-             , hobby = #{hobby, typeHandler=io.simpolor.mybatis.mybatis.type.StringSplitTypeHandler}
+             , hobby = #{hobby, typeHandler=io.simpolor.mybatis.mapper.type.StringSplitTypeHandler}
          WHERE seq = #{seq}
     </update>
 
