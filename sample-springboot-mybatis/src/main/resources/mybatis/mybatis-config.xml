@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <typeAliases>
+        <typeAlias alias="student" type="io.simpolor.mybatis.domain.Student" />
+    </typeAliases>
+
+    <typeHandlers>
+        <typeHandler handler="io.simpolor.mybatis.mybatis.type.StringSplitTypeHandler" />
+    </typeHandlers>
+    
+    <mappers>
+        <mapper resource="mybatis/mapper/student.xml" />
+        <mapper resource="mybatis/mapper/studentMapper.xml" />
+    </mappers>
+
+</configuration>

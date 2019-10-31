@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.simpolor.mybatis.mapper.StudentMapper">
+
+    <select id="selectStudentTotalCountMapper" resultType="int">
+        SELECT count(*) 
+          FROM student
+    </select>
+
+    <select id="selectStudentListMapper" resultType="student">
+        SELECT *
+          FROM student
+    </select>
+    
+    <select id="selectStudentMapper" parameterType="long" resultType="student">
+        SELECT *
+          FROM student
+         WHERE seq = #{seq}
+    </select>
+
+    <insert id="insertStudentMapper" parameterType="student" useGeneratedKeys="true" keyProperty="seq">
+        INSERT INTO student ( name, grade, age, hobby )
+             VALUES (
+                      #{name}
+                    , #{grade}
+                    , #{age}
+                    , #{hobby, typeHandler=io.simpolor.mybatis.mybatis.type.StringSplitTypeHandler}
+                    )
+    </insert>
+
+    <update id="updateStudentMapper" parameterType="student">
+        UPDATE student
+           SET name = #{name}
+             , grade = #{grade}
+             , age = #{age}
+             , hobby = #{hobby, typeHandler=io.simpolor.mybatis.mybatis.type.StringSplitTypeHandler}
+         WHERE seq = #{seq}
+    </update>
+
+    <delete id="deleteStudentMapper" parameterType="long">
+        DELETE FROM student
+              WHERE seq = #{seq}
+    </delete>
+
+
+</mapper>
