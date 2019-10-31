@@ -1,4 +1,4 @@
-package io.simpolor.mybatis.mybatis.type;
+package io.simpolor.mybatis.mapper.type;
 
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;

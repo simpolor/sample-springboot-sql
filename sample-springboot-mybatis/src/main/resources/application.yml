@@ -13,6 +13,3 @@ spring:
     console:
       enabled: true # 콘솔 활성화 여부
       path: /h2-console # 콘솔 주소변경
-
-mybatis:
-  config-location: classpath:mybatis/mybatis-config.xml

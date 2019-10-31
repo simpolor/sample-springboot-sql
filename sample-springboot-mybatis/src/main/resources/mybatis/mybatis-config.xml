@@ -8,7 +8,7 @@
     </typeAliases>
 
     <typeHandlers>
-        <typeHandler handler="io.simpolor.mybatis.mybatis.type.StringSplitTypeHandler" />
+        <typeHandler handler="io.simpolor.mybatis.mapper.type.StringSplitTypeHandler" />
     </typeHandlers>
     
     <mappers>
