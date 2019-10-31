@@ -20,23 +20,25 @@ Content-Type: application/json
 {
   "name": "박석영",
   "grade": 2,
-  "age": 18
+  "age": 18,
+  "hobby": ["축구"]
 }
 
 ###
 
 # Student 수정
-PUT http://127.0.0.1:8080/student/18
+PUT http://127.0.0.1:8080/student/3
 Content-Type: application/json
 
 {
   "name": "박석영",
   "grade": 2,
-  "age": 18
+  "age": 19,
+  "hobby": ["축구", "프로그래밍"]
 }
 ###
 
 # Student 삭제
-DELETE http://127.0.0.1:8080/student/18
+DELETE http://127.0.0.1:8080/student/3
 
 ###
