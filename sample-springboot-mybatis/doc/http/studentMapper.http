@@ -1,25 +1,25 @@
 # Student 전체 카운트
-GET http://127.0.0.1:8081/mapper/student/totalcount
+GET http://127.0.0.1:8080/mapper/student/totalcount
 
 ###
 
 # Student 전체 카운트 ( findByAllCount )
-GET http://127.0.0.1:8081/mapper/student/findByAllCount
+GET http://127.0.0.1:8080/mapper/student/findByAllCount
 
 ###
 
 # Student 전체 리스트
-GET http://127.0.0.1:8081/mapper/student/list
+GET http://127.0.0.1:8080/mapper/student/list
 
 ###
 
 # Student 조회
-GET http://127.0.0.1:8081/mapper/student/11
+GET http://127.0.0.1:8080/mapper/student/2
 
 ###
 
 # Student 등록
-POST http://127.0.0.1:8081/mapper/student
+POST http://127.0.0.1:8080/mapper/student
 Content-Type: application/json
 
 {
@@ -32,18 +32,18 @@ Content-Type: application/json
 ###
 
 # Student 수정
-PUT http://127.0.0.1:8081/mapper/student/11
+PUT http://127.0.0.1:8080/mapper/student/3
 Content-Type: application/json
 
 {
   "name": "박석영",
   "grade": 2,
-  "age": 18,
+  "age": 19,
   "hobby": ["축구", "프로그래밍"]
 }
 ###
 
 # Student 삭제
-DELETE http://127.0.0.1:8081/mapper/student/11
+DELETE http://127.0.0.1:8081/mapper/student/3
 
 ###
