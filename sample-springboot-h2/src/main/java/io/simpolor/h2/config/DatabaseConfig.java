@@ -1,20 +1,23 @@
 package io.simpolor.h2.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.jdbc.datasource.init.*;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.Properties;
 
 
-// @Configuration
+@Configuration
+@EnableJpaRepositories(basePackages = {
+        "io.simpolor.h2.repository",
+})
+@EnableTransactionManagement
 public class DatabaseConfig {
 
     @Autowired
@@ -29,11 +32,6 @@ public class DatabaseConfig {
         dataSource.setUsername("sa");
         dataSource.setPassword("");
 
-        // schema init
-        Resource initSchema = new ClassPathResource("schema.sql");
-        Resource initData = new ClassPathResource("data.sql");
-        DatabasePopulator databasePopulator = new ResourceDatabasePopulator(initSchema, initData);
-        DatabasePopulatorUtils.execute(databasePopulator, dataSource);
 
         return dataSource;
     }

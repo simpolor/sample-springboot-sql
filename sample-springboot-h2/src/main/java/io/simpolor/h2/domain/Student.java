@@ -1,11 +1,13 @@
 package io.simpolor.h2.domain;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Student {
 
 	@Id
