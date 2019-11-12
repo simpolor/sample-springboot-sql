@@ -1,6 +1,7 @@
 package io.simpolor.h2.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -14,10 +15,11 @@ import java.util.Properties;
 
 
 @Configuration
-@EnableJpaRepositories(basePackages = {
+// @EntityScan("io.simpolor.h2.domain")
+/*@EnableJpaRepositories(basePackages = {
         "io.simpolor.h2.repository",
-})
-@EnableTransactionManagement
+})*/
+// @EnableTransactionManagement
 public class DatabaseConfig {
 
     @Autowired
@@ -36,7 +38,7 @@ public class DatabaseConfig {
         return dataSource;
     }
 
-    @Bean
+    /*@Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em
                 = new LocalContainerEntityManagerFactoryBean();
@@ -50,18 +52,18 @@ public class DatabaseConfig {
         em.setJpaProperties(additionalProperties());
 
         return em;
-    }
+    }*/
 
-    private Properties additionalProperties() {
+    /*private Properties additionalProperties() {
         Properties properties = new Properties();
-        // properties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("spring.jpa.hibernate.ddl-auto"));
-        // properties.setProperty("hibernate.dialect", env.getProperty("spring.jpa.properties.hibernate.dialect"));
-        // properties.setProperty("hibernate.current_session_context_class", env.getProperty("spring.jpa.properties.hibernate.current_session_context_class"));
-        // properties.setProperty("hibernate.jdbc.lob.non_contextual_creation", env.getProperty("spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation"));
-        // properties.setProperty("hibernate.show_sql", env.getProperty("spring.jpa.show-sql"));
-        // properties.setProperty("hibernate.format_sql", env.getProperty("spring.jpa.properties.hibernate.format_sql"));
+        properties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("spring.jpa.hibernate.ddl-auto"));
+        properties.setProperty("hibernate.dialect", env.getProperty("spring.jpa.properties.hibernate.dialect"));
+        properties.setProperty("hibernate.current_session_context_class", env.getProperty("spring.jpa.properties.hibernate.current_session_context_class"));
+        properties.setProperty("hibernate.jdbc.lob.non_contextual_creation", env.getProperty("spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation"));
+        properties.setProperty("hibernate.show_sql", env.getProperty("spring.jpa.show-sql"));
+        properties.setProperty("hibernate.format_sql", env.getProperty("spring.jpa.properties.hibernate.format_sql"));
         return properties;
-    }
+    }*/
 
 
 }
