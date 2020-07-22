@@ -1,13 +1,15 @@
 package io.simpolor.mysql.domain;
 
 import io.simpolor.mysql.convert.StringListConverter;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Student {
 
 	@Id
