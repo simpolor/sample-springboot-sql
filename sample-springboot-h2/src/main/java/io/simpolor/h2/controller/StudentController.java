@@ -14,43 +14,48 @@ public class StudentController {
 	@Autowired
 	private StudentService studentService;
 
-	@RequestMapping(value="/totalcount", method=RequestMethod.GET)
-	public long studentTotalCount() {
-		return studentService.getStudentTotalCount();
+	@RequestMapping(value="/totalCount", method=RequestMethod.GET)
+	public long totalCount() {
+
+		return studentService.getTotalCount();
 	}
 
 	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public List<Student> studentList() {
-		return studentService.getStudentList();
+	public List<Student> list() {
+
+		return studentService.getAll();
 	}
 
 	@RequestMapping(value="/{seq}", method=RequestMethod.GET)
-	public Student studentView(@PathVariable long seq) {
-		return studentService.getStudent(seq);
+	public Student view(@PathVariable long seq) {
+
+		return studentService.get(seq);
 	}
 
 	@RequestMapping(value="", method=RequestMethod.POST)
-	public Student studentRegister(@RequestBody Student student) {
-		return studentService.registerStudent(student);
+	public Student register(@RequestBody Student student) {
+
+		return studentService.register(student);
 	}
 
 	@RequestMapping(value="/{seq}", method=RequestMethod.PUT)
-	public Student studentModify(@PathVariable int seq,
-							 @RequestBody Student student) {
+	public Student modify(@PathVariable int seq,
+						  @RequestBody Student student) {
+
 		student.setSeq(seq);
-		return studentService.modifyStudent(student);
+		return studentService.modify(student);
 	}
 
 	@RequestMapping(value="/{seq}", method=RequestMethod.DELETE)
-	public long studentDelete(@PathVariable long seq) {
-		return studentService.deleteStudent(seq);
+	public long delete(@PathVariable long seq) {
 
+		return studentService.delete(seq);
 	}
 
 	@RequestMapping(value="/not", method=RequestMethod.GET)
 	public String studentNot() {
-		return "Is not a studnet";
 
+		return "Is not a studnet";
 	}
 
 

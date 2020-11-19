@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
@@ -25,19 +27,11 @@ public class StudentRepositoryIntergrationTest {
     @Test
     public void testTotalcount(){
 
-        // given
-
-
-        // when
+        // given, when
         long result = studentRepository.count();
-
 
         // than
         MatcherAssert.assertThat(2L, CoreMatchers.is(result));
-
-        // print
-        System.out.println("result :"+result);
-
     }
 
     @Test
@@ -48,19 +42,13 @@ public class StudentRepositoryIntergrationTest {
         students.add(new Student(1, "하니", 1, 17));
         students.add(new Student(2, "홍길동", 3, 19));
 
-
         // when
-        List<Student> result = new ArrayList<>();
-        studentRepository.findAll().iterator().forEachRemaining(result::add);
-
+        List<Student> actual = new ArrayList<>();
+        studentRepository.findAll().iterator().forEachRemaining(actual::add);
 
         // than
-        MatcherAssert.assertThat(2, CoreMatchers.is(result.size()));
-        assertIterableEquals(students, result);
-
-        // print
-        System.out.println("result :"+result);
-
+        MatcherAssert.assertThat(2, CoreMatchers.is(actual.size()));
+        assertIterableEquals(students, actual);
     }
 
     @Test
@@ -70,19 +58,13 @@ public class StudentRepositoryIntergrationTest {
         long seq = 1L;
         Student student = new Student(seq, "하니", 1, 17);
 
-
         // when
-        Optional<Student> result = studentRepository.findById(seq);
-
+        Optional<Student> actual = studentRepository.findById(seq);
 
         // than
-        MatcherAssert.assertThat(true, CoreMatchers.is(result.isPresent()));
-        assertEquals( "하니", result.get().getName());
-        assertEquals(student, result.get());
-
-        // print
-        System.out.println("result :"+result);
-
+        MatcherAssert.assertThat(true, CoreMatchers.is(actual.isPresent()));
+        assertEquals( "하니", actual.get().getName());
+        assertEquals(student, actual.get());
     }
 
     @Test
@@ -92,18 +74,12 @@ public class StudentRepositoryIntergrationTest {
         long seq = 3L;
         Student student = new Student(seq, "사나", 1, 17);
 
-
         // when
-        Student result = studentRepository.save(student);
-
+        Student actual = studentRepository.save(student);
 
         // than
-        assertEquals( "사나", result.getName());
-        assertEquals(student, result);
-
-        // print
-        System.out.println("result :"+result);
-
+        assertEquals( "사나", actual.getName());
+        assertEquals(student, actual);
     }
 
     @Test
@@ -112,19 +88,11 @@ public class StudentRepositoryIntergrationTest {
         // given
         long seq = 1L;
 
-
         // when
         studentRepository.deleteById(seq);
-
-        Optional<Student> result = studentRepository.findById(seq);
-
+        Optional<Student> actual = studentRepository.findById(seq);
 
         // than
-        MatcherAssert.assertThat(false, CoreMatchers.is(result.isPresent()));
-
-
-        // print
-        System.out.println("result :"+result);
-
+        MatcherAssert.assertThat(false, CoreMatchers.is(actual.isPresent()));
     }
 }

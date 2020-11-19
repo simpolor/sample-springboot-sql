@@ -10,6 +10,7 @@ public class WelcomeController {
     @RequestMapping({"/", "/index", "/welcome"})
     @ResponseBody
     public String welcome() {
+
         return "Springboot Sample H2database";
     }
 }

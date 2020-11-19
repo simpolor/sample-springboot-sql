@@ -1,15 +1,17 @@
 package io.simpolor.h2.service;
 
-
 import io.simpolor.h2.domain.Student;
 import io.simpolor.h2.repository.StudentRepository;
-import org.aspectj.lang.annotation.Before;
-import org.junit.jupiter.api.*;
-import org.mockito.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
@@ -34,14 +36,12 @@ public class StudentServiceTest {
         long reuturnValue = 3L;
         when(studentRepository.count()).thenReturn(reuturnValue);
 
-
         // when
-        long result = studentService.getStudentTotalCount();
-
+        long actual = studentService.getTotalCount();
 
         // then
-        Assertions.assertNotNull(result);
-        Assertions.assertEquals(3L, result);
+        Assertions.assertNotNull(actual);
+        Assertions.assertEquals(3L, actual);
     }
 
     @Test
@@ -51,14 +51,12 @@ public class StudentServiceTest {
         Student student = new Student(1, "홍길동", 2, 18);
         when(studentRepository.findAll()).thenReturn(Arrays.asList(student));
 
-
         // when
-        List<Student> result = studentService.getStudentList();
-
+        List<Student> actual = studentService.getAll();
 
         // then
-        Assertions.assertNotNull(result);
-        Assertions.assertEquals(1, result.size());
+        Assertions.assertNotNull(actual);
+        Assertions.assertEquals(1, actual.size());
 
     }
 
@@ -69,16 +67,15 @@ public class StudentServiceTest {
         long seq = 1;
 
         Student student = new Student(1, "홍길동", 2, 18);
+
         when(studentRepository.findById(anyLong())).thenReturn(Optional.of(student));
 
-
         // when
-        Student result = studentService.getStudent(seq);
-
+        Student actual = studentService.get(seq);
 
         // then
-        Assertions.assertNotNull(result);
-        Assertions.assertEquals(1, result.getSeq());
+        Assertions.assertNotNull(actual);
+        Assertions.assertEquals(1, actual.getSeq());
 
     }
 
@@ -94,12 +91,11 @@ public class StudentServiceTest {
         when(studentRepository.save(student)).thenReturn(response);
 
         // when
-        Student result = studentService.registerStudent(student);
-
+        Student actual = studentService.register(student);
 
         // then
-        Assertions.assertNotNull(result);
-        Assertions.assertEquals(seq, result.getSeq());
+        Assertions.assertNotNull(actual);
+        Assertions.assertEquals(seq, actual.getSeq());
 
     }
 
@@ -115,15 +111,13 @@ public class StudentServiceTest {
         when(studentRepository.findById(seq)).thenReturn(Optional.of(student));
         when(studentRepository.save(student)).thenReturn(response);
 
-
         // when
-        Student result = studentService.modifyStudent(student);
-
+        Student actual = studentService.modify(student);
 
         // then
-        Assertions.assertNotNull(result);
-        Assertions.assertEquals(seq, result.getSeq());
-        Assertions.assertEquals("홍길순", result.getName());
+        Assertions.assertNotNull(actual);
+        Assertions.assertEquals(seq, actual.getSeq());
+        Assertions.assertEquals("홍길순", actual.getName());
 
     }
 }

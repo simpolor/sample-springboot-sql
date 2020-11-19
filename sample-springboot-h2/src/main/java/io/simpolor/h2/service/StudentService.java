@@ -14,11 +14,11 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public long getStudentTotalCount() {
+    public long getTotalCount() {
         return studentRepository.count();
     }
 
-    public List<Student> getStudentList() {
+    public List<Student> getAll() {
 
         Iterable<Student> students = studentRepository.findAll();
         List<Student> list = new ArrayList<>();
@@ -29,23 +29,28 @@ public class StudentService {
         return list;
     }
 
-    public Student getStudent(long seq) {
-        return studentRepository.findById(seq).orElse(new Student());
+    public Student get(long seq) {
+
+        return studentRepository.findById(seq).orElseThrow(() -> new IllegalArgumentException("seq : "+seq));
     }
 
-    public Student registerStudent(Student student) {
+    public Student register(Student request) {
+
+        return studentRepository.save(request);
+    }
+
+    public Student modify(Student request) {
+
+        Student student = studentRepository.findById(request.getSeq())
+                .orElseThrow(() -> new IllegalArgumentException("seq : "+request.getSeq()));
+
         return studentRepository.save(student);
     }
 
-    public Student modifyStudent(Student student) {
-        if(studentRepository.findById(student.getSeq()).isPresent()){
-            return studentRepository.save(student);
-        }
-        return new Student();
-    }
+    public long delete(long seq) {
 
-    public long deleteStudent(long seq) {
         studentRepository.deleteById(seq);
+
         return seq;
     }
 
