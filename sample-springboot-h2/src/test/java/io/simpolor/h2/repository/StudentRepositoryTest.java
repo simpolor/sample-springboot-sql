@@ -1,6 +1,7 @@
 package io.simpolor.h2.repository;
 
 import io.simpolor.h2.domain.Student;
+import org.assertj.core.api.Assertions;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
@@ -29,65 +30,41 @@ public class StudentRepositoryTest {
     private StudentRepository studentRepository;
 
     @Test
-    public void testTotalcount(){
+    public void testTotalCount(){
 
-        // given
+        // given, when
+        long actual = studentRepository.count();
 
-
-        // when
-        long result = studentRepository.count();
-
-
-        // than
-        MatcherAssert.assertThat(2L, CoreMatchers.is(result));
-
-        // print
-        System.out.println("result :"+result);
-
+        // then
+        Assertions.assertThat(actual).isEqualTo(2);
     }
 
     @Test
     public void testFindAll(){
 
-        // given
-        List<Student> students = new ArrayList<>();
-        students.add(new Student(1, "하니", 1, 17));
-        students.add(new Student(2, "홍길동", 3, 19));
-
-
-        // when
-        List<Student> result = new ArrayList<>();
-        studentRepository.findAll().iterator().forEachRemaining(result::add);
-
+        // given, when
+        List<Student> actual = studentRepository.findAll();
 
         // than
-        MatcherAssert.assertThat(2, CoreMatchers.is(result.size()));
-        assertIterableEquals(students, result);
-
-        // print
-        System.out.println("result :"+result);
-
+        Assertions.assertThat(actual).isNotEmpty();
+        Assertions.assertThat(actual).size().isEqualTo(2);
     }
 
     @Test
-    public void testFind(){
+    public void testFindById(){
 
         // given
         long seq = 1L;
         Student student = new Student(seq, "하니", 1, 17);
 
-
         // when
-        Optional<Student> result = studentRepository.findById(seq);
+        Optional<Student> actual = studentRepository.findById(seq);
 
-
-        // than
-        MatcherAssert.assertThat(true, CoreMatchers.is(result.isPresent()));
-        assertEquals( "하니", result.get().getName());
-        assertEquals(student, result.get());
-
-        // print
-        System.out.println("result :"+result);
+        // then
+        Assertions.assertThat(actual).isNotEmpty();
+        Assertions.assertThat(actual).get().extracting(Student::getSeq).isEqualTo(student.getSeq());
+        Assertions.assertThat(actual).get().extracting(Student::getName).isEqualTo(student.getName());
+        Assertions.assertThat(actual).get().extracting(Student::getAge).isEqualTo(student.getAge());
 
     }
 
@@ -98,39 +75,26 @@ public class StudentRepositoryTest {
         long seq = 3L;
         Student student = new Student(seq, "사나", 1, 17);
 
-
         // when
-        Student result = studentRepository.save(student);
+        Student actual = studentRepository.save(student);
 
-
-        // than
-        assertEquals( "사나", result.getName());
-        assertEquals(student, result);
-
-        // print
-        System.out.println("result :"+result);
-
+        // then
+        Assertions.assertThat(actual).isNotNull();
+        Assertions.assertThat(actual).extracting(Student::getName).isEqualTo(student.getName());
+        Assertions.assertThat(actual).extracting(Student::getAge).isEqualTo(student.getAge());
     }
 
     @Test
-    public void testDelete(){
+    public void testDeleteById(){
 
         // given
         long seq = 1L;
 
-
         // when
         studentRepository.deleteById(seq);
 
-        Optional<Student> result = studentRepository.findById(seq);
-
-
-        // than
-        MatcherAssert.assertThat(false, CoreMatchers.is(result.isPresent()));
-
-
-        // print
-        System.out.println("result :"+result);
-
+        // then
+        Optional<Student> actual = studentRepository.findById(seq);
+        Assertions.assertThat(actual).isEmpty();
     }
 }

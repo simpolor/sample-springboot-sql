@@ -45,7 +45,7 @@ public class StudentControllerTest {
         Long totalCount = 3L;
         when(studentService.getTotalCount()).thenReturn(totalCount);
 
-        // when
+        // when, then
         this.mockMvc.perform(
                 get("/student/totalCount")
         )
@@ -164,7 +164,7 @@ public class StudentControllerTest {
     public void testDelete() throws Exception {
 
         // given
-        Long seq = 1L;
+        long seq = 1L;
         when(studentService.delete(seq)).thenReturn(seq);
 
         // when, then
