@@ -49,4 +49,16 @@ public class Student {
 	public void setHobby(List<String> hobby) {
 		this.hobby = hobby;
 	}
+
+	public Student() {
+
+	}
+
+	public Student(long seq, String name, int grade, int age, List<String> hobby) {
+		this.seq = seq;
+		this.name = name;
+		this.grade = grade;
+		this.age = age;
+		this.hobby = hobby;
+	}
 }

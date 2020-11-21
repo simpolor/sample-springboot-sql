@@ -13,40 +13,40 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public int getStudentTotalCount() {
-        return studentRepository.selectStudentTotalCount();
+    public long getTotalCount() {
+
+        return studentRepository.selectCount();
     }
 
-    public List<Student> getStudentList() {
-        return studentRepository.selectStudentList();
+    public List<Student> getAll() {
+
+        return studentRepository.selectList();
     }
 
-    public Student getStudent(long seq) {
-        if(studentRepository.selectStudent(seq) != null){
-            return studentRepository.selectStudent(seq);
+    public Student get(long seq) {
+
+        Student student = studentRepository.selectOne(seq);
+
+        if(student == null){
+            new IllegalArgumentException("seq : "+seq);
         }
-        return new Student();
+
+        return student;
     }
 
-    public Student registerStudent(Student student) {
-        long result = studentRepository.insertStudent(student);
-        if(result > 0){
-            student.setSeq(result);
-            return student;
-        }
-        return new Student();
+    public void register(Student student) {
+
+        studentRepository.insert(student);
     }
 
-    public Student modifyStudent(Student student) {
-        if(studentRepository.updateStudent(student) > 0){
-            return student;
-        }
-        return new Student();
+    public void modify(Student student) {
+
+        studentRepository.update(student);
     }
 
-    public long deleteStudent(long seq) {
-        studentRepository.deleteStudent(seq);
-        return seq;
+    public void delete(long seq) {
+
+        studentRepository.delete(seq);
     }
 
 }
