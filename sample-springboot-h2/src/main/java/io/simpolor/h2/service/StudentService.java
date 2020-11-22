@@ -34,15 +34,15 @@ public class StudentService {
         return studentRepository.findById(seq).orElseThrow(() -> new IllegalArgumentException("seq : "+seq));
     }
 
-    public Student register(Student request) {
+    public Student register(Student student) {
 
-        return studentRepository.save(request);
+        return studentRepository.save(student);
     }
 
-    public Student modify(Student request) {
+    public Student modify(Student student) {
 
-        Student student = studentRepository.findById(request.getSeq())
-                .orElseThrow(() -> new IllegalArgumentException("seq : "+request.getSeq()));
+        studentRepository.findById(student.getSeq())
+                .orElseThrow(() -> new IllegalArgumentException("seq : "+student.getSeq()));
 
         return studentRepository.save(student);
     }
