@@ -29,7 +29,8 @@ Content-Type: application/json
     "프로그래밍"
   ],
   "classRooms": [
-    "햇님반"
+    "햇님반",
+    "햇님반2"
   ]
 }
 

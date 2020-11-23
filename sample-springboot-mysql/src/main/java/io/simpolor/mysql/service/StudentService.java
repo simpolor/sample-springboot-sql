@@ -3,6 +3,7 @@ package io.simpolor.mysql.service;
 import io.simpolor.mysql.domain.Classroom;
 import io.simpolor.mysql.domain.Student;
 import io.simpolor.mysql.domain.StudentClassroom;
+import io.simpolor.mysql.domain.StudentResponse;
 import io.simpolor.mysql.repository.ClassroomRepository;
 import io.simpolor.mysql.repository.StudentClassroomRepository;
 import io.simpolor.mysql.repository.StudentRepository;
@@ -48,8 +49,18 @@ public class StudentService {
 
         System.out.println("getSeq : "+studentClassroom.getSeq());
         System.out.println("getOrdering : "+studentClassroom.getOrdering());
-        System.out.println("getStudent : "+studentClassroom.getStudent());
-        System.out.println("getClassroom : "+studentClassroom.getClassroom());
+        System.out.println("getOrdering : "+studentClassroom.getOrdering());
+
+        System.out.println("------------------------");
+        List<StudentRepository.StudentsInterface> selectStudents = studentRepository.selectStudents();
+        for(StudentRepository.StudentsInterface selectStudent : selectStudents){
+            System.out.println("getSeq : "+selectStudent.getSeq());
+            System.out.println("getName : "+selectStudent.getName());
+            System.out.println("getClassRoom : "+selectStudent.getClassName());
+        }
+
+        // System.out.println("getStudent : "+studentClassroom.getStudent());
+        // System.out.println("getClassroom : "+studentClassroom.getClassroom());
 
         return null;
     }

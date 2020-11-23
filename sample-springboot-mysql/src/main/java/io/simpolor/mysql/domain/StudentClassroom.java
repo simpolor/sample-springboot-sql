@@ -20,12 +20,13 @@ public class StudentClassroom {
 	private int ordering;
 
 	// @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "student_seq")
 	private Student student;
 
 	// @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "classroom_seq")
 	private Classroom classroom;
+
 }
