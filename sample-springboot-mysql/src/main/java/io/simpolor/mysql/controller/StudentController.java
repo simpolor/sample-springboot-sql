@@ -1,6 +1,5 @@
 package io.simpolor.mysql.controller;
 
-import io.simpolor.mysql.domain.StudentRequest;
 import io.simpolor.mysql.domain.Student;
 import io.simpolor.mysql.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,18 +33,17 @@ public class StudentController {
 	}
 
 	@RequestMapping(value="", method=RequestMethod.POST)
-	public void register(@RequestBody StudentRequest request) {
+	public void register(@RequestBody Student student) {
 
-		// System.out.println("getHobbies : "+request.getClassRooms());
-
-		studentService.register(request.toStudent(), request.getClassRooms());
+		studentService.register(student);
 	}
 
 	@RequestMapping(value="/{seq}", method=RequestMethod.PUT)
 	public void modify(@PathVariable int seq,
-					   @RequestBody StudentRequest request) {
+					   @RequestBody Student student) {
 
-		studentService.modify(request.toStudent(seq));
+		student.setSeq(seq);
+		studentService.modify(student);
 	}
 
 	@RequestMapping(value="/{seq}", method=RequestMethod.DELETE)

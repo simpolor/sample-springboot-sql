@@ -18,19 +18,10 @@ POST http://127.0.0.1:8080/student
 Content-Type: application/json
 
 {
-  "name": "박석영",
+  "name": "홍길순",
   "grade": 2,
   "age": 18,
-  "foodNames": [
-    "pizza"
-  ],
-  "hobbies": [
-    "축구",
-    "프로그래밍"
-  ],
-  "classRooms": [
-    "햇님반"
-  ]
+  "hobby": "축구"
 }
 
 ###
@@ -40,9 +31,10 @@ PUT http://127.0.0.1:8080/student/3
 Content-Type: application/json
 
 {
-  "name": "박석영",
+  "name": "홍길순",
   "grade": 2,
-  "age": 19
+  "age": 19,
+  "hobby": "농구"
 }
 ###
 

@@ -1,4 +1,4 @@
-/*CREATE TABLE `student` (
+CREATE TABLE `student` (
   `seq` INT(11) NOT NULL AUTO_INCREMENT COMMENT '번호',
   `name` VARCHAR(50) NOT NULL COMMENT '이름',
   `grade` INT(11) NULL DEFAULT NULL COMMENT '학년',
@@ -6,8 +6,3 @@
   `hobby` VARCHAR(50) NULL DEFAULT NULL COMMENT '취미',
   PRIMARY KEY (`seq`)
 );
-
-CREATE TABLE `favorite_food` (
-  `student_seq` INT(11) NOT NULL AUTO_INCREMENT COMMENT '번호',
-  `food_name` VARCHAR(50) NOT NULL COMMENT '이름'
-);*/

@@ -1,4 +1,0 @@
-SELECT s.seq, s.name, c.class_name
-FROM student s
-	LEFT OUTER JOIN student_classroom sc ON s.seq = sc.student_seq
-		LEFT OUTER JOIN classroom c ON sc.classroom_seq = c.seq
