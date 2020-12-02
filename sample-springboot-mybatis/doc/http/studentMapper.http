@@ -1,10 +1,5 @@
 # Student 전체 카운트
-GET http://127.0.0.1:8080/mapper/student/totalcount
-
-###
-
-# Student 전체 카운트 ( findByAllCount )
-GET http://127.0.0.1:8080/mapper/student/findByAllCount
+GET http://127.0.0.1:8080/mapper/student/totalCount
 
 ###
 
@@ -32,7 +27,7 @@ Content-Type: application/json
 ###
 
 # Student 수정
-PUT http://127.0.0.1:8080/mapper/student/3
+PUT http://127.0.0.1:8080/mapper/student/4
 Content-Type: application/json
 
 {
@@ -44,6 +39,6 @@ Content-Type: application/json
 ###
 
 # Student 삭제
-DELETE http://127.0.0.1:8081/mapper/student/3
+DELETE http://127.0.0.1:8080/mapper/student/4
 
 ###

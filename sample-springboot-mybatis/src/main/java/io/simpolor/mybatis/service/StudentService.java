@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class StudentService {
@@ -13,38 +14,35 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public int getStudentTotalCount() {
+    public long getTotalCount() {
         return studentRepository.selectStudentTotalCount();
     }
 
-    public List<Student> getStudentList() {
+    public List<Student> getAll() {
         return studentRepository.selectStudentList();
     }
 
-    public Student getStudent(long seq) {
-        if(studentRepository.selectStudent(seq) != null){
-            return studentRepository.selectStudent(seq);
+    public Student get(long seq) {
+        Student student = studentRepository.selectStudent(seq);
+        if(Objects.isNull(student)){
+            throw new IllegalArgumentException("seq : "+student.getSeq());
         }
-        return new Student();
+        return student;
     }
 
-    public Student registerStudent(Student student) {
-        if(studentRepository.insertStudent(student) > 0){
-            return student;
-        }
-        return new Student();
+    public void register(Student student) {
+        studentRepository.insertStudent(student);
     }
 
-    public Student modifyStudent(Student student) {
-        if(studentRepository.updateStudent(student) > 0){
-            return student;
+    public void modify(Student student) {
+        if(Objects.isNull(studentRepository.selectStudent(student.getSeq()))){
+            throw new IllegalArgumentException("seq : "+student.getSeq());
         }
-        return new Student();
+        studentRepository.updateStudent(student);
     }
 
-    public long deleteStudent(long seq) {
+    public void delete(long seq) {
         studentRepository.deleteStudent(seq);
-        return seq;
     }
 
 }

@@ -13,7 +13,7 @@ public class StudentRepository {
     @Autowired
     private SqlSession sqlSession;
 
-    public int selectStudentTotalCount(){
+    public long selectStudentTotalCount(){
         return sqlSession.selectOne("selectStudentTotalCount");
     }
 

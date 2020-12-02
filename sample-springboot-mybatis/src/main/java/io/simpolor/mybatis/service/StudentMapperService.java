@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class StudentMapperService {
@@ -13,38 +14,35 @@ public class StudentMapperService {
     @Autowired
     private StudentMapper studentMapper;
 
-    public int getStudentTotalCount() {
+    public long getTotalCount() {
         return studentMapper.selectStudentTotalCountMapper();
     }
 
-    public List<Student> getStudentList() {
+    public List<Student> getAll() {
         return studentMapper.selectStudentListMapper();
     }
 
-    public Student getStudent(long seq) {
-        if(studentMapper.selectStudentMapper(seq) != null){
-            return studentMapper.selectStudentMapper(seq);
+    public Student get(long seq) {
+        Student student = studentMapper.selectStudentMapper(seq);
+        if(Objects.isNull(student)){
+            throw new IllegalArgumentException("seq : "+seq);
         }
-        return new Student();
+        return student;
     }
 
-    public Student registerStudent(Student student) {
-        if(studentMapper.insertStudentMapper(student) > 0){
-            return student;
-        }
-        return new Student();
+    public void register(Student student) {
+        studentMapper.insertStudentMapper(student);
     }
 
-    public Student modifyStudent(Student student) {
-        if(studentMapper.updateStudentMapper(student) > 0){
-            return student;
+    public void modify(Student student) {
+        if(Objects.isNull(studentMapper.selectStudentMapper(student.getSeq()))){
+            throw new IllegalArgumentException("seq : "+student.getSeq());
         }
-        return new Student();
+        studentMapper.updateStudentMapper(student);
     }
 
-    public long deleteStudent(long seq) {
+    public void delete(long seq) {
         studentMapper.deleteStudentMapper(seq);
-        return seq;
     }
 
 }

@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface StudentMapper {
 
-	int selectStudentTotalCountMapper();
+	long selectStudentTotalCountMapper();
 
 	List<Student> selectStudentListMapper();
 

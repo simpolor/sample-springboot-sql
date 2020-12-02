@@ -3,7 +3,7 @@
 
 <mapper namespace="io.simpolor.mybatis.mapper.StudentMapper">
 
-    <select id="selectStudentTotalCountMapper" resultType="int">
+    <select id="selectStudentTotalCountMapper" resultType="long">
         SELECT count(*) 
           FROM student
     </select>

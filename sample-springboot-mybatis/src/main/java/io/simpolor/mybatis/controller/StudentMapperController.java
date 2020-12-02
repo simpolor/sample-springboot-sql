@@ -14,41 +14,35 @@ public class StudentMapperController {
 	@Autowired
 	private StudentMapperService studentMapperService;
 
-	@RequestMapping(value="/findByAllCount", method=RequestMethod.GET)
-	public int studentFindByAllCount() {
-		return studentMapperService.getStudentTotalCount();
-	}
-
-	@RequestMapping(value="/totalcount", method=RequestMethod.GET)
-	public int studentTotalcount() {
-		return studentMapperService.getStudentTotalCount();
+	@RequestMapping(value="/totalCount", method=RequestMethod.GET)
+	public long getTotalCount() {
+		return studentMapperService.getTotalCount();
 	}
 
 	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public List<Student> studentList() {
-		return studentMapperService.getStudentList();
+	public List<Student> getList() {
+		return studentMapperService.getAll();
 	}
 
 	@RequestMapping(value="/{seq}", method=RequestMethod.GET)
-	public Student studentView(@PathVariable long seq) {
-		return studentMapperService.getStudent(seq);
+	public Student get(@PathVariable long seq) {
+		return studentMapperService.get(seq);
 	}
 
 	@RequestMapping(value="", method=RequestMethod.POST)
-	public Student studentRegister(@RequestBody Student student) {
-		return studentMapperService.registerStudent(student);
+	public void post(@RequestBody Student student) {
+		studentMapperService.register(student);
 	}
 
 	@RequestMapping(value="/{seq}", method=RequestMethod.PUT)
-	public Student studentModify(@PathVariable long seq,
-                                 @RequestBody Student student) {
+	public void put(@PathVariable long seq, @RequestBody Student student) {
 		student.setSeq(seq);
-		return studentMapperService.modifyStudent(student);
+		studentMapperService.modify(student);
 	}
 
 	@RequestMapping(value="/{seq}", method=RequestMethod.DELETE)
-	public long studentDelete(@PathVariable long seq) {
-		return studentMapperService.deleteStudent(seq);
+	public void delete(@PathVariable long seq) {
+		studentMapperService.delete(seq);
 	}
 
 
