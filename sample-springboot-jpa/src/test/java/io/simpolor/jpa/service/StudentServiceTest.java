@@ -1,6 +1,6 @@
 package io.simpolor.jpa.service;
 
-import io.simpolor.jpa.domain.Student;
+import io.simpolor.jpa.repository.entity.Student;
 import io.simpolor.jpa.repository.StudentRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -56,7 +56,7 @@ public class StudentServiceTest {
                 .name("홍길동")
                 .grade(1)
                 .age(17)
-                .hobby(Arrays.asList("반항"))
+                // .hobby(Arrays.asList("반항"))
                 .build();
 
         when(studentRepository.findAll()).thenReturn(Arrays.asList(student));
@@ -81,7 +81,7 @@ public class StudentServiceTest {
                 .name("홍길동")
                 .grade(1)
                 .age(17)
-                .hobby(Arrays.asList("반항"))
+                // .hobby(Arrays.asList("반항"))
                 .build();
 
         when(studentRepository.findById(anyLong())).thenReturn(Optional.of(student));
@@ -105,7 +105,7 @@ public class StudentServiceTest {
                 .name("홍길동")
                 .grade(1)
                 .age(17)
-                .hobby(Arrays.asList("반항"))
+                // .hobby(Arrays.asList("반항"))
                 .build();
 
         when(studentRepository.save(any())).thenReturn(student);
@@ -127,7 +127,7 @@ public class StudentServiceTest {
                 .name("홍길동")
                 .grade(1)
                 .age(17)
-                .hobby(Arrays.asList("반항"))
+                // .hobby(Arrays.asList("반항"))
                 .build();
 
         when(studentRepository.findById(anyLong())).thenReturn(Optional.of(student));

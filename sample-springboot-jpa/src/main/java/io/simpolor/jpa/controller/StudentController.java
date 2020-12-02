@@ -1,6 +1,6 @@
 package io.simpolor.jpa.controller;
 
-import io.simpolor.jpa.domain.Student;
+import io.simpolor.jpa.repository.entity.Student;
 import io.simpolor.jpa.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +40,7 @@ public class StudentController {
 
 	@RequestMapping(value="/{seq}", method=RequestMethod.PUT)
 	public void modify(@PathVariable int seq,
-						  @RequestBody Student student) {
+					   @RequestBody Student student) {
 
 		student.setSeq(seq);
 		studentService.modify(student);

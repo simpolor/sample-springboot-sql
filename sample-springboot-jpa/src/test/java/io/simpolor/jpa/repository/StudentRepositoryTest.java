@@ -1,6 +1,6 @@
 package io.simpolor.jpa.repository;
 
-import io.simpolor.jpa.domain.Student;
+import io.simpolor.jpa.repository.entity.Student;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -55,7 +55,7 @@ public class StudentRepositoryTest {
                 .name("하니")
                 .grade(1)
                 .age(17)
-                .hobby(Arrays.asList("달리기"))
+                // .hobby(Arrays.asList("달리기"))
                 .build();
 
         // when
@@ -79,7 +79,7 @@ public class StudentRepositoryTest {
                 .name("사나")
                 .grade(1)
                 .age(17)
-                .hobby(Arrays.asList("윙크"))
+                // .hobby(Arrays.asList("윙크"))
                 .build();
 
 
@@ -116,7 +116,7 @@ public class StudentRepositoryTest {
                 .name("하니")
                 .grade(1)
                 .age(17)
-                .hobby(Arrays.asList("달리기"))
+                // .hobby(Arrays.asList("달리기"))
                 .build();
 
         // when

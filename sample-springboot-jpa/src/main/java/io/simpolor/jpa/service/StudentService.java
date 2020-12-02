@@ -1,6 +1,6 @@
 package io.simpolor.jpa.service;
 
-import io.simpolor.jpa.domain.Student;
+import io.simpolor.jpa.repository.entity.Student;
 import io.simpolor.jpa.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

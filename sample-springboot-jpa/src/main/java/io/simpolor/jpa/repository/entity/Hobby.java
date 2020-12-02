@@ -1,4 +1,4 @@
-package io.simpolor.jpa.domain;
+package io.simpolor.jpa.repository.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

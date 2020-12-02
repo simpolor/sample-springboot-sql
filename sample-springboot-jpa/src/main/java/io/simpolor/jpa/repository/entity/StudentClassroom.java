@@ -1,4 +1,4 @@
-package io.simpolor.jpa.domain;
+package io.simpolor.jpa.repository.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,16 +17,16 @@ public class StudentClassroom {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long seq;
 
-	private int ordering;
+	private int orderNum;
 
 	// @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@ManyToOne(fetch = FetchType.LAZY)
+	/*@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "student_seq")
-	private Student student;
+	private Student student;*/
 
 	// @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@ManyToOne(fetch = FetchType.LAZY)
+	/*@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "classroom_seq")
-	private Classroom classroom;
+	private Classroom classroom;*/
 
 }

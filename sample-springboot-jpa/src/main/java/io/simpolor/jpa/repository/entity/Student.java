@@ -1,6 +1,7 @@
-package io.simpolor.jpa.domain;
+package io.simpolor.jpa.repository.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import java.util.*;
 @Entity
 @Table(name = "student")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Student {
@@ -27,7 +29,7 @@ public class Student {
 	// @JoinColumn(name = "student_seq")
 	// private Collection<Hobby> hobby;
 
-	@ElementCollection
+	/*@ElementCollection
 	@CollectionTable(
 			name = "favorite_food",
 			joinColumns = @JoinColumn(name = "student_seq")
@@ -36,5 +38,5 @@ public class Student {
 	private Set<String> foodNames = new HashSet<>();
 
 	@OneToMany(mappedBy = "student")
-	private List<StudentClassroom> StudentClassrooms = new ArrayList<>();
+	private List<StudentClassroom> StudentClassrooms = new ArrayList<>();*/
 }

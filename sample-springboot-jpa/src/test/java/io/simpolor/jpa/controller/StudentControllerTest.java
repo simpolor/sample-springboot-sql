@@ -1,6 +1,6 @@
 package io.simpolor.jpa.controller;
 
-import io.simpolor.jpa.domain.Student;
+import io.simpolor.jpa.repository.entity.Student;
 import io.simpolor.jpa.service.StudentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -68,7 +68,7 @@ public class StudentControllerTest {
                 .name("하니")
                 .grade(1)
                 .age(17)
-                .hobby(Arrays.asList("달리기"))
+                // .hobby(Arrays.asList("달리기"))
                 .build();
         when(studentService.getAll()).thenReturn(Arrays.asList(student));
 
@@ -96,7 +96,7 @@ public class StudentControllerTest {
                 .name("하니")
                 .grade(1)
                 .age(17)
-                .hobby(Arrays.asList("달리기"))
+                // .hobby(Arrays.asList("달리기"))
                 .build();
         when(studentService.get(anyLong())).thenReturn(student);
 

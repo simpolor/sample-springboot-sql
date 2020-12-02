@@ -1,5 +1,7 @@
 package io.simpolor.jpa.domain;
 
+import io.simpolor.jpa.repository.entity.Hobby;
+import io.simpolor.jpa.repository.entity.Student;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,9 +23,9 @@ public class StudentRequest {
     private int grade;
     private int age;
 
-    private List<String> hobbies = new ArrayList<>();
+    /*private List<String> hobbies = new ArrayList<>();
     private Set<String> foodNames = new HashSet<>();
-    private List<String> classRooms = new ArrayList<>();
+    private List<String> classRooms = new ArrayList<>();*/
 
     public Student toStudent(){
 
@@ -31,8 +33,8 @@ public class StudentRequest {
         student.setName(name);
         student.setGrade(grade);
         student.setAge(age);
-        student.setHobby(toHobby(hobbies));
-        student.setFoodNames(foodNames);
+        /*student.setHobby(toHobby(hobbies));
+        student.setFoodNames(foodNames);*/
 
         return student;
     }
@@ -44,13 +46,13 @@ public class StudentRequest {
         student.setName(name);
         student.setGrade(grade);
         student.setAge(age);
-        student.setHobby(toHobby(hobbies));
-        student.setFoodNames(foodNames);
+        /*student.setHobby(toHobby(hobbies));
+        student.setFoodNames(foodNames);*/
 
         return student;
     }
 
-    private List<Hobby> toHobby(List<String> hobbies){
+    /*private List<Hobby> toHobby(List<String> hobbies){
         List<Hobby> list = new ArrayList<>();
         for(String s : hobbies){
             Hobby hobby = new Hobby();
@@ -58,5 +60,5 @@ public class StudentRequest {
             list.add(hobby);
         }
         return list;
-    }
+    }*/
 }

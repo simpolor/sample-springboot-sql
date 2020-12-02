@@ -1,4 +1,4 @@
-package io.simpolor.jpa.domain;
+package io.simpolor.jpa.repository.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +20,6 @@ public class Classroom {
 
 	private String className;
 
-	@OneToMany(mappedBy = "classroom")
-	private List<StudentClassroom> students = new ArrayList<>();
+	/*@OneToMany(mappedBy = "classroom")
+	private List<StudentClassroom> students = new ArrayList<>();*/
 }

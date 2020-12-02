@@ -20,17 +20,18 @@ Content-Type: application/json
 {
   "name": "박석영",
   "grade": 2,
-  "age": 18,
-  "foodNames": [
-    "pizza"
-  ],
-  "hobbies": [
+  "age": 18
+  /*"hobbies": [
     "축구",
     "프로그래밍"
   ],
+  "foodNames": [
+    "pizza"
+  ],
+
   "classRooms": [
     "햇님반"
-  ]
+  ]*/
 }
 
 ###
