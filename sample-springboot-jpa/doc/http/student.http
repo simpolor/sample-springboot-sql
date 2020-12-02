@@ -21,11 +21,15 @@ Content-Type: application/json
   "name": "박석영",
   "grade": 2,
   "age": 18,
-  "hobby": [
-    "축구"
+  "foodNames": [
+    "pizza"
   ],
-  "food_name": [
-    "라면"
+  "hobbies": [
+    "축구",
+    "프로그래밍"
+  ],
+  "classRooms": [
+    "햇님반"
   ]
 }
 
@@ -38,11 +42,7 @@ Content-Type: application/json
 {
   "name": "박석영",
   "grade": 2,
-  "age": 19,
-  "hobby": [
-    "축구"
-  ]
-
+  "age": 19
 }
 ###
 

@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -16,5 +18,8 @@ public class Classroom {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long seq;
 
-	private String roomName;
+	private String className;
+
+	@OneToMany(mappedBy = "classroom")
+	private List<StudentClassroom> students = new ArrayList<>();
 }
