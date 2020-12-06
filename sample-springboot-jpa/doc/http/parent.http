@@ -1,0 +1,40 @@
+# parent 전체 카운트
+GET http://127.0.0.1:8080/parent/totalCount
+
+###
+
+# parent 리스트
+GET http://127.0.0.1:8080/parent/list
+
+###
+
+# parent 조회
+GET http://127.0.0.1:8080/parent/1
+
+###
+
+# parent 등록
+POST http://127.0.0.1:8080/parent
+Content-Type: application/json
+
+{
+    "father_name": "ABC",
+    "mother_name": "가나다"
+}
+
+###
+
+# parent 수정
+PUT http://127.0.0.1:8080/parent/1
+Content-Type: application/json
+
+{
+  "father_name": "XYZ",
+  "mother_name": "타파하"
+}
+###
+
+# parent 삭제
+DELETE http://127.0.0.1:8080/parent/1
+
+###

@@ -1,11 +1,10 @@
 package io.simpolor.jpa.service;
 
-import io.simpolor.jpa.repository.entity.Student;
 import io.simpolor.jpa.repository.StudentRepository;
+import io.simpolor.jpa.repository.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,13 +19,7 @@ public class StudentService {
 
     public List<Student> getAll() {
 
-        Iterable<Student> students = studentRepository.findAll();
-        List<Student> list = new ArrayList<>();
-        for(Student student : students){
-            list.add(student);
-        }
-
-        return list;
+        return studentRepository.findAll();
     }
 
     public Student get(long seq) {
@@ -35,6 +28,9 @@ public class StudentService {
     }
 
     public void register(Student student) {
+
+        /*List<Long> teachers = teachService.saveAndGet(student.getTeachers());
+        System.out.println("teachers : "+teachers);*/
 
         studentRepository.save(student);
     }

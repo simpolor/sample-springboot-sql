@@ -20,34 +20,42 @@ Content-Type: application/json
 {
   "name": "박석영",
   "grade": 2,
-  "age": 18
-  /*"hobbies": [
+  "age": 18,
+  "favorite_foods": [
+    "치킨",
+    "피자"
+  ],
+  "hobbies": [
     "축구",
     "프로그래밍"
   ],
-  "foodNames": [
-    "pizza"
-  ],
-
-  "classRooms": [
-    "햇님반"
-  ]*/
+  "parent": {
+    "father_name": "ABC",
+    "mother_name": "가나다"
+  },
+  "teachers": [
+    "슨생님"
+  ]
 }
 
 ###
 
 # Student 수정
-PUT http://127.0.0.1:8080/student/3
+PUT http://127.0.0.1:8080/student/1
 Content-Type: application/json
 
 {
   "name": "박석영",
   "grade": 2,
-  "age": 19
+  "age": 19,
+  "hobbies": [
+    "농구",
+    "프로그래밍"
+  ]
 }
 ###
 
 # Student 삭제
-DELETE http://127.0.0.1:8080/student/3
+DELETE http://127.0.0.1:8080/student/1
 
 ###

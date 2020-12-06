@@ -1,6 +1,7 @@
 package io.simpolor.jpa.controller;
 
-import io.simpolor.jpa.repository.entity.Student;
+import io.simpolor.jpa.domain.student.StudentRequest;
+import io.simpolor.jpa.domain.student.StudentResponse;
 import io.simpolor.jpa.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,29 +22,28 @@ public class StudentController {
 	}
 
 	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public List<Student> list() {
+	public List<StudentResponse> getList() {
 
-		return studentService.getAll();
+		return StudentResponse.of(studentService.getAll());
 	}
 
 	@RequestMapping(value="/{seq}", method=RequestMethod.GET)
-	public Student view(@PathVariable long seq) {
+	public StudentResponse get(@PathVariable long seq) {
 
-		return studentService.get(seq);
+		return StudentResponse.of(studentService.get(seq));
 	}
 
 	@RequestMapping(value="", method=RequestMethod.POST)
-	public void register(@RequestBody Student student) {
+	public void post(@RequestBody StudentRequest request) {
 
-		studentService.register(student);
+		studentService.register(request.toStudent());
 	}
 
 	@RequestMapping(value="/{seq}", method=RequestMethod.PUT)
-	public void modify(@PathVariable int seq,
-					   @RequestBody Student student) {
+	public void put(@PathVariable int seq,
+					@RequestBody StudentRequest request) {
 
-		student.setSeq(seq);
-		studentService.modify(student);
+		studentService.modify(request.toStudent(seq));
 	}
 
 	@RequestMapping(value="/{seq}", method=RequestMethod.DELETE)
