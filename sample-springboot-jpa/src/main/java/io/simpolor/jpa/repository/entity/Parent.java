@@ -22,12 +22,13 @@ public class Parent {
 
     private String motherName;
 
+    /*
+        mappedBy : 1. 연관관계 주인 설정 ( 양방향 설정시 하나는 꼭 주인 설정이 필요 )
+                   2. 주인은 CRUD 가능, 아닌 경우 읽기만 가능
+                   3. 주인이 아닌 경우
+     */
     @JsonBackReference
     @OneToOne(mappedBy = "parent")
-    /*@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "student_seq")*/
-    /*@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_seq")*/
     private Student student;
 
 }

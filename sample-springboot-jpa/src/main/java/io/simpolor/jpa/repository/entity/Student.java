@@ -1,6 +1,5 @@
 package io.simpolor.jpa.repository.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.simpolor.jpa.repository.convert.StringListConverter;
 import lombok.AllArgsConstructor;
@@ -9,10 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "student")
@@ -35,12 +31,42 @@ public class Student {
 	@Convert(converter = StringListConverter.class)
 	private List<String> hobbies;
 
+	/**
+		@OneToOne
+        - name :
+        - cascade :
+        	+ CascadeType.ALL :
+        - fetch :
+        	+ FetchType.LAZY :
+			+ FetchType.EAGER :
+		- orphanRemoval :
+     */
+	/**
+		@JoinColumn
+		- name :
+		- insertable :
+		- updatable :
+	 */
 	@JsonManagedReference
 	@OneToOne(cascade = CascadeType.ALL)
-	// @OneToOne(mappedBy = "student")
 	@JoinColumn(name = "parent_seq")
 	private Parent parent;
 
+	/**
+	 * 연관 관계가 주인이 아닌경우 @Transient를 통해 저장/불러오기시에 무시하도록 해야 에러가 나지 않음
+	 */
+	@Transient
+	@OneToOne(mappedBy = "student")
+	private Tag tag;
+
+	/**
+		@ElementCollection :
+	 */
+	/**
+	 @CollectionTable :
+	 	- name :
+	 	- joinColumns :
+	 */
 	@ElementCollection
 	@CollectionTable(
 			name = "favorite_food",
@@ -53,12 +79,8 @@ public class Student {
 	@JoinColumn(name = "student_seq")
 	private List<Teacher> teachers = new ArrayList<>();
 
-	// @OneToMany(fetch = FetchType.LAZY, mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
-	// @JoinColumn(name = "student_seq", insertable = false, updatable = false)
-	// @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	// @OneToMany(fetch = FetchType.LAZY)
 	// @JoinColumn(name = "student_seq")
-	// private Collection<Hobby> hobby;
-
-	/*@OneToMany(mappedBy = "student")
-	private List<StudentClassroom> StudentClassrooms = new ArrayList<>();*/
+	// @OneToMany(mappedBy = "student")
+	// private List<StudentClassroom> StudentClassrooms = new ArrayList<>();
 }

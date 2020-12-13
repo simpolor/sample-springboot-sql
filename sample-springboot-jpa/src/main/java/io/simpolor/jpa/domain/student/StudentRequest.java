@@ -2,6 +2,7 @@ package io.simpolor.jpa.domain.student;
 
 import io.simpolor.jpa.repository.entity.Parent;
 import io.simpolor.jpa.repository.entity.Student;
+import io.simpolor.jpa.repository.entity.Tag;
 import io.simpolor.jpa.repository.entity.Teacher;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,6 +29,7 @@ public class StudentRequest {
     private Set<String> favoriteFoods = new HashSet<>();
     private List<String> teachers = new ArrayList<>();
     private Parent parent;
+    private Tag tag;
 
     public Student toStudent(){
 
@@ -38,6 +40,7 @@ public class StudentRequest {
         student.setHobbies(this.hobbies);
         student.setFoodNames(this.favoriteFoods);
         student.setParent(this.parent);
+        student.setTag(this.tag);
         student.setTeachers(Teacher.of(this.teachers));
 
         return student;
@@ -53,6 +56,7 @@ public class StudentRequest {
         student.setHobbies(this.hobbies);
         student.setFoodNames(this.favoriteFoods);
         student.setParent(this.parent);
+        student.setTag(this.tag);
         student.setTeachers(Teacher.of(this.teachers));
 
         return student;

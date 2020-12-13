@@ -33,6 +33,9 @@ Content-Type: application/json
     "father_name": "ABC",
     "mother_name": "가나다"
   },
+  "tag": {
+    "title": "공부잘하는 학생"
+  },
   "teachers": [
     "슨생님"
   ]

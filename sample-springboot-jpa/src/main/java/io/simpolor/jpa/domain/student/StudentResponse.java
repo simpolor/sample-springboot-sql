@@ -2,6 +2,7 @@ package io.simpolor.jpa.domain.student;
 
 import io.simpolor.jpa.repository.entity.Parent;
 import io.simpolor.jpa.repository.entity.Student;
+import io.simpolor.jpa.repository.entity.Tag;
 import io.simpolor.jpa.repository.entity.Teacher;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

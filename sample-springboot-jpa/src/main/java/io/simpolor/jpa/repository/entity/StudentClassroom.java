@@ -6,8 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-// @Entity
-// @Table(name = "student_classroom")
+@Entity
+@Table(name = "student_classroom")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,9 +20,9 @@ public class StudentClassroom {
 	private int orderNum;
 
 	// @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	/*@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "student_seq")
-	private Student student;*/
+	@ManyToOne
+	@JoinColumn
+	private Student student;
 
 	// @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	/*@ManyToOne(fetch = FetchType.LAZY)
