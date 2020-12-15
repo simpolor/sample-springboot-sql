@@ -1,5 +1,6 @@
 package io.simpolor.jpa.domain.student;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.simpolor.jpa.repository.entity.Parent;
 import io.simpolor.jpa.repository.entity.Student;
 import io.simpolor.jpa.repository.entity.Tag;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class StudentResponse {
 
     private long seq;

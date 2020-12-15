@@ -19,14 +19,16 @@ public class StudentClassroom {
 
 	private int orderNum;
 
-	// @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name = "student_seq")
 	private Student student;
 
-	// @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	/*@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "classroom_seq")
-	private Classroom classroom;*/
+	private Classroom classroom;
+
+	public StudentClassroom(Long classSeq){
+		this.classroom = new Classroom(classSeq);
+	}
 
 }

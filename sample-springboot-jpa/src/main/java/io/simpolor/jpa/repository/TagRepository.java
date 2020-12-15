@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface TagRepository extends JpaRepository<Tag, Long> {
 
     Optional<Tag> findByTitle(String title);
+
+    Optional<Tag> findByStudentSeq(Long studentSeq);
 }

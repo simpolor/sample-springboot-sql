@@ -1,9 +1,6 @@
 package io.simpolor.jpa.domain.student;
 
-import io.simpolor.jpa.repository.entity.Parent;
-import io.simpolor.jpa.repository.entity.Student;
-import io.simpolor.jpa.repository.entity.Tag;
-import io.simpolor.jpa.repository.entity.Teacher;
+import io.simpolor.jpa.repository.entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Data
 @Builder
@@ -30,6 +28,7 @@ public class StudentRequest {
     private List<String> teachers = new ArrayList<>();
     private Parent parent;
     private Tag tag;
+    private List<Long> classroomSequences = new ArrayList<>();
 
     public Student toStudent(){
 
@@ -42,6 +41,9 @@ public class StudentRequest {
         student.setParent(this.parent);
         student.setTag(this.tag);
         student.setTeachers(Teacher.of(this.teachers));
+        student.setStudentClassrooms(
+                this.classroomSequences.stream().map(o -> new StudentClassroom(o)).collect(Collectors.toList())
+        );
 
         return student;
     }

@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -14,10 +16,14 @@ public class Classroom {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long seq;
+	private Long seq;
 
 	private String className;
 
-	/*@OneToMany(mappedBy = "classroom")
-	private List<StudentClassroom> students = new ArrayList<>();*/
+	@OneToMany
+	private List<StudentClassroom> students = new ArrayList<>();
+
+	public Classroom(Long seq){
+		this.seq = seq;
+	}
 }
