@@ -1,10 +1,11 @@
 package io.simpolor.jpa.domain.student;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.simpolor.jpa.domain.parent.ParentResponse;
+import io.simpolor.jpa.domain.pet.PetResponse;
 import io.simpolor.jpa.repository.entity.Parent;
 import io.simpolor.jpa.repository.entity.Student;
-import io.simpolor.jpa.repository.entity.Tag;
-import io.simpolor.jpa.repository.entity.Teacher;
+import io.simpolor.jpa.repository.entity.Pet;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,8 +31,8 @@ public class StudentResponse {
 
     private Set<String> favoriteFoods = new HashSet<>();
     private List<String> hobbies = new ArrayList<>();
-    private List<Teacher> teachers;
-    private Parent parent;
+    private List<PetResponse> pets;
+    private ParentResponse parent;
 
     public static StudentResponse of(Student student){
 
@@ -42,8 +43,8 @@ public class StudentResponse {
                 .age(student.getAge())
                 .favoriteFoods(student.getFoodNames())
                 .hobbies(student.getHobbies())
-                .teachers(student.getTeachers())
-                .parent(student.getParent())
+                .pets(PetResponse.of(student.getPets()))
+                .parent(ParentResponse.of(student.getParent()))
                 .build();
     }
 

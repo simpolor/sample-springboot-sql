@@ -36,8 +36,12 @@ Content-Type: application/json
   "tag": {
     "title": "공부잘하는 학생"
   },
-  "teachers": [
-    "슨생님"
+  "pets": [
+    {
+      "kind": "dog",
+      "name": "쭈쭈",
+      "age": 3
+    }
   ]
 }
 

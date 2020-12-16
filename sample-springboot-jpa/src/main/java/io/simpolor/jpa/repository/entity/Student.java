@@ -1,6 +1,5 @@
 package io.simpolor.jpa.repository.entity;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.simpolor.jpa.repository.convert.StringListConverter;
 import lombok.AllArgsConstructor;
@@ -78,8 +77,8 @@ public class Student {
 	private Set<String> foodNames = new HashSet<>();
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "student_seq")
-	private List<Teacher> teachers = new ArrayList<>();
+	@JoinColumn(name = "pet_seq")
+	private List<Pet> pets = new ArrayList<>();
 
 	@OneToMany
 	private List<StudentClassroom> StudentClassrooms = new ArrayList<>();
