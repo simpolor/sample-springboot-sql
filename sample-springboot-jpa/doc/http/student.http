@@ -34,7 +34,8 @@ Content-Type: application/json
     "mother_name": "가나다"
   },
   "tag": {
-    "title": "공부잘하는 학생"
+    "title": "공부잘하는 학생",
+    "order_num" : 1
   },
   "pets": [
     {
@@ -42,6 +43,12 @@ Content-Type: application/json
       "name": "쭈쭈",
       "age": 3
     }
+  ],
+  "classroom_names": [
+    "햇님반"
+  ],
+  "teachers": [
+    1
   ]
 }
 

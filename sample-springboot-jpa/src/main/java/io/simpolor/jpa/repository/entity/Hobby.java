@@ -1,14 +1,12 @@
 package io.simpolor.jpa.repository.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
 @Entity
-@Table(name = "hobby")
+@Builder
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Hobby {

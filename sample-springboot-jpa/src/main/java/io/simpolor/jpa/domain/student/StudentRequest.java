@@ -1,6 +1,7 @@
 package io.simpolor.jpa.domain.student;
 
 import io.simpolor.jpa.domain.pet.PetRequest;
+import io.simpolor.jpa.domain.tag.TagRequest;
 import io.simpolor.jpa.repository.entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,40 +29,36 @@ public class StudentRequest {
     private Set<String> favoriteFoods = new HashSet<>();
     private List<PetRequest> pets = new ArrayList<>();
     private Parent parent;
-    private Tag tag;
-    private List<Long> classroomSequences = new ArrayList<>();
+    private TagRequest tag;
+    private List<String> classroomNames = new ArrayList<>();
+    private List<Long> teachers = new ArrayList<>();
 
     public Student toStudent(){
 
-        Student student = new Student();
-        student.setName(this.name);
-        student.setGrade(this.grade);
-        student.setAge(this.age);
-        student.setHobbies(this.hobbies);
-        student.setFoodNames(this.favoriteFoods);
-        student.setParent(this.parent);
-        student.setTag(this.tag);
-        student.setPets(this.pets.stream().map(PetRequest::toPet).collect(Collectors.toList()));
-        student.setStudentClassrooms(
-                this.classroomSequences.stream().map(o -> new StudentClassroom(o)).collect(Collectors.toList())
-        );
-
-        return student;
+        return Student.builder()
+                .name(this.name)
+                .grade(this.grade)
+                .age(this.age)
+                .hobbies(this.hobbies)
+                .foodNames(this.favoriteFoods)
+                .parent(this.parent)
+                .tag(this.tag.toTag())
+                .pets(this.pets.stream().map(PetRequest::toPet).collect(Collectors.toList()))
+                .build();
     }
 
     public Student toStudent(long seq){
 
-        Student student = new Student();
-        student.setSeq(seq);
-        student.setName(name);
-        student.setGrade(grade);
-        student.setAge(age);
-        student.setHobbies(this.hobbies);
-        student.setFoodNames(this.favoriteFoods);
-        student.setParent(this.parent);
-        student.setTag(this.tag);
-        student.setPets(this.pets.stream().map(PetRequest::toPet).collect(Collectors.toList()));
-
-        return student;
+        return Student.builder()
+                .seq(seq)
+                .name(this.name)
+                .grade(this.grade)
+                .age(this.age)
+                .hobbies(this.hobbies)
+                .foodNames(this.favoriteFoods)
+                .parent(this.parent)
+                .tag(this.tag.toTag())
+                .pets(this.pets.stream().map(PetRequest::toPet).collect(Collectors.toList()))
+                .build();
     }
 }

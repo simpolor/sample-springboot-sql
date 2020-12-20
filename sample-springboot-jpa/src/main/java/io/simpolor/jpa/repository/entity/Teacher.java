@@ -11,14 +11,14 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Classroom {
+public class Teacher {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long seq;
 
-	private String className;
+	private String teacherName;
 
-	@OneToMany(mappedBy = "classroom")
-	private List<StudentClassroom> studentClassrooms = new ArrayList<>();
+	@OneToMany(mappedBy = "teacher")
+	private List<StudentTeacher> studentTeachers = new ArrayList<>();
 }

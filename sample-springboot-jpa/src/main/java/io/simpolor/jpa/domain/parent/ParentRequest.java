@@ -1,7 +1,6 @@
 package io.simpolor.jpa.domain.parent;
 
 import io.simpolor.jpa.repository.entity.Parent;
-import io.simpolor.jpa.repository.entity.Student;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,20 +24,18 @@ public class ParentRequest {
 
     public Parent toParent() {
 
-        Parent parent = new Parent();
-        parent.setFatherName(this.fatherName);
-        parent.setMotherName(this.motherName);
-
-        return parent;
+        return Parent.builder()
+                .fatherName(this.fatherName)
+                .motherName(this.motherName)
+                .build();
     }
 
     public Parent toParent(long seq) {
 
-        Parent parent = new Parent();
-        parent.setSeq(seq);
-        parent.setFatherName(this.fatherName);
-        parent.setMotherName(this.motherName);
-
-        return parent;
+        return Parent.builder()
+                .seq(seq)
+                .fatherName(this.fatherName)
+                .motherName(this.motherName)
+                .build();
     }
 }

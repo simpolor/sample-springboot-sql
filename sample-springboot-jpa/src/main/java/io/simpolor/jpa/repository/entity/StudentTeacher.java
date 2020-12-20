@@ -9,21 +9,17 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudentClassroom {
+public class StudentTeacher {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long seq;
 
-	/***
-	 * @ManyToOne은 항상 주인이 되므로 mappedBy를 설정할 수 없음
-	 */
 	@ManyToOne
 	@JoinColumn(name = "student_seq")
 	private Student student;
 
 	@ManyToOne
-	@JoinColumn(name = "classroom_seq")
-	private Classroom classroom;
-
+	@JoinColumn(name = "teacher_seq")
+	private Teacher teacher;
 }

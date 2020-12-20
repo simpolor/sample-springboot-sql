@@ -2,17 +2,14 @@ package io.simpolor.jpa.repository.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.simpolor.jpa.repository.convert.StringListConverter;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.*;
 
-@Entity
+@Entity(name = "student")
 @Table(name = "student")
-@Data
+@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -47,6 +44,12 @@ public class Student {
 		- insertable :
 		- updatable :
 	 */
+	/**
+	 @JsonManagedReference
+	 - 무한 루프를 방어하기 위한 JSON 애노테이션
+	 - 불러오는 주체
+	 - @JsonBackReference와 쌍으로 사용됨
+	 */
 	@JsonManagedReference
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "parent_seq")
@@ -80,6 +83,21 @@ public class Student {
 	@JoinColumn(name = "pet_seq")
 	private List<Pet> pets = new ArrayList<>();
 
-	@OneToMany
-	private List<StudentClassroom> StudentClassrooms = new ArrayList<>();
+	@OneToMany(mappedBy = "student")
+	private List<StudentClassroom> studentClassrooms = new ArrayList<>();
+
+	@OneToMany(mappedBy = "student")
+	private List<StudentTeacher> studentTeachers = new ArrayList<>();
+
+	/***
+	 * @Temporal
+	 * - 데이터베이스에 저장될 타입을 지정
+	 */
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date insert_date = new Date();
+
+	/***
+	 * @Enumerated(EnumType.STRING)
+	 * - Enum 타입을 어떻게 저장할지 여부
+	 */
 }

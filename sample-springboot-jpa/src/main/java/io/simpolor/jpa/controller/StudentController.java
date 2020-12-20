@@ -36,7 +36,7 @@ public class StudentController {
 	@RequestMapping(value="", method=RequestMethod.POST)
 	public void post(@RequestBody StudentRequest request) {
 
-		studentService.register(request.toStudent());
+		studentService.register(request.toStudent(), request.getClassroomNames(), request.getTeachers());
 	}
 
 	@RequestMapping(value="/{seq}", method=RequestMethod.PUT)

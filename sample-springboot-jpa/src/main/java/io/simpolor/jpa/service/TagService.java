@@ -24,14 +24,13 @@ public class TagService {
         return tagRepository.findById(seq).orElseThrow(() -> new IllegalArgumentException("seq : "+seq));
     }
 
-    public Tag getStudent(long studentSeq) {
-
-        return tagRepository.findByStudentSeq(studentSeq).orElse(null);
-    }
-
     public void register(String title, Student student) {
 
-        tagRepository.save(new Tag(title, student));
+        Tag tag = Tag.builder()
+                .title(title)
+                .student(student)
+                .build();
+        tagRepository.save(tag);
     }
 
 

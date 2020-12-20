@@ -1,0 +1,38 @@
+# Teacher 전체 카운트
+GET http://127.0.0.1:8080/teacher/totalCount
+
+###
+
+# Teacher 리스트
+GET http://127.0.0.1:8080/teacher/list
+
+###
+
+# Teacher 조회
+GET http://127.0.0.1:8080/teacher/1
+
+###
+
+# Teacher 등록
+POST http://127.0.0.1:8080/teacher
+Content-Type: application/json
+
+{
+  "name": "라이언"
+}
+
+###
+
+# Teacher 수정
+PUT http://127.0.0.1:8080/teacher/1
+Content-Type: application/json
+
+{
+  "name": "제임스"
+}
+###
+
+# Teacher 삭제
+DELETE http://127.0.0.1:8080/teacher/1
+
+###
