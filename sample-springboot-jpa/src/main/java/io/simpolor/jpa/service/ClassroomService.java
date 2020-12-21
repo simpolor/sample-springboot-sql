@@ -17,8 +17,6 @@ public class ClassroomService {
     public List<Classroom> saveAndGet(List<String> classroomNames) {
 
         List<Classroom> classrooms = classroomRepository.findAllByClassNameIn(classroomNames);
-        System.out.println("classrooms : "+classrooms.size());
-        System.out.println("classroomNames : "+classroomNames.size());
         if(CollectionUtils.isEmpty(classrooms)){
             for(String classroomName : classroomNames){
                 classrooms.add(Classroom.builder().className(classroomName).build());

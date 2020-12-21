@@ -3,6 +3,7 @@ package io.simpolor.jpa.repository.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.simpolor.jpa.repository.convert.StringListConverter;
 import lombok.*;
+import org.springframework.data.annotation.Persistent;
 
 import javax.persistence.*;
 import java.util.*;
@@ -56,11 +57,11 @@ public class Student {
 	private Parent parent;
 
 	/**
-	 * 연관 관계가 주인이 아닌경우 @Transient를 통해 저장/불러오기시에 무시하도록 해야 에러가 나지 않음
-	 * 주인이 아닌 경우 조회할때 연관 관계를 조회할 수 없음? ( 확인 필요 )
+	 * 단방향 관계에서 연관 관계가 주인이 아닌경우 @Transient를 통해 저장/불러오기시에 무시하도록 해야 에러가 나지 않음
+	 * 단방향에서 자식에서 조회시 부모를 함께 조회하기 위한 방법으로 cascade 옵션 추가
 	 */
-	@Transient
-	@OneToOne(mappedBy = "student")
+	// @Transient
+	@OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
 	private Tag tag;
 
 	/**

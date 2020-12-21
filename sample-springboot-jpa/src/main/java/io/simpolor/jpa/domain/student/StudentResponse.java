@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import io.simpolor.jpa.domain.classroom.ClassroomResponse;
 import io.simpolor.jpa.domain.parent.ParentResponse;
 import io.simpolor.jpa.domain.pet.PetResponse;
+import io.simpolor.jpa.domain.tag.TagResponse;
 import io.simpolor.jpa.domain.teacher.TeacherResponse;
 import io.simpolor.jpa.repository.entity.Student;
 import lombok.AllArgsConstructor;
@@ -33,6 +34,7 @@ public class StudentResponse {
     private List<String> hobbies = new ArrayList<>();
     private List<PetResponse> pets;
     private ParentResponse parent;
+    private TagResponse tag;
     private List<ClassroomResponse> classrooms;
     private List<TeacherResponse> teachers;
 
@@ -46,6 +48,7 @@ public class StudentResponse {
                 .favoriteFoods(student.getFoodNames())
                 .hobbies(student.getHobbies())
                 .pets(PetResponse.of(student.getPets()))
+                .tag(TagResponse.of(student.getTag()))
                 .parent(ParentResponse.of(student.getParent()))
                 .classrooms(ClassroomResponse.of(student.getStudentClassrooms()))
                 .teachers(TeacherResponse.ofStudent(student.getStudentTeachers()))

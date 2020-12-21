@@ -43,7 +43,7 @@ public class StudentController {
 	public void put(@PathVariable int seq,
 					@RequestBody StudentRequest request) {
 
-		studentService.modify(request.toStudent(seq));
+		studentService.modify(request.toStudent(seq), request.getClassroomNames(), request.getTeachers());
 	}
 
 	@RequestMapping(value="/{seq}", method=RequestMethod.DELETE)

@@ -17,16 +17,12 @@ public class TagResponse {
 
     private long seq;
     private String title;
-    private Integer orderNum;
-    private long studentSeq;
 
     public static TagResponse of(Tag tag){
 
         return TagResponse.builder()
                 .seq(tag.getSeq())
                 .title(tag.getTitle())
-                .orderNum(tag.getOrderNum())
-                .studentSeq(tag.getStudent().getSeq())
                 .build();
     }
 

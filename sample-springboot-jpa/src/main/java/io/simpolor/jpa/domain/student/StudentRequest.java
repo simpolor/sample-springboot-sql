@@ -42,7 +42,7 @@ public class StudentRequest {
                 .hobbies(this.hobbies)
                 .foodNames(this.favoriteFoods)
                 .parent(this.parent)
-                .tag(this.tag.toTag())
+                .tag(this.tag.toInsert())
                 .pets(this.pets.stream().map(PetRequest::toPet).collect(Collectors.toList()))
                 .build();
     }
@@ -57,7 +57,7 @@ public class StudentRequest {
                 .hobbies(this.hobbies)
                 .foodNames(this.favoriteFoods)
                 .parent(this.parent)
-                .tag(this.tag.toTag())
+                .tag(this.tag.toUpdate())
                 .pets(this.pets.stream().map(PetRequest::toPet).collect(Collectors.toList()))
                 .build();
     }

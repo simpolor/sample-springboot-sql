@@ -59,12 +59,39 @@ PUT http://127.0.0.1:8080/student/1
 Content-Type: application/json
 
 {
-  "name": "박석영",
-  "grade": 2,
+  "name": "박석영2",
+  "grade": 3,
   "age": 19,
+  "favorite_foods": [
+    "치킨",
+    "피자",
+    "국밥"
+  ],
   "hobbies": [
-    "농구",
-    "프로그래밍"
+    "축구",
+    "프로그래밍",
+    "팔찌공예"
+  ],
+  "parent": {
+    "father_name": "ABCD",
+    "mother_name": "가나다라"
+  },
+  "tag": {
+    "seq": 1,
+    "title": "공부잘하는 학생일까??"
+  },
+  "pets": [
+    {
+      "kind": "dog",
+      "name": "쭈쭈",
+      "age": 3
+    }
+  ],
+  "classroom_names": [
+    "햇님반일까?"
+  ],
+  "teachers": [
+    1
   ]
 }
 ###

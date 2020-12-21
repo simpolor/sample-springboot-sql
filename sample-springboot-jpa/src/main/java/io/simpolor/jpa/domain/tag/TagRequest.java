@@ -9,14 +9,21 @@ import lombok.*;
 @AllArgsConstructor
 public class TagRequest {
 
+    private Long seq;
     private String title;
-    private Integer orderNum;
 
-    public Tag toTag(){
+    public Tag toInsert(){
 
         return Tag.builder()
                 .title(this.title)
-                .orderNum(this.orderNum)
+                .build();
+    }
+
+    public Tag toUpdate(){
+
+        return Tag.builder()
+                .seq(this.seq)
+                .title(this.title)
                 .build();
     }
 }

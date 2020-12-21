@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Entity
 @Builder
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Tag {
@@ -16,8 +17,6 @@ public class Tag {
     private long seq;
 
     private String title;
-
-    private Integer orderNum;
 
     @OneToOne
     @JoinColumn(name = "student_seq")

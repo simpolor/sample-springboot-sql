@@ -45,7 +45,7 @@ public class StudentService {
 
         studentRepository.saveAndFlush(student);
         if(Objects.nonNull(student.getTag())) {
-            tagService.register(student.getTag().getTitle(), student);
+            tagService.register(student.getTag(), student);
         }
 
         List<Classroom> classrooms = classroomService.saveAndGet(classroomNames);
@@ -67,12 +67,34 @@ public class StudentService {
         }
     }
 
-    public void modify(Student student) {
+    public void modify(Student student, List<String> classroomNames, List<Long> teacherSeqs) {
 
         studentRepository.findById(student.getSeq())
                 .orElseThrow(() -> new IllegalArgumentException("seq : "+student.getSeq()));
 
-        studentRepository.save(student);
+        studentRepository.saveAndFlush(student);
+        if(Objects.nonNull(student.getTag())) {
+            tagService.modify(student.getTag(), student);
+        }
+
+        studentClassroomService.getAndDelete(student.getSeq());
+        List<Classroom> classrooms = classroomService.saveAndGet(classroomNames);
+        if(!CollectionUtils.isEmpty(classrooms)){
+            List<StudentClassroom> studentClassrooms = new ArrayList<>();
+            for(Classroom classroom : classrooms){
+                studentClassrooms.add(StudentClassroom.builder().student(student).classroom(classroom).build());
+            }
+            studentClassroomService.register(studentClassrooms);
+        }
+
+        List<Teacher> teachers = teacherService.getAll(teacherSeqs);
+        if(!CollectionUtils.isEmpty(teachers)){
+            List<StudentTeacher> studentTeachers = new ArrayList<>();
+            for(Teacher teacher : teachers){
+                studentTeachers.add(StudentTeacher.builder().student(student).teacher(teacher).build());
+            }
+            studentTeacherService.modify(studentTeachers, student.getSeq());
+        }
     }
 
     public void delete(long seq) {
