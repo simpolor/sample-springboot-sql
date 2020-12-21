@@ -36,14 +36,14 @@ public class StudentController {
 	@RequestMapping(value="", method=RequestMethod.POST)
 	public void post(@RequestBody StudentRequest request) {
 
-		studentService.register(request.toStudent(), request.getClassroomNames(), request.getTeachers());
+		studentService.register(request.toStudent(), request.getClassroomNames(), request.getTeacherSequences());
 	}
 
 	@RequestMapping(value="/{seq}", method=RequestMethod.PUT)
 	public void put(@PathVariable int seq,
 					@RequestBody StudentRequest request) {
 
-		studentService.modify(request.toStudent(seq), request.getClassroomNames(), request.getTeachers());
+		studentService.modify(request.toStudent(seq), request.getClassroomNames(), request.getTeacherSequences());
 	}
 
 	@RequestMapping(value="/{seq}", method=RequestMethod.DELETE)

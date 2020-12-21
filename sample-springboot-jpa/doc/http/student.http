@@ -88,9 +88,10 @@ Content-Type: application/json
     }
   ],
   "classroom_names": [
-    "햇님반일까?"
+    "햇님반일까?",
+    "햇님반2"
   ],
-  "teachers": [
+  "teacher_sequences": [
     1
   ]
 }

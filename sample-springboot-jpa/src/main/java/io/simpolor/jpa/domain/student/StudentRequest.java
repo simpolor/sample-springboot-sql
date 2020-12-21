@@ -31,7 +31,7 @@ public class StudentRequest {
     private Parent parent;
     private TagRequest tag;
     private List<String> classroomNames = new ArrayList<>();
-    private List<Long> teachers = new ArrayList<>();
+    private List<Long> teacherSequences = new ArrayList<>();
 
     public Student toStudent(){
 

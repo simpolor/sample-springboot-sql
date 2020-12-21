@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ClassroomService {
@@ -17,12 +18,14 @@ public class ClassroomService {
     public List<Classroom> saveAndGet(List<String> classroomNames) {
 
         List<Classroom> classrooms = classroomRepository.findAllByClassNameIn(classroomNames);
-        if(CollectionUtils.isEmpty(classrooms)){
-            for(String classroomName : classroomNames){
+        List<String> orgClassroomNames = classrooms.stream().map(Classroom::getClassName).collect(Collectors.toList());
+
+        for(String classroomName : classroomNames){
+            if(!orgClassroomNames.contains(classroomName)){
                 classrooms.add(Classroom.builder().className(classroomName).build());
             }
-            classroomRepository.saveAll(classrooms);
         }
+        classroomRepository.saveAll(classrooms);
 
         return classrooms;
     }

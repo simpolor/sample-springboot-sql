@@ -23,9 +23,9 @@ public class TeacherService {
         return teacherRepository.findAll();
     }
 
-    public List<Teacher> getAll(List<Long> secs) {
+    public List<Teacher> getAll(List<Long> sequences) {
 
-        return teacherRepository.findAllBySeqIn(secs);
+        return teacherRepository.findAllBySeqIn(sequences);
     }
 
     public Teacher get(long seq) {

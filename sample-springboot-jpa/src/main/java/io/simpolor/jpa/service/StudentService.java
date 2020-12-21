@@ -41,7 +41,7 @@ public class StudentService {
         return studentOptional.get();
     }
 
-    public void register(Student student, List<String> classroomNames, List<Long> teacherSeqs) {
+    public void register(Student student, List<String> classroomNames, List<Long> teacherSequences) {
 
         studentRepository.saveAndFlush(student);
         if(Objects.nonNull(student.getTag())) {
@@ -57,7 +57,7 @@ public class StudentService {
             studentClassroomService.register(studentClassrooms);
         }
 
-        List<Teacher> teachers = teacherService.getAll(teacherSeqs);
+        List<Teacher> teachers = teacherService.getAll(teacherSequences);
         if(!CollectionUtils.isEmpty(teachers)){
             List<StudentTeacher> studentTeachers = new ArrayList<>();
             for(Teacher teacher : teachers){
@@ -67,7 +67,7 @@ public class StudentService {
         }
     }
 
-    public void modify(Student student, List<String> classroomNames, List<Long> teacherSeqs) {
+    public void modify(Student student, List<String> classroomNames, List<Long> teacherSequences) {
 
         studentRepository.findById(student.getSeq())
                 .orElseThrow(() -> new IllegalArgumentException("seq : "+student.getSeq()));
@@ -79,6 +79,7 @@ public class StudentService {
 
         studentClassroomService.getAndDelete(student.getSeq());
         List<Classroom> classrooms = classroomService.saveAndGet(classroomNames);
+        System.out.println("classroomNames : "+classroomNames);
         if(!CollectionUtils.isEmpty(classrooms)){
             List<StudentClassroom> studentClassrooms = new ArrayList<>();
             for(Classroom classroom : classrooms){
@@ -87,7 +88,7 @@ public class StudentService {
             studentClassroomService.register(studentClassrooms);
         }
 
-        List<Teacher> teachers = teacherService.getAll(teacherSeqs);
+        List<Teacher> teachers = teacherService.getAll(teacherSequences);
         if(!CollectionUtils.isEmpty(teachers)){
             List<StudentTeacher> studentTeachers = new ArrayList<>();
             for(Teacher teacher : teachers){
