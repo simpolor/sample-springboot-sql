@@ -1,9 +1,11 @@
 package io.simpolor.jpa.service;
 
 import io.simpolor.jpa.repository.StudentTeacherRepository;
+import io.simpolor.jpa.repository.entity.StudentClassroom;
 import io.simpolor.jpa.repository.entity.StudentTeacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -45,6 +47,14 @@ public class StudentTeacherService {
 
         studentTeacherRepository.saveAll(saveBulk);
         studentTeacherRepository.saveAll(deleteBulk);
+    }
+
+    public void getAndDelete(Long studentSeq) {
+
+        List<StudentTeacher> studentTeachers = studentTeacherRepository.findAllByStudentSeq(studentSeq);
+        if(!CollectionUtils.isEmpty(studentTeachers)){
+            studentTeacherRepository.deleteAll(studentTeachers);
+        }
     }
 
 }

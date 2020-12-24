@@ -1,5 +1,6 @@
 package io.simpolor.jpa.domain.student;
 
+import io.simpolor.jpa.domain.parent.ParentRequest;
 import io.simpolor.jpa.domain.pet.PetRequest;
 import io.simpolor.jpa.domain.tag.TagRequest;
 import io.simpolor.jpa.repository.entity.*;
@@ -8,10 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Data
@@ -28,7 +26,7 @@ public class StudentRequest {
     private List<String> hobbies = new ArrayList<>();
     private Set<String> favoriteFoods = new HashSet<>();
     private List<PetRequest> pets = new ArrayList<>();
-    private Parent parent;
+    private ParentRequest parent;
     private TagRequest tag;
     private List<String> classroomNames = new ArrayList<>();
     private List<Long> teacherSequences = new ArrayList<>();
@@ -41,8 +39,8 @@ public class StudentRequest {
                 .age(this.age)
                 .hobbies(this.hobbies)
                 .foodNames(this.favoriteFoods)
-                .parent(this.parent)
-                .tag(this.tag.toInsert())
+                .parent((Objects.nonNull(this.parent)) ? this.parent.toInsert() : null)
+                .tag((Objects.nonNull(this.tag)) ? this.tag.toInsert() : null)
                 .pets(this.pets.stream().map(PetRequest::toPet).collect(Collectors.toList()))
                 .build();
     }
@@ -56,8 +54,8 @@ public class StudentRequest {
                 .age(this.age)
                 .hobbies(this.hobbies)
                 .foodNames(this.favoriteFoods)
-                .parent(this.parent)
-                .tag(this.tag.toUpdate())
+                .parent((Objects.nonNull(this.parent)) ? this.parent.toUpdate() : null)
+                .tag((Objects.nonNull(this.tag)) ? this.tag.toUpdate() : null)
                 .pets(this.pets.stream().map(PetRequest::toPet).collect(Collectors.toList()))
                 .build();
     }

@@ -94,8 +94,8 @@ public class Student {
 	 * @Temporal
 	 * - 데이터베이스에 저장될 타입을 지정
 	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date insert_date = new Date();
+	// @Temporal(TemporalType.TIMESTAMP)
+	// private Date insertDate = new Date();
 
 	/***
 	 * @Enumerated(EnumType.STRING)

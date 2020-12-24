@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface StudentClassroomRepository extends JpaRepository<StudentClassroom, Long> {
 
-    List<StudentClassroom> getAllByStudentSeq(Long seq);
+    List<StudentClassroom> findAllByStudentSeq(Long seq);
 }

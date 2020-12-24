@@ -22,7 +22,7 @@ public class ParentRequest {
     private List<String> hobbies = new ArrayList<>();
     private Parent parent;
 
-    public Parent toParent() {
+    public Parent toInsert() {
 
         return Parent.builder()
                 .fatherName(this.fatherName)
@@ -30,7 +30,16 @@ public class ParentRequest {
                 .build();
     }
 
-    public Parent toParent(long seq) {
+    public Parent toUpdate() {
+
+        return Parent.builder()
+                .seq(this.seq)
+                .fatherName(this.fatherName)
+                .motherName(this.motherName)
+                .build();
+    }
+
+    public Parent toUpdate(long seq) {
 
         return Parent.builder()
                 .seq(seq)

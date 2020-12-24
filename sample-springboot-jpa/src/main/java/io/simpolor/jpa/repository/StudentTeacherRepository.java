@@ -10,4 +10,5 @@ import java.util.List;
 public interface StudentTeacherRepository extends JpaRepository<StudentTeacher, Long> {
 
     List<StudentTeacher> findAllByStudentSeq(Long studentSeq);
+
 }

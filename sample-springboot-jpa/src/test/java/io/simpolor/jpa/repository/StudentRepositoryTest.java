@@ -1,21 +1,26 @@
 package io.simpolor.jpa.repository;
 
 import io.simpolor.jpa.repository.entity.Student;
+import io.simpolor.jpa.service.*;
 import org.assertj.core.api.Assertions;
+import org.assertj.core.util.Lists;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+
+import static org.mockito.Mockito.mock;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 // @ActiveProfiles("local")
-// @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 /*@TestPropertySource(properties = {
         "spring.jpa.hibernate.ddl-auto=validate"
 })*/
@@ -23,6 +28,33 @@ public class StudentRepositoryTest {
 
     @Autowired
     private StudentRepository studentRepository;
+
+    @BeforeEach
+    public void setup() {
+        studentRepository.deleteAll();
+
+        Student student = Student.builder()
+                .seq(1L)
+                .name("하니")
+                .grade(1)
+                .age(17)
+                .hobbies(Arrays.asList("달리기"))
+                .pets(Collections.EMPTY_LIST)
+                .build();
+
+        Student student2 = Student.builder()
+                .seq(2L)
+                .name("철수")
+                .grade(2)
+                .age(18)
+                .hobbies(Arrays.asList("축구"))
+                .pets(Collections.EMPTY_LIST)
+                .build();
+
+        List<Student> students = Lists.newArrayList(student, student2);
+
+        studentRepository.saveAll(students);
+    }
 
     @Test
     public void testTotalCount(){
@@ -49,23 +81,18 @@ public class StudentRepositoryTest {
     public void testFindById(){
 
         // given
-        long seq = 1L;
-        Student student = Student.builder()
-                .seq(seq)
-                .name("하니")
-                .grade(1)
-                .age(17)
-                // .hobby(Arrays.asList("달리기"))
-                .build();
+        Long seq = 1L;
+        String name = "하니";
+        Integer age = 17;
 
         // when
         Optional<Student> actual = studentRepository.findById(seq);
 
         // then
         Assertions.assertThat(actual).isNotEmpty();
-        Assertions.assertThat(actual).get().extracting(Student::getSeq).isEqualTo(student.getSeq());
-        Assertions.assertThat(actual).get().extracting(Student::getName).isEqualTo(student.getName());
-        Assertions.assertThat(actual).get().extracting(Student::getAge).isEqualTo(student.getAge());
+        Assertions.assertThat(actual).get().extracting(Student::getSeq).isEqualTo(seq);
+        Assertions.assertThat(actual).get().extracting(Student::getName).isEqualTo(name);
+        Assertions.assertThat(actual).get().extracting(Student::getAge).isEqualTo(age);
 
     }
 
@@ -76,18 +103,19 @@ public class StudentRepositoryTest {
         long seq = 3L;
         Student student = Student.builder()
                 .seq(seq)
-                .name("사나")
-                .grade(1)
-                .age(17)
-                // .hobby(Arrays.asList("윙크"))
+                .name("영희")
+                .grade(3)
+                .age(18)
+                .hobbies(Arrays.asList("독서"))
+                .pets(Collections.EMPTY_LIST)
                 .build();
-
 
         // when
         Student actual = studentRepository.save(student);
 
         // then
         Assertions.assertThat(actual).isNotNull();
+        Assertions.assertThat(actual).extracting(Student::getSeq).isEqualTo(student.getSeq());
         Assertions.assertThat(actual).extracting(Student::getName).isEqualTo(student.getName());
         Assertions.assertThat(actual).extracting(Student::getAge).isEqualTo(student.getAge());
     }
@@ -96,7 +124,7 @@ public class StudentRepositoryTest {
     public void testDeleteById(){
 
         // given
-        long seq = 1L;
+        long seq = 2L;
 
         // when
         studentRepository.deleteById(seq);
@@ -110,23 +138,18 @@ public class StudentRepositoryTest {
     public void testSelectStudent(){
 
         // given
-        long seq = 1L;
-        Student student = Student.builder()
-                .seq(seq)
-                .name("하니")
-                .grade(1)
-                .age(17)
-                // .hobby(Arrays.asList("달리기"))
-                .build();
+        Long seq = 1L;
+        String name = "하니";
+        Integer age = 17;
 
         // when
-        // Student actual = studentRepository.selectStudent(seq);
+        Student actual = studentRepository.selectStudent(seq);
 
         // then
-        /*Assertions.assertThat(actual).isNotNull();
-        Assertions.assertThat(actual).extracting(Student::getSeq).isEqualTo(student.getSeq());
-        Assertions.assertThat(actual).extracting(Student::getName).isEqualTo(student.getName());
-        Assertions.assertThat(actual).extracting(Student::getAge).isEqualTo(student.getAge());*/
+        Assertions.assertThat(actual).isNotNull();
+        Assertions.assertThat(actual).extracting(Student::getSeq).isEqualTo(seq);
+        Assertions.assertThat(actual).extracting(Student::getName).isEqualTo(name);
+        Assertions.assertThat(actual).extracting(Student::getAge).isEqualTo(age);
 
     }
 }

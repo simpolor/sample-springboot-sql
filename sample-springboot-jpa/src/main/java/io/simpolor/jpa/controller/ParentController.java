@@ -2,7 +2,6 @@ package io.simpolor.jpa.controller;
 
 import io.simpolor.jpa.domain.parent.ParentRequest;
 import io.simpolor.jpa.domain.parent.ParentResponse;
-import io.simpolor.jpa.repository.entity.Parent;
 import io.simpolor.jpa.service.ParentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -37,14 +36,14 @@ public class ParentController {
 	@RequestMapping(value="", method=RequestMethod.POST)
 	public void post(@RequestBody ParentRequest request) {
 
-		parentService.register(request.toParent());
+		parentService.register(request.toInsert());
 	}
 
 	@RequestMapping(value="/{seq}", method=RequestMethod.PUT)
 	public void put(@PathVariable int seq,
 					@RequestBody ParentRequest request) {
 
-		parentService.modify(request.toParent(seq));
+		parentService.modify(request.toUpdate(seq));
 	}
 
 	@RequestMapping(value="/{seq}", method=RequestMethod.DELETE)

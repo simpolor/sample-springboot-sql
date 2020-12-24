@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -68,7 +69,10 @@ public class StudentControllerTest {
                 .name("하니")
                 .grade(1)
                 .age(17)
-                // .hobby(Arrays.asList("달리기"))
+                .hobbies(Arrays.asList("달리기"))
+                .pets(Collections.EMPTY_LIST)
+                .studentClassrooms(Collections.EMPTY_LIST)
+                .studentTeachers(Collections.EMPTY_LIST)
                 .build();
         when(studentService.getAll()).thenReturn(Arrays.asList(student));
 
@@ -96,7 +100,10 @@ public class StudentControllerTest {
                 .name("하니")
                 .grade(1)
                 .age(17)
-                // .hobby(Arrays.asList("달리기"))
+                .hobbies(Arrays.asList("달리기"))
+                .pets(Collections.EMPTY_LIST)
+                .studentClassrooms(Collections.EMPTY_LIST)
+                .studentTeachers(Collections.EMPTY_LIST)
                 .build();
         when(studentService.get(anyLong())).thenReturn(student);
 

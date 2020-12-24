@@ -5,39 +5,39 @@ import io.simpolor.jpa.repository.StudentRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
+@ExtendWith(SpringExtension.class)
 public class StudentServiceTest {
 
-    @Mock
-    private StudentRepository studentRepository;
+    @Mock private StudentRepository studentRepository;
+    @Mock private TagService tagService;
+    @Mock private ClassroomService classroomService;
+    @Mock private StudentClassroomService studentClassroomService;
+    @Mock private TeacherService teacherService;
+    @Mock private StudentTeacherService studentTeacherService;
 
     @InjectMocks
     private StudentService studentService;
 
-    @BeforeEach
-    public void initMocks() {
-        MockitoAnnotations.initMocks(this);
-    }
-
     @Test
-    public void testStuentTotalcount() {
+    public void testTotalCount() {
 
         // given
-        long reuturnValue = 3L;
-        when(studentRepository.count()).thenReturn(reuturnValue);
+        long totalCount = 3L;
+        when(studentRepository.count()).thenReturn(totalCount);
 
         // when
         long actual = studentService.getTotalCount();
@@ -48,15 +48,18 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testStudentList() {
+    public void testGetAll() {
 
         // given
         Student student = Student.builder()
-                .seq(1)
-                .name("홍길동")
+                .seq(1L)
+                .name("하니")
                 .grade(1)
                 .age(17)
-                // .hobby(Arrays.asList("반항"))
+                .hobbies(Arrays.asList("달리기"))
+                .pets(Collections.EMPTY_LIST)
+                .studentClassrooms(Collections.EMPTY_LIST)
+                .studentTeachers(Collections.EMPTY_LIST)
                 .build();
 
         when(studentRepository.findAll()).thenReturn(Arrays.asList(student));
@@ -71,17 +74,20 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testStudentView() {
+    public void testGet() {
 
         // given
         long seq = 1;
 
         Student student = Student.builder()
-                .seq(1)
-                .name("홍길동")
+                .seq(seq)
+                .name("하니")
                 .grade(1)
                 .age(17)
-                // .hobby(Arrays.asList("반항"))
+                .hobbies(Arrays.asList("달리기"))
+                .pets(Collections.EMPTY_LIST)
+                .studentClassrooms(Collections.EMPTY_LIST)
+                .studentTeachers(Collections.EMPTY_LIST)
                 .build();
 
         when(studentRepository.findById(anyLong())).thenReturn(Optional.of(student));
@@ -96,49 +102,61 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testStudentSave() {
+    public void testRegister() {
 
         // given
         long seq = 1;
         Student student = Student.builder()
                 .seq(seq)
-                .name("홍길동")
+                .name("하니")
                 .grade(1)
                 .age(17)
-                // .hobby(Arrays.asList("반항"))
+                .hobbies(Arrays.asList("달리기"))
+                .pets(Collections.EMPTY_LIST)
                 .build();
 
         when(studentRepository.save(any())).thenReturn(student);
 
         // when
-        // studentService.register(student);
+        studentService.register(student, Collections.EMPTY_LIST, Collections.EMPTY_LIST);
 
         // then
-        // verify(studentRepository, times(1)).save(any());
+        verify(studentRepository, times(1)).saveAndFlush(any());
+        verify(tagService, times(0)).register(any(), any());
+        verify(classroomService, times(1)).saveAndGet(any());
+        verify(studentClassroomService, times(0)).register(any());
+        verify(teacherService, times(1)).getAll(any());
+        verify(studentTeacherService, times(0)).register(any());
     }
 
     @Test
-    public void testStudentModify() {
+    public void testModify() {
 
         // given
         long seq = 1;
         Student student = Student.builder()
                 .seq(seq)
-                .name("홍길동")
+                .name("하니")
                 .grade(1)
                 .age(17)
-                // .hobby(Arrays.asList("반항"))
+                .hobbies(Arrays.asList("달리기"))
+                .pets(Collections.EMPTY_LIST)
                 .build();
 
         when(studentRepository.findById(anyLong())).thenReturn(Optional.of(student));
         when(studentRepository.save(any())).thenReturn(student);
 
         // when
-        // studentService.modify(student);
+        studentService.modify(student, Collections.EMPTY_LIST, Collections.EMPTY_LIST);
 
         // then
-        /*verify(studentRepository, times(1)).findById(anyLong());
-        verify(studentRepository, times(1)).save(any());*/
+        verify(studentRepository, times(1)).findById(anyLong());
+        verify(studentRepository, times(1)).saveAndFlush(any());
+        verify(studentClassroomService, times(1)).getAndDelete(any());
+        verify(classroomService, times(1)).saveAndGet(any());
+        verify(studentClassroomService, times(0)).register(any());
+        verify(teacherService, times(1)).getAll(any());
+        verify(studentTeacherService, times(0)).register(any());
     }
 
     @Test
@@ -151,6 +169,8 @@ public class StudentServiceTest {
         studentService.delete(seq);
 
         // then
+        verify(studentClassroomService, times(1)).getAndDelete(anyLong());
+        verify(studentTeacherService, times(1)).getAndDelete(anyLong());
         verify(studentRepository, times(1)).deleteById(anyLong());
     }
 }

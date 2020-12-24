@@ -12,10 +12,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Data
@@ -47,9 +44,9 @@ public class StudentResponse {
                 .age(student.getAge())
                 .favoriteFoods(student.getFoodNames())
                 .hobbies(student.getHobbies())
-                .pets(PetResponse.of(student.getPets()))
-                .tag(TagResponse.of(student.getTag()))
-                .parent(ParentResponse.of(student.getParent()))
+                .pets((Objects.nonNull(student.getPets())) ? PetResponse.of(student.getPets()) : null)
+                .tag((Objects.nonNull(student.getTag())) ? TagResponse.of(student.getTag()) : null)
+                .parent((Objects.nonNull(student.getParent())) ? ParentResponse.of(student.getParent()) : null)
                 .classrooms(ClassroomResponse.of(student.getStudentClassrooms()))
                 .teachers(TeacherResponse.ofStudent(student.getStudentTeachers()))
                 .build();

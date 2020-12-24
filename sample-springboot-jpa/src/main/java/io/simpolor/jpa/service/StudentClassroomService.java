@@ -21,7 +21,7 @@ public class StudentClassroomService {
 
     public void getAndDelete(Long studentSeq) {
 
-        List<StudentClassroom> studentClassrooms = studentClassroomRepository.getAllByStudentSeq(studentSeq);
+        List<StudentClassroom> studentClassrooms = studentClassroomRepository.findAllByStudentSeq(studentSeq);
         if(!CollectionUtils.isEmpty(studentClassrooms)){
             studentClassroomRepository.deleteAll(studentClassrooms);
         }

@@ -79,7 +79,6 @@ public class StudentService {
 
         studentClassroomService.getAndDelete(student.getSeq());
         List<Classroom> classrooms = classroomService.saveAndGet(classroomNames);
-        System.out.println("classroomNames : "+classroomNames);
         if(!CollectionUtils.isEmpty(classrooms)){
             List<StudentClassroom> studentClassrooms = new ArrayList<>();
             for(Classroom classroom : classrooms){
@@ -99,6 +98,9 @@ public class StudentService {
     }
 
     public void delete(long seq) {
+
+        studentClassroomService.getAndDelete(seq);
+        studentTeacherService.getAndDelete(seq);
 
         studentRepository.deleteById(seq);
     }
