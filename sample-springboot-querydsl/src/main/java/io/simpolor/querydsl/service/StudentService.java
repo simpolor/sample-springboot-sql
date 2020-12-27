@@ -1,5 +1,6 @@
 package io.simpolor.querydsl.service;
 
+import com.querydsl.core.QueryResults;
 import io.simpolor.querydsl.repository.StudentRepository;
 import io.simpolor.querydsl.repository.entity.Student;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,10 @@ public class StudentService {
     public List<Student> getAll() {
 
         return studentRepository.findAll();
+    }
+
+    public QueryResults<Student> getAllByName(String name) {
+        return studentRepository.findAllBySearch(name);
     }
 
     public Student get(long seq) {

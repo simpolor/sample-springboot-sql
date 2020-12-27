@@ -27,6 +27,12 @@ public class StudentController {
 		return StudentResponse.of(studentService.getAll());
 	}
 
+	@RequestMapping(value="/listByName", method=RequestMethod.GET)
+	public List<StudentResponse> getListByName() {
+
+		return StudentResponse.of(studentService.getAll());
+	}
+
 	@RequestMapping(value="/{seq}", method=RequestMethod.GET)
 	public StudentResponse get(@PathVariable long seq) {
 
