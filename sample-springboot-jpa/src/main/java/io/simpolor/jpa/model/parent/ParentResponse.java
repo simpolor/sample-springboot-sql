@@ -1,13 +1,11 @@
-package io.simpolor.jpa.domain.parent;
+package io.simpolor.jpa.model.parent;
 
 import io.simpolor.jpa.repository.entity.Parent;
-import io.simpolor.jpa.repository.entity.Student;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;

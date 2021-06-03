@@ -1,3 +1,4 @@
+
 package io.simpolor.mybatis.config;
 
 /*

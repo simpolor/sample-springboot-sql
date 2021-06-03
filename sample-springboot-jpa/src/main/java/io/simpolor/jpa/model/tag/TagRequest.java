@@ -1,4 +1,4 @@
-package io.simpolor.jpa.domain.tag;
+package io.simpolor.jpa.model.tag;
 
 import io.simpolor.jpa.repository.entity.Tag;
 import lombok.*;

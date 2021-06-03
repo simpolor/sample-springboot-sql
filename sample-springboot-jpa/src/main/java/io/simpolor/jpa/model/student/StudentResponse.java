@@ -1,11 +1,11 @@
-package io.simpolor.jpa.domain.student;
+package io.simpolor.jpa.model.student;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.simpolor.jpa.domain.classroom.ClassroomResponse;
-import io.simpolor.jpa.domain.parent.ParentResponse;
-import io.simpolor.jpa.domain.pet.PetResponse;
-import io.simpolor.jpa.domain.tag.TagResponse;
-import io.simpolor.jpa.domain.teacher.TeacherResponse;
+import io.simpolor.jpa.model.classroom.ClassroomResponse;
+import io.simpolor.jpa.model.parent.ParentResponse;
+import io.simpolor.jpa.model.pet.PetResponse;
+import io.simpolor.jpa.model.tag.TagResponse;
+import io.simpolor.jpa.model.teacher.TeacherResponse;
 import io.simpolor.jpa.repository.entity.Student;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

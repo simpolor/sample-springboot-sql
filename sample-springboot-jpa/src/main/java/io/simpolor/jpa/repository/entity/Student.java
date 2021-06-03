@@ -26,6 +26,9 @@ public class Student {
 
 	private int age;
 
+	/**
+	 * 리스트를 스트링 문자열로 저장
+	 */
 	@Convert(converter = StringListConverter.class)
 	private List<String> hobbies;
 
@@ -47,8 +50,8 @@ public class Student {
 	 */
 	/**
 	 @JsonManagedReference
-	 - 무한 루프를 방어하기 위한 JSON 애노테이션
-	 - 불러오는 주체
+	 - 순환 참조로 인한 무한 루프를 방어하기 위한 JSON 애노테이션
+	 - @JsonManagedReference를 애노테이션을 선언 쪽이 주체
 	 - @JsonBackReference와 쌍으로 사용됨
 	 */
 	@JsonManagedReference
@@ -57,20 +60,16 @@ public class Student {
 	private Parent parent;
 
 	/**
-	 * 단방향 관계에서 연관 관계가 주인이 아닌경우 @Transient를 통해 저장/불러오기시에 무시하도록 해야 에러가 나지 않음
 	 * 단방향에서 자식에서 조회시 부모를 함께 조회하기 위한 방법으로 cascade 옵션 추가
 	 */
-	// @Transient
 	@OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
 	private Tag tag;
 
 	/**
-		@ElementCollection :
-	 */
-	/**
-	 @CollectionTable :
-	 	- name :
-	 	- joinColumns :
+	 * @ElementCollection
+	 * @CollectionTable :
+	 *	- name :
+	 *	- joinColumns :
 	 */
 	@ElementCollection
 	@CollectionTable(
@@ -100,5 +99,9 @@ public class Student {
 	/***
 	 * @Enumerated(EnumType.STRING)
 	 * - Enum 타입을 어떻게 저장할지 여부
+	 */
+
+	/**
+	 * @Transient를 통해 저장/불러오기시에 무시하도록 설정
 	 */
 }

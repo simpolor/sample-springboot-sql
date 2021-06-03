@@ -1,4 +1,4 @@
-package io.simpolor.jpa.domain.teacher;
+package io.simpolor.jpa.model.teacher;
 
 import io.simpolor.jpa.repository.entity.Teacher;
 import lombok.AllArgsConstructor;

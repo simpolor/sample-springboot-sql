@@ -1,7 +1,7 @@
 package io.simpolor.jpa.controller;
 
-import io.simpolor.jpa.domain.student.StudentRequest;
-import io.simpolor.jpa.domain.student.StudentResponse;
+import io.simpolor.jpa.model.student.StudentRequest;
+import io.simpolor.jpa.model.student.StudentResponse;
 import io.simpolor.jpa.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

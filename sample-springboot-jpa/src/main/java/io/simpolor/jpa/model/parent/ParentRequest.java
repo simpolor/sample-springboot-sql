@@ -1,4 +1,4 @@
-package io.simpolor.jpa.domain.parent;
+package io.simpolor.jpa.model.parent;
 
 import io.simpolor.jpa.repository.entity.Parent;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package io.simpolor.jpa.controller;
 
-import io.simpolor.jpa.domain.tag.TagResponse;
+import io.simpolor.jpa.model.tag.TagResponse;
 import io.simpolor.jpa.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;

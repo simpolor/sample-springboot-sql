@@ -1,8 +1,8 @@
-package io.simpolor.jpa.domain.student;
+package io.simpolor.jpa.model.student;
 
-import io.simpolor.jpa.domain.parent.ParentRequest;
-import io.simpolor.jpa.domain.pet.PetRequest;
-import io.simpolor.jpa.domain.tag.TagRequest;
+import io.simpolor.jpa.model.parent.ParentRequest;
+import io.simpolor.jpa.model.pet.PetRequest;
+import io.simpolor.jpa.model.tag.TagRequest;
 import io.simpolor.jpa.repository.entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

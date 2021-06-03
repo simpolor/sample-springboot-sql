@@ -1,4 +1,4 @@
-package io.simpolor.jpa.domain.pet;
+package io.simpolor.jpa.model.pet;
 
 import io.simpolor.jpa.repository.entity.Pet;
 import lombok.AllArgsConstructor;
