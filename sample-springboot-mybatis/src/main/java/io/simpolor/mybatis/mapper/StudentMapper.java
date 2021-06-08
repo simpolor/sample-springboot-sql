@@ -1,6 +1,6 @@
 package io.simpolor.mybatis.mapper;
 
-import io.simpolor.mybatis.domain.Student;
+import io.simpolor.mybatis.model.StudentDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -11,13 +11,13 @@ public interface StudentMapper {
 
 	long selectStudentTotalCountMapper();
 
-	List<Student> selectStudentListMapper();
+	List<StudentDto> selectStudentListMapper();
 
-	Student selectStudentMapper(long seq);
+	StudentDto selectStudentMapper(long seq);
 
-	int insertStudentMapper(Student student);
+	int insertStudentMapper(StudentDto studentDto);
 
-	int updateStudentMapper(Student student);
+	int updateStudentMapper(StudentDto studentDto);
 
 	int deleteStudentMapper(long seq);
 	

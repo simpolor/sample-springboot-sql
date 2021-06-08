@@ -91,7 +91,7 @@ public class StudentServiceTest {
         when(studentRepository.save(student)).thenReturn(response);
 
         // when
-        Student actual = studentService.register(student);
+        Student actual = studentService.create(student);
 
         // then
         Assertions.assertNotNull(actual);
@@ -112,7 +112,7 @@ public class StudentServiceTest {
         when(studentRepository.save(student)).thenReturn(response);
 
         // when
-        Student actual = studentService.modify(student);
+        Student actual = studentService.update(student);
 
         // then
         Assertions.assertNotNull(actual);

@@ -1,4 +1,4 @@
-package io.simpolor.mybatis.domain;
+package io.simpolor.mybatis.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +11,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Student {
+public class StudentDto {
 
 	private long seq;
 	private String name;

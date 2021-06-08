@@ -1,40 +1,40 @@
 package io.simpolor.mybatis.service;
 
-import io.simpolor.mybatis.domain.Student;
 import io.simpolor.mybatis.mapper.StudentMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.simpolor.mybatis.model.StudentDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
 
 @Service
+@RequiredArgsConstructor
 public class StudentMapperService {
 
-    @Autowired
-    private StudentMapper studentMapper;
+    private final StudentMapper studentMapper;
 
     public long getTotalCount() {
         return studentMapper.selectStudentTotalCountMapper();
     }
 
-    public List<Student> getAll() {
+    public List<StudentDto> getAll() {
         return studentMapper.selectStudentListMapper();
     }
 
-    public Student get(long seq) {
-        Student student = studentMapper.selectStudentMapper(seq);
+    public StudentDto get(long seq) {
+        StudentDto student = studentMapper.selectStudentMapper(seq);
         if(Objects.isNull(student)){
             throw new IllegalArgumentException("seq : "+seq);
         }
         return student;
     }
 
-    public void register(Student student) {
+    public void create(StudentDto student) {
         studentMapper.insertStudentMapper(student);
     }
 
-    public void modify(Student student) {
+    public void update(StudentDto student) {
         if(Objects.isNull(studentMapper.selectStudentMapper(student.getSeq()))){
             throw new IllegalArgumentException("seq : "+student.getSeq());
         }

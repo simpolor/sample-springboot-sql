@@ -1,6 +1,6 @@
 package io.simpolor.mybatis.repository;
 
-import io.simpolor.mybatis.domain.Student;
+import io.simpolor.mybatis.model.StudentDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,19 +17,19 @@ public class StudentRepository {
         return sqlSession.selectOne("selectStudentTotalCount");
     }
 
-    public List<Student> selectStudentList(){
+    public List<StudentDto> selectStudentList(){
         return sqlSession.selectList("selectStudentList");
     }
 
-    public Student selectStudent(long seq){
+    public StudentDto selectStudent(long seq){
         return sqlSession.selectOne("selectStudent", seq);
     }
 
-    public int insertStudent(Student student){
+    public int insertStudent(StudentDto student){
         return sqlSession.insert("insertStudent", student);
     }
 
-    public int updateStudent(Student student){
+    public int updateStudent(StudentDto student){
         return sqlSession.update("updateStudent", student);
     }
 

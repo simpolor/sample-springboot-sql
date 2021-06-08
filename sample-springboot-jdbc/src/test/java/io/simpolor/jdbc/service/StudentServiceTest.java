@@ -1,6 +1,6 @@
 package io.simpolor.jdbc.service;
 
-import io.simpolor.jdbc.domain.Student;
+import io.simpolor.jdbc.model.StudentDto;
 import io.simpolor.jdbc.repository.StudentRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,7 +32,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testTotalCount() {
+    public void testGetTotalCount() {
 
         // given
         long count = 3L;
@@ -49,11 +49,11 @@ public class StudentServiceTest {
     public void testGetAll() {
 
         // given
-        Student student = new Student(1, "홍길동", 2, 18, Arrays.asList("독서"));
+        StudentDto student = new StudentDto(1, "홍길동", 2, 18, Arrays.asList("독서"));
         when(studentRepository.selectList()).thenReturn(Arrays.asList(student));
 
         // when
-        List<Student> actual = studentService.getAll();
+        List<StudentDto> actual = studentService.getAll();
 
         // then
         Assertions.assertThat(actual).isNotEmpty();
@@ -66,15 +66,15 @@ public class StudentServiceTest {
 
         // given
         long seq = 1;
-        Student student = new Student(1, "홍길동", 2, 18, Arrays.asList("독서"));
+        StudentDto student = new StudentDto(1, "홍길동", 2, 18, Arrays.asList("독서"));
         when(studentRepository.selectOne(anyLong())).thenReturn(student);
 
         // when
-        Student actual = studentService.get(seq);
+        StudentDto actual = studentService.get(seq);
 
         // then
         Assertions.assertThat(actual).isNotNull();
-        Assertions.assertThat(actual).extracting(Student::getName).isEqualTo("홍길동");
+        Assertions.assertThat(actual).extracting(StudentDto::getName).isEqualTo("홍길동");
 
     }
 
@@ -83,7 +83,7 @@ public class StudentServiceTest {
 
         // given
         long seq = 1;
-        Student student = new Student(0, "홍길동", 2, 18, Arrays.asList("독서"));
+        StudentDto student = new StudentDto(0, "홍길동", 2, 18, Arrays.asList("독서"));
 
         // when
         studentService.register(student);
@@ -97,7 +97,7 @@ public class StudentServiceTest {
 
         // given
         long seq = 1;
-        Student student = new Student(seq, "홍길동", 2, 18, Arrays.asList("독서"));
+        StudentDto student = new StudentDto(seq, "홍길동", 2, 18, Arrays.asList("독서"));
 
         // when
         studentService.modify(student);

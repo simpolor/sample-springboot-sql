@@ -27,7 +27,7 @@ public class StudentRepositoryTest {
     private StudentRepository studentRepository;
 
     @Test
-    public void testTotalCount(){
+    public void testCount(){
 
         // given, when
         long actual = studentRepository.count();

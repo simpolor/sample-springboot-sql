@@ -2,6 +2,7 @@ package io.simpolor.h2.service;
 
 import io.simpolor.h2.repository.entity.Student;
 import io.simpolor.h2.repository.StudentRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,12 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class StudentService {
 
-    @Autowired
-    private StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
 
-    public long getTotalCount() {
+    public Long getTotalCount() {
         return studentRepository.count();
     }
 
@@ -34,12 +35,12 @@ public class StudentService {
         return studentRepository.findById(seq).orElseThrow(() -> new IllegalArgumentException("seq : "+seq));
     }
 
-    public Student register(Student student) {
+    public Student create(Student student) {
 
         return studentRepository.save(student);
     }
 
-    public Student modify(Student student) {
+    public Student update(Student student) {
 
         studentRepository.findById(student.getSeq())
                 .orElseThrow(() -> new IllegalArgumentException("seq : "+student.getSeq()));

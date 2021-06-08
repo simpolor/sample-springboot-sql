@@ -1,13 +1,13 @@
 package io.simpolor.h2.controller;
 
-import io.simpolor.h2.model.StudentRequest;
-import io.simpolor.h2.model.StudentResponse;
+import io.simpolor.h2.model.StudentDto;
 import io.simpolor.h2.repository.entity.Student;
 import io.simpolor.h2.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping(value = "/students")
@@ -23,35 +23,40 @@ public class StudentController {
 	}
 
 	@GetMapping
-	public List<StudentResponse> list() {
+	public List<StudentDto> list() {
 
-		return StudentResponse.of(studentService.getAll());
+		return StudentDto.of(studentService.getAll());
 	}
 
 	@GetMapping(value="/{seq}")
-	public Student view(@PathVariable long seq) {
+	public StudentDto detail(@PathVariable long seq) {
 
-		return studentService.get(seq);
+		Student student = studentService.get(seq);
+		if(Objects.isNull(student)){
+			return null;
+		}
+
+		return StudentDto.of(student);
 	}
 
 	@PostMapping
-	public Student register(@RequestBody StudentRequest request) {
+	public void register(@RequestBody StudentDto studentDto) {
 
-		return studentService.register(request.toEntity());
+		studentService.create(studentDto.toEntity());
 	}
 
 	@PutMapping(value="/{seq}")
-	public Student modify(@PathVariable int seq,
-						  @RequestBody Student student) {
+	public void modify(@PathVariable int seq,
+					   @RequestBody StudentDto studentDto) {
 
-		student.setSeq(seq);
-		return studentService.modify(student);
+		studentDto.setSeq(seq);
+		studentService.update(studentDto.toEntity());
 	}
 
 	@DeleteMapping(value="/{seq}")
-	public long delete(@PathVariable long seq) {
+	public void delete(@PathVariable long seq) {
 
-		return studentService.delete(seq);
+		studentService.delete(seq);
 	}
 
 	@RequestMapping(value="/not", method=RequestMethod.GET)

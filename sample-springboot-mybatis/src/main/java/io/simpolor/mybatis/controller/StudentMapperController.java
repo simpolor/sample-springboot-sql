@@ -1,47 +1,53 @@
 package io.simpolor.mybatis.controller;
 
-import io.simpolor.mybatis.domain.Student;
+import io.simpolor.mybatis.model.StudentDto;
 import io.simpolor.mybatis.service.StudentMapperService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/mapper/student")
 @RestController
+@RequestMapping("/mapper/students")
+@RequiredArgsConstructor
 public class StudentMapperController {
 
-	@Autowired
-	private StudentMapperService studentMapperService;
+	private final StudentMapperService studentMapperService;
 
-	@RequestMapping(value="/totalCount", method=RequestMethod.GET)
-	public long getTotalCount() {
+	@RequestMapping(value="/total-count", method=RequestMethod.GET)
+	public Long totalCount() {
+
 		return studentMapperService.getTotalCount();
 	}
 
-	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public List<Student> getList() {
+	@GetMapping
+	public List<StudentDto> list() {
+
 		return studentMapperService.getAll();
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.GET)
-	public Student get(@PathVariable long seq) {
+	@GetMapping(value="/{seq}")
+	public StudentDto detail(@PathVariable long seq) {
+
 		return studentMapperService.get(seq);
 	}
 
-	@RequestMapping(value="", method=RequestMethod.POST)
-	public void post(@RequestBody Student student) {
-		studentMapperService.register(student);
+	@PostMapping
+	public void register(@RequestBody StudentDto student) {
+
+		studentMapperService.create(student);
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.PUT)
-	public void put(@PathVariable long seq, @RequestBody Student student) {
+	@PutMapping(value="/{seq}")
+	public void modify(@PathVariable long seq, @RequestBody StudentDto student) {
+
 		student.setSeq(seq);
-		studentMapperService.modify(student);
+		studentMapperService.update(student);
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.DELETE)
+	@DeleteMapping(value="/{seq}")
 	public void delete(@PathVariable long seq) {
+
 		studentMapperService.delete(seq);
 	}
 

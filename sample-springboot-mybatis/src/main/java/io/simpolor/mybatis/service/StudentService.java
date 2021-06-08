@@ -1,6 +1,6 @@
 package io.simpolor.mybatis.service;
 
-import io.simpolor.mybatis.domain.Student;
+import io.simpolor.mybatis.model.StudentDto;
 import io.simpolor.mybatis.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,23 +18,23 @@ public class StudentService {
         return studentRepository.selectStudentTotalCount();
     }
 
-    public List<Student> getAll() {
+    public List<StudentDto> getAll() {
         return studentRepository.selectStudentList();
     }
 
-    public Student get(long seq) {
-        Student student = studentRepository.selectStudent(seq);
+    public StudentDto get(long seq) {
+        StudentDto student = studentRepository.selectStudent(seq);
         if(Objects.isNull(student)){
             throw new IllegalArgumentException("seq : "+student.getSeq());
         }
         return student;
     }
 
-    public void register(Student student) {
+    public void create(StudentDto student) {
         studentRepository.insertStudent(student);
     }
 
-    public void modify(Student student) {
+    public void update(StudentDto student) {
         if(Objects.isNull(studentRepository.selectStudent(student.getSeq()))){
             throw new IllegalArgumentException("seq : "+student.getSeq());
         }

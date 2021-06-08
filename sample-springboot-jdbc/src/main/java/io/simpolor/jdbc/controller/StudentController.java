@@ -1,54 +1,54 @@
 package io.simpolor.jdbc.controller;
 
-import io.simpolor.jdbc.domain.Student;
+import io.simpolor.jdbc.model.StudentDto;
 import io.simpolor.jdbc.service.StudentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/student")
 @RestController
+@RequestMapping("/students")
+@RequiredArgsConstructor
 public class StudentController {
 
-	@Autowired
-	private StudentService studentService;
+	private final StudentService studentService;
 
-	@RequestMapping(value="/totalCount", method=RequestMethod.GET)
+	@GetMapping(value="/total-count")
 	public long totalCount() {
 
 		return studentService.getTotalCount();
 	}
 
-	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public List<Student> list() {
+	@GetMapping
+	public List<StudentDto> list() {
 
 		return studentService.getAll();
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.GET)
+	@GetMapping(value="/{seq}")
+	public StudentDto detail(@PathVariable long seq) {
 
-	public Student view(@PathVariable long seq) {
 		return studentService.get(seq);
 	}
 
-	@RequestMapping(value="", method=RequestMethod.POST)
-	public void register(@RequestBody Student student) {
+	@PostMapping
+	public void register(@RequestBody StudentDto studentDto) {
 
-		studentService.register(student);
+		studentService.register(studentDto);
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.PUT)
-	public void modify(@PathVariable int seq, @RequestBody Student student) {
+	@PutMapping(value="/{seq}")
+	public void modify(@PathVariable int seq, @RequestBody StudentDto studentDto) {
 
-		student.setSeq(seq);
-		studentService.modify(student);
+		studentDto.setSeq(seq);
+		studentService.modify(studentDto);
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.DELETE)
+	@DeleteMapping(value="/{seq}")
 	public void delete(@PathVariable long seq) {
-		studentService.delete(seq);
 
+		studentService.delete(seq);
 	}
 
 

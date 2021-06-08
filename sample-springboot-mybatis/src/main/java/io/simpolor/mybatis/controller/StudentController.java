@@ -1,47 +1,51 @@
 package io.simpolor.mybatis.controller;
 
-import io.simpolor.mybatis.domain.Student;
+import io.simpolor.mybatis.model.StudentDto;
 import io.simpolor.mybatis.service.StudentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/student")
+@RequestMapping("/students")
 @RestController
+@RequiredArgsConstructor
 public class StudentController {
 
-	@Autowired
-	private StudentService studentService;
+	private final StudentService studentService;
 
-	@RequestMapping(value="/totalCount", method=RequestMethod.GET)
-	public long getTotalCount() {
+	@GetMapping(value="/total-count")
+	public Long totalCount() {
+
 		return studentService.getTotalCount();
 	}
 
-	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public List<Student> getList() {
+	@GetMapping
+	public List<StudentDto> list() {
+
 		return studentService.getAll();
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.GET)
-	public Student get(@PathVariable long seq) {
+	@GetMapping(value="/{seq}")
+	public StudentDto detail(@PathVariable long seq) {
+
 		return studentService.get(seq);
 	}
 
-	@RequestMapping(value="", method=RequestMethod.POST)
-	public void post(@RequestBody Student student) {
-		studentService.register(student);
+	@PostMapping
+	public void register(@RequestBody StudentDto student) {
+
+		studentService.create(student);
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.PUT)
-	public void put(@PathVariable int seq,
-								 @RequestBody Student student) {
+	@PutMapping(value="/{seq}")
+	public void modify(@PathVariable int seq,
+								 @RequestBody StudentDto student) {
 		student.setSeq(seq);
-		studentService.modify(student);
+		studentService.update(student);
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.DELETE)
+	@DeleteMapping(value="/{seq}")
 	public void delete(@PathVariable long seq) {
 		studentService.delete(seq);
 

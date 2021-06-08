@@ -1,6 +1,6 @@
 package io.simpolor.jdbc.repository;
 
-import io.simpolor.jdbc.domain.Student;
+import io.simpolor.jdbc.model.StudentDto;
 import io.simpolor.jdbc.repository.mapper.StudentMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +27,14 @@ public class StudentRepository {
         return result;
     }
 
-    public List<Student> selectList(){
+    public List<StudentDto> selectList(){
         String query = "SELECT * FROM student";
-        RowMapper<Student> rowMapper = new BeanPropertyRowMapper<>(Student.class);
-        List<Student> result = jdbcTemplate.query(query, rowMapper);
+        RowMapper<StudentDto> rowMapper = new BeanPropertyRowMapper<>(StudentDto.class);
+        List<StudentDto> result = jdbcTemplate.query(query, rowMapper);
         return result;
     }
 
-    public Student selectOne(long seq){
+    public StudentDto selectOne(long seq){
 
         try {
             String query = "SELECT * FROM student WHERE seq = ?";
@@ -47,7 +47,7 @@ public class StudentRepository {
         return null;
     }
 
-    public long insert(Student student){
+    public long insert(StudentDto student){
 
         String query = "INSERT INTO student ( name, grade, age, hobby ) values ( ?, ?, ?, ? )";
 
@@ -68,7 +68,7 @@ public class StudentRepository {
         return key.longValue();
     }
 
-    public int update(Student student){
+    public int update(StudentDto student){
         String query = "UPDATE student SET name=?, grade=?, age=?, hobby=? WHERE seq = ?";
         return jdbcTemplate.update(query, student.getName(), student.getGrade(), student.getAge(), this.stringJoiner(student.getHobby()), student.getSeq());
     }

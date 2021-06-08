@@ -1,7 +1,7 @@
 package io.simpolor.mybatis.repository;
 
 import io.simpolor.mybatis.MybatisApplication;
-import io.simpolor.mybatis.domain.Student;
+import io.simpolor.mybatis.model.StudentDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,7 +35,7 @@ public class StudentRepositoryTest {
     public void testSelectStudentList(){
 
         // given, when
-        List<Student> actual = studentRepository.selectStudentList();
+        List<StudentDto> actual = studentRepository.selectStudentList();
 
         // than
         Assertions.assertThat(actual).isNotEmpty();
@@ -47,7 +47,7 @@ public class StudentRepositoryTest {
 
         // given
         long seq = 1L;
-        Student student = Student.builder()
+        StudentDto student = StudentDto.builder()
                 .seq(seq)
                 .name("하니")
                 .grade(1)
@@ -56,22 +56,22 @@ public class StudentRepositoryTest {
                 .build();
 
         // when
-        Student actual = studentRepository.selectStudent(seq);
+        StudentDto actual = studentRepository.selectStudent(seq);
 
         // then
         Assertions.assertThat(actual).isNotNull();
-        Assertions.assertThat(actual).extracting(Student::getSeq).isEqualTo(student.getSeq());
-        Assertions.assertThat(actual).extracting(Student::getName).isEqualTo(student.getName());
-        Assertions.assertThat(actual).extracting(Student::getAge).isEqualTo(student.getAge());
+        Assertions.assertThat(actual).extracting(StudentDto::getSeq).isEqualTo(student.getSeq());
+        Assertions.assertThat(actual).extracting(StudentDto::getName).isEqualTo(student.getName());
+        Assertions.assertThat(actual).extracting(StudentDto::getAge).isEqualTo(student.getAge());
 
     }
 
     @Test
-    public void testSave(){
+    public void testInsertStudent(){
 
         // given
         long seq = 3L;
-        Student student = Student.builder()
+        StudentDto student = StudentDto.builder()
                 .seq(seq)
                 .name("사나")
                 .grade(1)
@@ -88,7 +88,7 @@ public class StudentRepositoryTest {
     }
 
     @Test
-    public void testDeleteById(){
+    public void testDeleteStudent(){
 
         // given
         long seq = 1L;
@@ -97,7 +97,7 @@ public class StudentRepositoryTest {
         studentRepository.deleteStudent(seq);
 
         // then
-        Student actual = studentRepository.selectStudent(seq);
+        StudentDto actual = studentRepository.selectStudent(seq);
         Assertions.assertThat(actual).isNull();
     }
 }

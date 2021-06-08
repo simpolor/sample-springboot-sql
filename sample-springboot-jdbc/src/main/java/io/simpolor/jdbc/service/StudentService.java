@@ -1,6 +1,6 @@
 package io.simpolor.jdbc.service;
 
-import io.simpolor.jdbc.domain.Student;
+import io.simpolor.jdbc.model.StudentDto;
 import io.simpolor.jdbc.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,14 +18,14 @@ public class StudentService {
         return studentRepository.selectCount();
     }
 
-    public List<Student> getAll() {
+    public List<StudentDto> getAll() {
 
         return studentRepository.selectList();
     }
 
-    public Student get(long seq) {
+    public StudentDto get(long seq) {
 
-        Student student = studentRepository.selectOne(seq);
+        StudentDto student = studentRepository.selectOne(seq);
 
         if(student == null){
             new IllegalArgumentException("seq : "+seq);
@@ -34,12 +34,12 @@ public class StudentService {
         return student;
     }
 
-    public void register(Student student) {
+    public void register(StudentDto student) {
 
         studentRepository.insert(student);
     }
 
-    public void modify(Student student) {
+    public void modify(StudentDto student) {
 
         studentRepository.update(student);
     }

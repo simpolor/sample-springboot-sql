@@ -1,16 +1,16 @@
 package io.simpolor.jdbc.repository.mapper;
 
-import io.simpolor.jdbc.domain.Student;
+import io.simpolor.jdbc.model.StudentDto;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
 
-public class StudentMapper implements RowMapper<Student> {
+public class StudentMapper implements RowMapper<StudentDto> {
 
-    public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Student student = new Student();
+    public StudentDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+        StudentDto student = new StudentDto();
 
         student.setSeq(rs.getLong("seq"));
         student.setName(rs.getString("name"));

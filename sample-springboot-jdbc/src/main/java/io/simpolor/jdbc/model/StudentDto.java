@@ -1,8 +1,8 @@
-package io.simpolor.jdbc.domain;
+package io.simpolor.jdbc.model;
 
 import java.util.List;
 
-public class Student {
+public class StudentDto {
 
 	private long seq;
 	private String name;
@@ -50,11 +50,11 @@ public class Student {
 		this.hobby = hobby;
 	}
 
-	public Student() {
+	public StudentDto() {
 
 	}
 
-	public Student(long seq, String name, int grade, int age, List<String> hobby) {
+	public StudentDto(long seq, String name, int grade, int age, List<String> hobby) {
 		this.seq = seq;
 		this.name = name;
 		this.grade = grade;

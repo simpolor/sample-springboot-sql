@@ -82,7 +82,7 @@ public class StudentControllerTest {
     }
 
     @Test
-    public void testView() throws Exception {
+    public void testDetail() throws Exception {
 
         // given
         Student student = new Student(1, "하니", 2, 18);
@@ -108,7 +108,7 @@ public class StudentControllerTest {
 
         // given
         Student student = new Student(1, "하니", 2, 18);
-        when(studentService.register(student)).thenReturn(student);
+        when(studentService.create(student)).thenReturn(student);
 
         String json = "{ \"seq\": 1, \"name\":\"하니\", \"grade\": 2, \"age\": 18 }";
 
@@ -120,16 +120,7 @@ public class StudentControllerTest {
                     .content(json)
         )
         .andDo(MockMvcResultHandlers.print())
-        .andExpect(status().isOk()).andExpect(
-                MockMvcResultMatchers
-                        .jsonPath("$.seq")
-                        .value(is(1))
-        )
-        .andExpect(
-                MockMvcResultMatchers
-                        .jsonPath("$.name")
-                        .value(is("하니"))
-        )
+        .andExpect(status().isOk())
         .andReturn();
     }
 
@@ -138,7 +129,7 @@ public class StudentControllerTest {
 
         // given
         Student student = new Student(1, "하니", 2, 19);
-        when(studentService.modify(student)).thenReturn(student);
+        when(studentService.update(student)).thenReturn(student);
 
         String json = "{ \"seq\": 1, \"name\":\"하니\", \"grade\": 2, \"age\": 19 }";
 
@@ -150,13 +141,7 @@ public class StudentControllerTest {
                     .content(json)
         )
         .andDo(MockMvcResultHandlers.print())
-        .andExpect(status().isOk()).andExpect(
-                MockMvcResultMatchers
-                        .jsonPath("$.seq")
-                        .value(is(1)))
-        .andExpect(MockMvcResultMatchers
-                        .jsonPath("$.age")
-                        .value(is(19)))
+        .andExpect(status().isOk())
         .andReturn();
     }
 
@@ -172,11 +157,7 @@ public class StudentControllerTest {
             delete("/students/1")
         )
         .andDo(MockMvcResultHandlers.print())
-        .andExpect(status().isOk()).andExpect(
-                MockMvcResultMatchers
-                    .jsonPath("$")
-                    .value(is(1))
-        )
+        .andExpect(status().isOk())
         .andReturn();
     }
 

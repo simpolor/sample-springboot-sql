@@ -1,7 +1,7 @@
 package io.simpolor.jdbc.repository;
 
 import io.simpolor.jdbc.JdbcApplication;
-import io.simpolor.jdbc.domain.Student;
+import io.simpolor.jdbc.model.StudentDto;
 import org.assertj.core.api.Assertions;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
@@ -22,7 +22,7 @@ public class StudentRepositoryTest {
     private StudentRepository studentRepository;
 
     @Test
-    public void testTotalcount(){
+    public void testSelectCount(){
 
         // given, when
         long result = studentRepository.selectCount();
@@ -35,7 +35,7 @@ public class StudentRepositoryTest {
     public void testSelectList(){
 
         // given, when
-        List<Student> actual = studentRepository.selectList();
+        List<StudentDto> actual = studentRepository.selectList();
 
         // then
         Assertions.assertThat(actual).isNotEmpty();
@@ -49,11 +49,11 @@ public class StudentRepositoryTest {
         long seq = 1L;
 
         // when
-        Student actual = studentRepository.selectOne(seq);
+        StudentDto actual = studentRepository.selectOne(seq);
 
         // then
         Assertions.assertThat(actual).isNotNull();
-        Assertions.assertThat(actual).extracting(Student::getName).isEqualTo("하니");
+        Assertions.assertThat(actual).extracting(StudentDto::getName).isEqualTo("하니");
     }
 
     @Test
@@ -61,7 +61,7 @@ public class StudentRepositoryTest {
 
         // given
         long seq = 3L;
-        Student student = new Student(seq, "사나", 1, 17, Arrays.asList("달리기"));
+        StudentDto student = new StudentDto(seq, "사나", 1, 17, Arrays.asList("달리기"));
 
         // when
         long actual = studentRepository.insert(student);
@@ -75,7 +75,7 @@ public class StudentRepositoryTest {
 
         // given
         long seq = 3L;
-        Student student = new Student(seq, "사니", 1, 17, Arrays.asList("달리기"));
+        StudentDto student = new StudentDto(seq, "사니", 1, 17, Arrays.asList("달리기"));
 
         // when
         int actual = studentRepository.update(student);
@@ -94,7 +94,7 @@ public class StudentRepositoryTest {
         studentRepository.delete(seq);
 
         // then
-        Student actual = studentRepository.selectOne(seq);
+        StudentDto actual = studentRepository.selectOne(seq);
         Assertions.assertThat(actual).isNull();
     }
 }

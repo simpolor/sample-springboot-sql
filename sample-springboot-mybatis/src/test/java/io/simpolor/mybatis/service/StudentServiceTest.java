@@ -1,6 +1,6 @@
 package io.simpolor.mybatis.service;
 
-import io.simpolor.mybatis.domain.Student;
+import io.simpolor.mybatis.model.StudentDto;
 import io.simpolor.mybatis.repository.StudentRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,7 +30,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testGetTotalcount() {
+    public void testGetTotalCount() {
 
         // given
         long reuturnValue = 3L;
@@ -45,10 +45,10 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testStudentList() {
+    public void testGetAll() {
 
         // given
-        Student student = Student.builder()
+        StudentDto student = StudentDto.builder()
                 .seq(1)
                 .name("홍길동")
                 .grade(1)
@@ -59,7 +59,7 @@ public class StudentServiceTest {
         when(studentRepository.selectStudentList()).thenReturn(Arrays.asList(student));
 
         // when
-        List<Student> actual = studentService.getAll();
+        List<StudentDto> actual = studentService.getAll();
 
         // then
         Assertions.assertNotNull(actual);
@@ -68,12 +68,12 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testStudentView() {
+    public void testGet() {
 
         // given
         long seq = 1;
 
-        Student student = Student.builder()
+        StudentDto student = StudentDto.builder()
                 .seq(1)
                 .name("홍길동")
                 .grade(1)
@@ -84,7 +84,7 @@ public class StudentServiceTest {
         when(studentRepository.selectStudent(anyLong())).thenReturn(student);
 
         // when
-        Student actual = studentService.get(seq);
+        StudentDto actual = studentService.get(seq);
 
         // then
         Assertions.assertNotNull(actual);
@@ -93,11 +93,11 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testStudentSave() {
+    public void testCreate() {
 
         // given
         long seq = 1;
-        Student student = Student.builder()
+        StudentDto student = StudentDto.builder()
                 .seq(seq)
                 .name("홍길동")
                 .grade(1)
@@ -108,18 +108,18 @@ public class StudentServiceTest {
         when(studentRepository.insertStudent(any())).thenReturn(1);
 
         // when
-        studentService.register(student);
+        studentService.create(student);
 
         // then
         verify(studentRepository, times(1)).insertStudent(any());
     }
 
     @Test
-    public void testStudentModify() {
+    public void testUpdate() {
 
         // given
         long seq = 1;
-        Student student = Student.builder()
+        StudentDto student = StudentDto.builder()
                 .seq(seq)
                 .name("홍길동")
                 .grade(1)
@@ -131,7 +131,7 @@ public class StudentServiceTest {
         when(studentRepository.updateStudent(any())).thenReturn(1);
 
         // when
-        studentService.modify(student);
+        studentService.update(student);
 
         // then
         verify(studentRepository, times(1)).selectStudent(anyLong());
@@ -139,7 +139,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testDeleteById() {
+    public void testDelete() {
 
         // given
         long seq = 1;

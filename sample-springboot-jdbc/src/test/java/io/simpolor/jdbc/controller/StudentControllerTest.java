@@ -1,6 +1,6 @@
 package io.simpolor.jdbc.controller;
 
-import io.simpolor.jdbc.domain.Student;
+import io.simpolor.jdbc.model.StudentDto;
 import io.simpolor.jdbc.service.StudentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -47,7 +47,7 @@ public class StudentControllerTest {
 
         // when
         this.mockMvc.perform(
-                get("/student/totalCount")
+                get("/students/total-count")
         )
         .andDo(MockMvcResultHandlers.print())
         .andExpect(status().isOk())
@@ -63,12 +63,12 @@ public class StudentControllerTest {
     public void testList() throws Exception {
 
         // given
-        Student student = new Student(1L, "하니", 2, 18, Arrays.asList("축구"));
+        StudentDto student = new StudentDto(1L, "하니", 2, 18, Arrays.asList("축구"));
         when(studentService.getAll()).thenReturn(Arrays.asList(student));
 
         // when, then
         this.mockMvc.perform(
-                get("/student/list")
+                get("/students")
         )
         .andDo(MockMvcResultHandlers.print())
         .andExpect(status().isOk())
@@ -82,15 +82,15 @@ public class StudentControllerTest {
     }
 
     @Test
-    public void testView() throws Exception {
+    public void testDetail() throws Exception {
 
         // given
-        Student student = new Student(1, "하니", 2, 18, Arrays.asList("독서"));
+        StudentDto student = new StudentDto(1, "하니", 2, 18, Arrays.asList("독서"));
         when(studentService.get(anyLong())).thenReturn(student);
 
         // when, then
         this.mockMvc.perform(
-                get("/student/1")
+                get("/students/1")
         )
         .andDo(MockMvcResultHandlers.print())
         .andExpect(status().isOk())
@@ -110,7 +110,7 @@ public class StudentControllerTest {
 
         // when, then
         this.mockMvc.perform(
-                post("/student")
+                post("/students")
                     .header("Accept", "application/json")
                     .contentType((MediaType.APPLICATION_JSON))
                     .content(json)
@@ -128,7 +128,7 @@ public class StudentControllerTest {
 
         // when, then
         this.mockMvc.perform(
-                put("/student/1")
+                put("/students/1")
                     .header("Accept", "application/json")
                     .contentType((MediaType.APPLICATION_JSON))
                     .content(json)
@@ -146,7 +146,7 @@ public class StudentControllerTest {
 
         // when, then
         this.mockMvc.perform(
-            delete("/student/{seq}", seq)
+            delete("/students/{seq}", seq)
         )
         .andDo(MockMvcResultHandlers.print())
         .andExpect(status().isOk())
