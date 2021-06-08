@@ -1,44 +1,46 @@
 package io.simpolor.h2.controller;
 
-import io.simpolor.h2.domain.Student;
+import io.simpolor.h2.model.StudentRequest;
+import io.simpolor.h2.model.StudentResponse;
+import io.simpolor.h2.repository.entity.Student;
 import io.simpolor.h2.service.StudentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/student")
 @RestController
+@RequestMapping(value = "/students")
+@RequiredArgsConstructor
 public class StudentController {
 
-	@Autowired
-	private StudentService studentService;
+	private final StudentService studentService;
 
-	@RequestMapping(value="/totalCount", method=RequestMethod.GET)
-	public long totalCount() {
+	@GetMapping(value="/total-count")
+	public Long totalCount() {
 
 		return studentService.getTotalCount();
 	}
 
-	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public List<Student> list() {
+	@GetMapping
+	public List<StudentResponse> list() {
 
-		return studentService.getAll();
+		return StudentResponse.of(studentService.getAll());
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.GET)
+	@GetMapping(value="/{seq}")
 	public Student view(@PathVariable long seq) {
 
 		return studentService.get(seq);
 	}
 
-	@RequestMapping(value="", method=RequestMethod.POST)
-	public Student register(@RequestBody Student student) {
+	@PostMapping
+	public Student register(@RequestBody StudentRequest request) {
 
-		return studentService.register(student);
+		return studentService.register(request.toEntity());
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.PUT)
+	@PutMapping(value="/{seq}")
 	public Student modify(@PathVariable int seq,
 						  @RequestBody Student student) {
 
@@ -46,7 +48,7 @@ public class StudentController {
 		return studentService.modify(student);
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.DELETE)
+	@DeleteMapping(value="/{seq}")
 	public long delete(@PathVariable long seq) {
 
 		return studentService.delete(seq);

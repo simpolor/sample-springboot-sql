@@ -1,6 +1,6 @@
 package io.simpolor.h2.controller;
 
-import io.simpolor.h2.domain.Student;
+import io.simpolor.h2.repository.entity.Student;
 import io.simpolor.h2.service.StudentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -47,7 +47,7 @@ public class StudentControllerTest {
 
         // when, then
         this.mockMvc.perform(
-                get("/student/totalCount")
+                get("/students/total-count")
         )
         .andDo(MockMvcResultHandlers.print())
         .andExpect(status().isOk())
@@ -68,7 +68,7 @@ public class StudentControllerTest {
 
         // when, then
         this.mockMvc.perform(
-                get("/student/list")
+                get("/students")
         )
         .andDo(MockMvcResultHandlers.print())
         .andExpect(status().isOk())
@@ -91,7 +91,7 @@ public class StudentControllerTest {
 
         // when, then
         this.mockMvc.perform(
-                get("/student/1")
+                get("/students/1")
         )
         .andDo(MockMvcResultHandlers.print())
         .andExpect(status().isOk())
@@ -114,7 +114,7 @@ public class StudentControllerTest {
 
         // when, then
         this.mockMvc.perform(
-                post("/student")
+                post("/students")
                     .header("Accept", "application/json")
                     .contentType((MediaType.APPLICATION_JSON))
                     .content(json)
@@ -144,7 +144,7 @@ public class StudentControllerTest {
 
         // when, then
         this.mockMvc.perform(
-                put("/student/1")
+                put("/students/1")
                     .header("Accept", "application/json")
                     .contentType((MediaType.APPLICATION_JSON))
                     .content(json)
@@ -169,7 +169,7 @@ public class StudentControllerTest {
 
         // when, then
         this.mockMvc.perform(
-            delete("/student/1")
+            delete("/students/1")
         )
         .andDo(MockMvcResultHandlers.print())
         .andExpect(status().isOk()).andExpect(

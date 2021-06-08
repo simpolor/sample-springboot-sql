@@ -1,6 +1,6 @@
 package io.simpolor.h2.service;
 
-import io.simpolor.h2.domain.Student;
+import io.simpolor.h2.repository.entity.Student;
 import io.simpolor.h2.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

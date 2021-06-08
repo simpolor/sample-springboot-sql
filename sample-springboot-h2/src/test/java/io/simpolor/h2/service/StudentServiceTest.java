@@ -1,6 +1,6 @@
 package io.simpolor.h2.service;
 
-import io.simpolor.h2.domain.Student;
+import io.simpolor.h2.repository.entity.Student;
 import io.simpolor.h2.repository.StudentRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,7 +30,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testStuentTotalcount() {
+    public void testGetTotalCount() {
 
         // given
         long reuturnValue = 3L;
@@ -45,7 +45,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testStudentList() {
+    public void testGetAll() {
 
         // given
         Student student = new Student(1, "홍길동", 2, 18);
@@ -61,7 +61,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testStudentView() {
+    public void testGet() {
 
         // given
         long seq = 1;
@@ -80,7 +80,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testStudentSave() {
+    public void testRegister() {
 
         // given
         long seq = 1;
@@ -100,7 +100,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testStudentModify() {
+    public void testModify() {
 
         // given
         long seq = 1;

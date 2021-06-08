@@ -1,4 +1,4 @@
-package io.simpolor.h2.domain;
+package io.simpolor.h2.repository.entity;
 
 import lombok.*;
 
