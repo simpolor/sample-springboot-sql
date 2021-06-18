@@ -1,6 +1,6 @@
 package io.simpolor.mysql.controller;
 
-import io.simpolor.mysql.domain.Student;
+import io.simpolor.mysql.repository.entity.Student;
 import io.simpolor.mysql.service.StudentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

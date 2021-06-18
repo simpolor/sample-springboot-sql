@@ -9,17 +9,17 @@ import java.util.List;
 @Mapper
 public interface StudentMapper {
 
-	long selectStudentTotalCountMapper();
+	Integer selectStudentTotalCountMapper();
 
 	List<StudentDto> selectStudentListMapper();
 
-	StudentDto selectStudentMapper(long seq);
+	StudentDto selectStudentMapper(Long seq);
 
-	int insertStudentMapper(StudentDto studentDto);
+	Integer insertStudentMapper(StudentDto studentDto);
 
-	int updateStudentMapper(StudentDto studentDto);
+	Integer updateStudentMapper(StudentDto studentDto);
 
-	int deleteStudentMapper(long seq);
+	Integer deleteStudentMapper(Long seq);
 	
 	@Select("SELECT COUNT(*) FROM student")
 	int findByAllCount();

@@ -3,17 +3,17 @@ package io.simpolor.jpa.service;
 import io.simpolor.jpa.repository.TagRepository;
 import io.simpolor.jpa.repository.entity.Student;
 import io.simpolor.jpa.repository.entity.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class TagService {
 
-    @Autowired
-    private TagRepository tagRepository;
+    private  final TagRepository tagRepository;
 
     public List<Tag> getAll() {
 
@@ -22,17 +22,22 @@ public class TagService {
 
     public Tag get(long seq) {
 
-        return tagRepository.findById(seq).orElseThrow(() -> new IllegalArgumentException("seq : "+seq));
+        Optional<Tag> optionalTag = tagRepository.findById(seq);
+        if(!optionalTag.isPresent()){
+            throw new IllegalArgumentException("seq : "+seq);
+        }
+
+        return optionalTag.get();
     }
 
-    public void register(Tag tag, Student student) {
+    public void create(Tag tag, Student student) {
 
         tag.setStudent(student);
 
         tagRepository.save(tag);
     }
 
-    public void modify(Tag tag, Student student) {
+    public void update(Tag tag, Student student) {
 
         Optional<Tag> optionalTag = tagRepository.findById(tag.getSeq());
         if(!optionalTag.isPresent()){

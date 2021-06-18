@@ -1,6 +1,6 @@
 package io.simpolor.mysql.service;
 
-import io.simpolor.mysql.domain.Student;
+import io.simpolor.mysql.repository.entity.Student;
 import io.simpolor.mysql.repository.StudentRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

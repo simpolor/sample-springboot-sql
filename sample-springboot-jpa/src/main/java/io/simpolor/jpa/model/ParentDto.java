@@ -1,4 +1,4 @@
-package io.simpolor.jpa.model.parent;
+package io.simpolor.jpa.model;
 
 import io.simpolor.jpa.repository.entity.Parent;
 import lombok.AllArgsConstructor;
@@ -14,16 +14,24 @@ import java.util.stream.Collectors;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ParentResponse {
+public class ParentDto {
 
     private long seq;
     private String fatherName;
     private String motherName;
     private String studentName;
 
-    public static ParentResponse of(Parent parent){
+    public Parent toEntity() {
 
-        return ParentResponse.builder()
+        return Parent.builder()
+                .fatherName(this.fatherName)
+                .motherName(this.motherName)
+                .build();
+    }
+
+    public static ParentDto of(Parent parent){
+
+        return ParentDto.builder()
                 .seq(parent.getSeq())
                 .fatherName(parent.getFatherName())
                 .motherName(parent.getMotherName())
@@ -31,9 +39,9 @@ public class ParentResponse {
                 .build();
     }
 
-    public static List<ParentResponse> of(List<Parent> parents){
+    public static List<ParentDto> of(List<Parent> parents){
 
-        return parents.stream().map(p -> ParentResponse.of(p)).collect(Collectors.toList());
+        return parents.stream().map(p -> ParentDto.of(p)).collect(Collectors.toList());
     }
 
 }

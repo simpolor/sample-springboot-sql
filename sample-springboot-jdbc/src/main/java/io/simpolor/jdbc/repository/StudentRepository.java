@@ -2,10 +2,12 @@ package io.simpolor.jdbc.repository;
 
 import io.simpolor.jdbc.model.StudentDto;
 import io.simpolor.jdbc.repository.mapper.StudentMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.*;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -16,10 +18,10 @@ import java.util.StringJoiner;
 
 @Slf4j
 @Repository
+@RequiredArgsConstructor
 public class StudentRepository {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     public long selectCount(){
         String query = "SELECT COUNT(*) FROM student";

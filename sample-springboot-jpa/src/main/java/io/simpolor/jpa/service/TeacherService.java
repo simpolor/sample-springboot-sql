@@ -2,17 +2,17 @@ package io.simpolor.jpa.service;
 
 import io.simpolor.jpa.repository.TeacherRepository;
 import io.simpolor.jpa.repository.entity.Teacher;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class TeacherService {
 
-    @Autowired
-    private TeacherRepository teacherRepository;
+    private final TeacherRepository teacherRepository;
 
     public long getTotalCount() {
         return teacherRepository.count();
@@ -38,15 +38,17 @@ public class TeacherService {
         return teacherOptional.get();
     }
 
-    public void register(Teacher teacher) {
+    public void create(Teacher teacher) {
 
         teacherRepository.save(teacher);
     }
 
-    public void modify(Teacher teacher) {
+    public void update(Teacher teacher) {
 
-        teacherRepository.findById(teacher.getSeq())
-                .orElseThrow(() -> new IllegalArgumentException("seq : "+teacher.getSeq()));
+        Optional<Teacher> optionalTeacher = teacherRepository.findById(teacher.getSeq());
+        if(!optionalTeacher.isPresent()){
+            throw new IllegalArgumentException("seq : "+teacher.getSeq());
+        }
 
         teacherRepository.save(teacher);
     }

@@ -1,4 +1,4 @@
-package io.simpolor.jpa.model.tag;
+package io.simpolor.jpa.model;
 
 import io.simpolor.jpa.repository.entity.Tag;
 import lombok.AllArgsConstructor;
@@ -13,22 +13,29 @@ import java.util.stream.Collectors;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TagResponse {
+public class TagDto {
 
     private long seq;
     private String title;
 
-    public static TagResponse of(Tag tag){
+    public Tag toEntity(){
 
-        return TagResponse.builder()
+        return Tag.builder()
+                .title(this.title)
+                .build();
+    }
+
+    public static TagDto of(Tag tag){
+
+        return TagDto.builder()
                 .seq(tag.getSeq())
                 .title(tag.getTitle())
                 .build();
     }
 
-    public static List<TagResponse> of(List<Tag> tags){
+    public static List<TagDto> of(List<Tag> tags){
 
-        return tags.stream().map(tag -> TagResponse.of(tag)).collect(Collectors.toList());
+        return tags.stream().map(tag -> TagDto.of(tag)).collect(Collectors.toList());
     }
 
 }

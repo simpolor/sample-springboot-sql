@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping(value = "/students")
@@ -29,12 +28,9 @@ public class StudentController {
 	}
 
 	@GetMapping(value="/{seq}")
-	public StudentDto detail(@PathVariable long seq) {
+	public StudentDto detail(@PathVariable Long seq) {
 
 		Student student = studentService.get(seq);
-		if(Objects.isNull(student)){
-			return null;
-		}
 
 		return StudentDto.of(student);
 	}
@@ -46,7 +42,7 @@ public class StudentController {
 	}
 
 	@PutMapping(value="/{seq}")
-	public void modify(@PathVariable int seq,
+	public void modify(@PathVariable Long seq,
 					   @RequestBody StudentDto studentDto) {
 
 		studentDto.setSeq(seq);
@@ -54,7 +50,7 @@ public class StudentController {
 	}
 
 	@DeleteMapping(value="/{seq}")
-	public void delete(@PathVariable long seq) {
+	public void delete(@PathVariable Long seq) {
 
 		studentService.delete(seq);
 	}

@@ -1,6 +1,7 @@
 package io.simpolor.mybatis.repository;
 
 import io.simpolor.mybatis.model.StudentDto;
+import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -8,10 +9,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class StudentRepository {
 
-    @Autowired
-    private SqlSession sqlSession;
+    private final SqlSession sqlSession;
 
     public long selectStudentTotalCount(){
         return sqlSession.selectOne("selectStudentTotalCount");

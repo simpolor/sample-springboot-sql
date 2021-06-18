@@ -2,6 +2,7 @@ package io.simpolor.jpa.service;
 
 import io.simpolor.jpa.repository.ClassroomRepository;
 import io.simpolor.jpa.repository.entity.Classroom;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -10,10 +11,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ClassroomService {
 
-    @Autowired
-    private ClassroomRepository classroomRepository;
+    private final ClassroomRepository classroomRepository;
 
     public List<Classroom> saveAndGet(List<String> classroomNames) {
 

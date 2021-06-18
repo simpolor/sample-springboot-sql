@@ -1,4 +1,4 @@
-package io.simpolor.mysql.domain;
+package io.simpolor.mysql.repository.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

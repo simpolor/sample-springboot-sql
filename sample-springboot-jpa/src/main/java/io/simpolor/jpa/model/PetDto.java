@@ -1,4 +1,4 @@
-package io.simpolor.jpa.model.pet;
+package io.simpolor.jpa.model;
 
 import io.simpolor.jpa.repository.entity.Pet;
 import lombok.AllArgsConstructor;
@@ -13,16 +13,25 @@ import java.util.stream.Collectors;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PetResponse {
+public class PetDto {
 
     private long seq;
     private String kind;
     private String name;
     private int age;
 
-    public static PetResponse of(Pet pet){
+    public Pet toEntity(){
 
-        PetResponse response = new PetResponse();
+        return Pet.builder()
+                .kind(this.kind)
+                .name(this.name)
+                .age(this.age)
+                .build();
+    }
+
+    public static PetDto of(Pet pet){
+
+        PetDto response = new PetDto();
         response.setSeq(pet.getSeq());
         response.setKind(pet.getKind());
         response.setName(pet.getName());
@@ -31,8 +40,8 @@ public class PetResponse {
         return response;
     }
 
-    public static List<PetResponse> of(List<Pet> pets){
+    public static List<PetDto> of(List<Pet> pets){
 
-        return pets.stream().map(PetResponse::of).collect(Collectors.toList());
+        return pets.stream().map(PetDto::of).collect(Collectors.toList());
     }
 }

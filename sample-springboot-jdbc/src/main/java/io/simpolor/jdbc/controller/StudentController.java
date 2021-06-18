@@ -27,7 +27,7 @@ public class StudentController {
 	}
 
 	@GetMapping(value="/{seq}")
-	public StudentDto detail(@PathVariable long seq) {
+	public StudentDto detail(@PathVariable Long seq) {
 
 		return studentService.get(seq);
 	}
@@ -39,14 +39,14 @@ public class StudentController {
 	}
 
 	@PutMapping(value="/{seq}")
-	public void modify(@PathVariable int seq, @RequestBody StudentDto studentDto) {
+	public void modify(@PathVariable Long seq, @RequestBody StudentDto studentDto) {
 
 		studentDto.setSeq(seq);
 		studentService.modify(studentDto);
 	}
 
 	@DeleteMapping(value="/{seq}")
-	public void delete(@PathVariable long seq) {
+	public void delete(@PathVariable Long seq) {
 
 		studentService.delete(seq);
 	}

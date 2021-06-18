@@ -48,7 +48,7 @@ public class StudentControllerTest {
 
         // when, then
         this.mockMvc.perform(
-                get("/student/totalCount")
+                get("/students/totalCount")
         )
         .andDo(MockMvcResultHandlers.print())
         .andExpect(status().isOk())
@@ -78,7 +78,7 @@ public class StudentControllerTest {
 
         // when, then
         this.mockMvc.perform(
-                get("/student/list")
+                get("/students/list")
         )
         .andDo(MockMvcResultHandlers.print())
         .andExpect(status().isOk())
@@ -92,7 +92,7 @@ public class StudentControllerTest {
     }
 
     @Test
-    public void testView() throws Exception {
+    public void testDetail() throws Exception {
 
         // given
         Student student = Student.builder()
@@ -110,7 +110,7 @@ public class StudentControllerTest {
 
         // when, then
         this.mockMvc.perform(
-                get("/student/1")
+                get("/students/1")
         )
         .andDo(MockMvcResultHandlers.print())
         .andExpect(status().isOk())
@@ -130,7 +130,7 @@ public class StudentControllerTest {
 
         // when, then
         this.mockMvc.perform(
-                post("/student")
+                post("/students")
                     .header("Accept", "application/json")
                     .contentType((MediaType.APPLICATION_JSON))
                     .content(json)
@@ -148,7 +148,7 @@ public class StudentControllerTest {
 
         // when, then
         this.mockMvc.perform(
-                put("/student/1")
+                put("/students/1")
                     .header("Accept", "application/json")
                     .contentType((MediaType.APPLICATION_JSON))
                     .content(json)
@@ -166,7 +166,7 @@ public class StudentControllerTest {
 
         // when, then
         this.mockMvc.perform(
-            delete("/student/{seq}", seq)
+            delete("/students/{seq}", seq)
         )
         .andDo(MockMvcResultHandlers.print())
         .andExpect(status().isOk())

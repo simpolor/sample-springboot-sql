@@ -1,4 +1,4 @@
-package io.simpolor.jpa.model.classroom;
+package io.simpolor.jpa.model;
 
 import io.simpolor.jpa.repository.entity.StudentClassroom;
 import lombok.AllArgsConstructor;
@@ -13,22 +13,22 @@ import java.util.stream.Collectors;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClassroomResponse {
+public class ClassroomDto {
 
     private long seq;
     private String name;
 
-    public static ClassroomResponse of(StudentClassroom studentClassroom){
+    public static ClassroomDto of(StudentClassroom studentClassroom){
 
-        return ClassroomResponse.builder()
+        return ClassroomDto.builder()
                 .seq(studentClassroom.getClassroom().getSeq())
                 .name(studentClassroom.getClassroom().getClassName())
                 .build();
     }
 
-    public static List<ClassroomResponse> of(List<StudentClassroom> studentClassrooms){
+    public static List<ClassroomDto> of(List<StudentClassroom> studentClassrooms){
 
-        return studentClassrooms.stream().map(ClassroomResponse::of).collect(Collectors.toList());
+        return studentClassrooms.stream().map(ClassroomDto::of).collect(Collectors.toList());
     }
 
 }

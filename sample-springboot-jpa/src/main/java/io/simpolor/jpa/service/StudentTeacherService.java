@@ -1,9 +1,8 @@
 package io.simpolor.jpa.service;
 
 import io.simpolor.jpa.repository.StudentTeacherRepository;
-import io.simpolor.jpa.repository.entity.StudentClassroom;
 import io.simpolor.jpa.repository.entity.StudentTeacher;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -13,18 +12,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class StudentTeacherService {
 
-    @Autowired
-    private StudentTeacherRepository studentTeacherRepository;
+    private final StudentTeacherRepository studentTeacherRepository;
 
-    public void register(List<StudentTeacher> studentTeachers) {
+    public void create(List<StudentTeacher> studentTeachers) {
 
         studentTeacherRepository.saveAll(studentTeachers);
     }
 
     @Transactional
-    public void modify(List<StudentTeacher> studentTeachers, Long studentSeq) {
+    public void update(List<StudentTeacher> studentTeachers, Long studentSeq) {
 
         List<StudentTeacher> saveBulk = new ArrayList<>();
         List<StudentTeacher> deleteBulk = new ArrayList<>();

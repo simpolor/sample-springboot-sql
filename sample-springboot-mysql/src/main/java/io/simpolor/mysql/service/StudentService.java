@@ -1,17 +1,18 @@
 package io.simpolor.mysql.service;
 
-import io.simpolor.mysql.domain.Student;
 import io.simpolor.mysql.repository.StudentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.simpolor.mysql.repository.entity.Student;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class StudentService {
 
-    @Autowired
-    private StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
 
     public long getTotalCount() {
         return studentRepository.count();
@@ -24,8 +25,12 @@ public class StudentService {
 
     public Student get(long seq) {
 
-        return studentRepository.findById(seq)
-                .orElseThrow(() -> new IllegalArgumentException("seq : "+seq));
+        Optional<Student> optionalStudent = studentRepository.findById(seq);
+        if(!optionalStudent.isPresent()){
+            throw new IllegalArgumentException("seq : "+seq);
+        }
+
+        return optionalStudent.get();
     }
 
     public void register(Student student) {
@@ -35,8 +40,10 @@ public class StudentService {
 
     public void modify(Student student) {
 
-        studentRepository.findById(student.getSeq())
-                .orElseThrow(() -> new IllegalArgumentException("seq : "+student.getSeq()));
+        Optional<Student> optionalStudent = studentRepository.findById(student.getSeq());
+        if(!optionalStudent.isPresent()){
+            throw new IllegalArgumentException("seq : "+student.getSeq());
+        }
 
         studentRepository.save(student);
     }

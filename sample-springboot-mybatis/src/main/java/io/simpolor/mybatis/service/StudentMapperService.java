@@ -22,26 +22,31 @@ public class StudentMapperService {
         return studentMapper.selectStudentListMapper();
     }
 
-    public StudentDto get(long seq) {
+    public StudentDto get(Long seq) {
+
         StudentDto student = studentMapper.selectStudentMapper(seq);
         if(Objects.isNull(student)){
             throw new IllegalArgumentException("seq : "+seq);
         }
+
         return student;
     }
 
     public void create(StudentDto student) {
+
         studentMapper.insertStudentMapper(student);
     }
 
     public void update(StudentDto student) {
+
         if(Objects.isNull(studentMapper.selectStudentMapper(student.getSeq()))){
             throw new IllegalArgumentException("seq : "+student.getSeq());
         }
         studentMapper.updateStudentMapper(student);
     }
 
-    public void delete(long seq) {
+    public void delete(Long seq) {
+
         studentMapper.deleteStudentMapper(seq);
     }
 

@@ -2,19 +2,19 @@ package io.simpolor.jpa.service;
 
 import io.simpolor.jpa.repository.StudentClassroomRepository;
 import io.simpolor.jpa.repository.entity.StudentClassroom;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class StudentClassroomService {
 
-    @Autowired
-    private StudentClassroomRepository studentClassroomRepository;
+    private final StudentClassroomRepository studentClassroomRepository;
 
-    public void register(List<StudentClassroom> studentClassrooms) {
+    public void create(List<StudentClassroom> studentClassrooms) {
 
         studentClassroomRepository.saveAll(studentClassrooms);
     }

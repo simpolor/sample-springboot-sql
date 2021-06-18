@@ -6,8 +6,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,7 +34,12 @@ public class StudentService {
 
     public Student get(long seq) {
 
-        return studentRepository.findById(seq).orElseThrow(() -> new IllegalArgumentException("seq : "+seq));
+        Optional<Student> optionalStudent = studentRepository.findById(seq);
+        if(!optionalStudent.isPresent()){
+            throw new IllegalArgumentException("seq : "+seq);
+        }
+
+        return optionalStudent.get();
     }
 
     public Student create(Student student) {
@@ -42,8 +49,10 @@ public class StudentService {
 
     public Student update(Student student) {
 
-        studentRepository.findById(student.getSeq())
-                .orElseThrow(() -> new IllegalArgumentException("seq : "+student.getSeq()));
+        Optional<Student> optionalStudent = studentRepository.findById(student.getSeq());
+        if(!optionalStudent.isPresent()){
+            throw new IllegalArgumentException("seq : "+student.getSeq());
+        }
 
         return studentRepository.save(student);
     }

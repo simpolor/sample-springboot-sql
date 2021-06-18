@@ -1,62 +1,55 @@
 package io.simpolor.jpa.controller;
 
-import io.simpolor.jpa.model.student.StudentRequest;
-import io.simpolor.jpa.model.student.StudentResponse;
+import io.simpolor.jpa.model.StudentDto;
 import io.simpolor.jpa.service.StudentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/student")
+@RequestMapping("/students")
 @RestController
+@RequiredArgsConstructor
 public class StudentController {
 
-	@Autowired
-	private StudentService studentService;
+	private final StudentService studentService;
 
-	@RequestMapping(value="/totalCount", method=RequestMethod.GET)
-	public long totalCount() {
+	@GetMapping(value="/total-count")
+	public Long totalCount() {
 
 		return studentService.getTotalCount();
 	}
 
-	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public List<StudentResponse> getList() {
+	@GetMapping
+	public List<StudentDto> list() {
 
-		return StudentResponse.of(studentService.getAll());
+		return StudentDto.of(studentService.getAll());
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.GET)
-	public StudentResponse get(@PathVariable long seq) {
+	@GetMapping(value="/{seq}")
+	public StudentDto detail(@PathVariable Long seq) {
 
-		return StudentResponse.of(studentService.get(seq));
+		return StudentDto.of(studentService.get(seq));
 	}
 
-	@RequestMapping(value="", method=RequestMethod.POST)
-	public void post(@RequestBody StudentRequest request) {
+	@PostMapping
+	public void register(@RequestBody StudentDto request) {
 
-		studentService.register(request.toStudent(), request.getClassroomNames(), request.getTeacherSequences());
+		studentService.create(request.toEntity());
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.PUT)
-	public void put(@PathVariable int seq,
-					@RequestBody StudentRequest request) {
+	@PutMapping(value="/{seq}")
+	public void modify(@PathVariable Long seq,
+					   @RequestBody StudentDto request) {
 
-		studentService.modify(request.toStudent(seq), request.getClassroomNames(), request.getTeacherSequences());
+		request.setSeq(seq);
+		studentService.update(request.toEntity());
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.DELETE)
-	public void delete(@PathVariable long seq) {
+	@DeleteMapping(value="/{seq}")
+	public void delete(@PathVariable Long seq) {
 
 		studentService.delete(seq);
 	}
-
-	@RequestMapping(value="/not", method=RequestMethod.GET)
-	public String studentNot() {
-
-		return "Is not a studnet";
-	}
-
 
 }

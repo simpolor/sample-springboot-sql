@@ -27,7 +27,7 @@ public class StudentMapperController {
 	}
 
 	@GetMapping(value="/{seq}")
-	public StudentDto detail(@PathVariable long seq) {
+	public StudentDto detail(@PathVariable Long seq) {
 
 		return studentMapperService.get(seq);
 	}
@@ -39,14 +39,15 @@ public class StudentMapperController {
 	}
 
 	@PutMapping(value="/{seq}")
-	public void modify(@PathVariable long seq, @RequestBody StudentDto student) {
+	public void modify(@PathVariable Long seq,
+					   @RequestBody StudentDto student) {
 
 		student.setSeq(seq);
 		studentMapperService.update(student);
 	}
 
 	@DeleteMapping(value="/{seq}")
-	public void delete(@PathVariable long seq) {
+	public void delete(@PathVariable Long seq) {
 
 		studentMapperService.delete(seq);
 	}

@@ -1,9 +1,8 @@
 package io.simpolor.jpa.service;
 
-import io.simpolor.jpa.repository.entity.Student;
 import io.simpolor.jpa.repository.StudentRepository;
+import io.simpolor.jpa.repository.entity.Student;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -118,15 +117,16 @@ public class StudentServiceTest {
         when(studentRepository.save(any())).thenReturn(student);
 
         // when
-        studentService.register(student, Collections.EMPTY_LIST, Collections.EMPTY_LIST);
+        // studentService.register(student, Collections.EMPTY_LIST, Collections.EMPTY_LIST);
+        studentService.create(student);
 
         // then
         verify(studentRepository, times(1)).saveAndFlush(any());
-        verify(tagService, times(0)).register(any(), any());
+        verify(tagService, times(0)).create(any(), any());
         verify(classroomService, times(1)).saveAndGet(any());
-        verify(studentClassroomService, times(0)).register(any());
+        verify(studentClassroomService, times(0)).create(any());
         verify(teacherService, times(1)).getAll(any());
-        verify(studentTeacherService, times(0)).register(any());
+        verify(studentTeacherService, times(0)).create(any());
     }
 
     @Test
@@ -147,16 +147,17 @@ public class StudentServiceTest {
         when(studentRepository.save(any())).thenReturn(student);
 
         // when
-        studentService.modify(student, Collections.EMPTY_LIST, Collections.EMPTY_LIST);
+        // studentService.update(student, Collections.EMPTY_LIST, Collections.EMPTY_LIST);
+        studentService.update(student);
 
         // then
         verify(studentRepository, times(1)).findById(anyLong());
         verify(studentRepository, times(1)).saveAndFlush(any());
         verify(studentClassroomService, times(1)).getAndDelete(any());
         verify(classroomService, times(1)).saveAndGet(any());
-        verify(studentClassroomService, times(0)).register(any());
+        verify(studentClassroomService, times(0)).create(any());
         verify(teacherService, times(1)).getAll(any());
-        verify(studentTeacherService, times(0)).register(any());
+        verify(studentTeacherService, times(0)).update(any(), anyLong());
     }
 
     @Test

@@ -1,53 +1,53 @@
 package io.simpolor.jpa.controller;
 
-import io.simpolor.jpa.model.parent.ParentRequest;
-import io.simpolor.jpa.model.parent.ParentResponse;
+import io.simpolor.jpa.model.ParentDto;
 import io.simpolor.jpa.service.ParentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/parent")
+@RequestMapping("/parents")
 @RestController
+@RequiredArgsConstructor
 public class ParentController {
 
-	@Autowired
-	private ParentService parentService;
+	private final ParentService parentService;
 
-	@RequestMapping(value="/totalCount", method=RequestMethod.GET)
+	@GetMapping(value="/total-count")
 	public long totalCount() {
 
 		return parentService.getTotalCount();
 	}
 
-	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public List<ParentResponse> getList() {
+	@GetMapping
+	public List<ParentDto> list() {
 
-		return ParentResponse.of(parentService.getAll());
+		return ParentDto.of(parentService.getAll());
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.GET)
-	public ParentResponse get(@PathVariable long seq) {
+	@GetMapping(value="/{seq}")
+	public ParentDto detail(@PathVariable Long seq) {
 
-		return ParentResponse.of(parentService.get(seq));
+		return ParentDto.of(parentService.get(seq));
 	}
 
-	@RequestMapping(value="", method=RequestMethod.POST)
-	public void post(@RequestBody ParentRequest request) {
+	@PostMapping
+	public void register(@RequestBody ParentDto request) {
 
-		parentService.register(request.toInsert());
+		parentService.create(request.toEntity());
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.PUT)
-	public void put(@PathVariable int seq,
-					@RequestBody ParentRequest request) {
+	@PutMapping(value="/{seq}")
+	public void modify(@PathVariable Long seq,
+					   @RequestBody ParentDto request) {
 
-		parentService.modify(request.toUpdate(seq));
+		request.setSeq(seq);
+		parentService.update(request.toEntity());
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.DELETE)
-	public void delete(@PathVariable long seq) {
+	@DeleteMapping(value="/{seq}")
+	public void delete(@PathVariable Long seq) {
 
 		parentService.delete(seq);
 	}

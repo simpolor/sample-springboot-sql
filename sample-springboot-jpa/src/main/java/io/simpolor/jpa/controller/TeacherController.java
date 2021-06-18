@@ -1,53 +1,53 @@
 package io.simpolor.jpa.controller;
 
-import io.simpolor.jpa.model.teacher.TeacherRequest;
-import io.simpolor.jpa.model.teacher.TeacherResponse;
+import io.simpolor.jpa.model.TeacherDto;
 import io.simpolor.jpa.service.TeacherService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/teacher")
+@RequestMapping("/teachers")
 @RestController
+@RequiredArgsConstructor
 public class TeacherController {
 
-	@Autowired
-	private TeacherService teacherService;
+	private final TeacherService teacherService;
 
-	@RequestMapping(value="/totalCount", method=RequestMethod.GET)
-	public long totalCount() {
+	@GetMapping(value="/total-count")
+	public Long totalCount() {
 
 		return teacherService.getTotalCount();
 	}
 
-	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public List<TeacherResponse> getList() {
+	@GetMapping
+	public List<TeacherDto> list() {
 
-		return TeacherResponse.of(teacherService.getAll());
+		return TeacherDto.of(teacherService.getAll());
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.GET)
-	public TeacherResponse get(@PathVariable long seq) {
+	@GetMapping(value="/{seq}")
+	public TeacherDto detail(@PathVariable Long seq) {
 
-		return TeacherResponse.of(teacherService.get(seq));
+		return TeacherDto.of(teacherService.get(seq));
 	}
 
-	@RequestMapping(value="", method=RequestMethod.POST)
-	public void post(@RequestBody TeacherRequest request) {
+	@PostMapping
+	public void post(@RequestBody TeacherDto request) {
 
-		teacherService.register(request.toTeacher());
+		teacherService.create(request.toEntity());
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.PUT)
-	public void put(@PathVariable int seq,
-					@RequestBody TeacherRequest request) {
+	@PutMapping(value="/{seq}")
+	public void put(@PathVariable Long seq,
+					@RequestBody TeacherDto request) {
 
-		teacherService.modify(request.toTeacher(seq));
+		request.setSeq(seq);
+		teacherService.update(request.toEntity());
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.DELETE)
-	public void delete(@PathVariable long seq) {
+	@DeleteMapping(value="/{seq}")
+	public void delete(@PathVariable Long seq) {
 
 		teacherService.delete(seq);
 	}
