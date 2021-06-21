@@ -2,6 +2,7 @@ package io.simpolor.mybatis.service;
 
 import io.simpolor.mybatis.model.StudentDto;
 import io.simpolor.mybatis.repository.StudentRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,10 +10,10 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
+@RequiredArgsConstructor
 public class StudentService {
 
-    @Autowired
-    private StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
 
     public long getTotalCount() {
         return studentRepository.selectStudentTotalCount();
