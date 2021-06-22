@@ -6,7 +6,7 @@ spring:
   jackson:
     property-naming-strategy: SNAKE_CASE
     serialization:
-      WRITE_DATES_AS_TIMESTAMPS: true
+      WRITE_DATES_AS_TIMESTAMPS: false
       WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS: false
       INDENT_OUTPUT: true
       FAIL_ON_EMPTY_BEANS: false

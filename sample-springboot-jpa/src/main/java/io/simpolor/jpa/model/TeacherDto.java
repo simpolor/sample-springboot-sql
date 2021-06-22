@@ -1,6 +1,5 @@
 package io.simpolor.jpa.model;
 
-import io.simpolor.jpa.repository.entity.StudentTeacher;
 import io.simpolor.jpa.repository.entity.Teacher;
 import lombok.*;
 
@@ -36,18 +35,4 @@ public class TeacherDto {
 
         return teachers.stream().map(TeacherDto::of).collect(Collectors.toList());
     }
-
-    public static TeacherDto ofStudent(StudentTeacher studentTeacher){
-
-        return TeacherDto.builder()
-                .seq(studentTeacher.getTeacher().getSeq())
-                .name(studentTeacher.getTeacher().getTeacherName())
-                .build();
-    }
-
-    public static List<TeacherDto> ofStudent(List<StudentTeacher> studentTeachers){
-
-        return studentTeachers.stream().map(TeacherDto::ofStudent).collect(Collectors.toList());
-    }
-
 }

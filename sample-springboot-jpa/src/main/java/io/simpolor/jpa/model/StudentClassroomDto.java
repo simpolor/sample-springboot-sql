@@ -13,22 +13,22 @@ import java.util.stream.Collectors;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClassroomDto {
+public class StudentClassroomDto {
 
     private long seq;
     private String name;
 
-    public static ClassroomDto of(StudentClassroom studentClassroom){
+    public static StudentClassroomDto of(StudentClassroom studentClassroom){
 
-        return ClassroomDto.builder()
+        return StudentClassroomDto.builder()
                 .seq(studentClassroom.getClassroom().getSeq())
                 .name(studentClassroom.getClassroom().getClassName())
                 .build();
     }
 
-    public static List<ClassroomDto> of(List<StudentClassroom> studentClassrooms){
+    public static List<StudentClassroomDto> of(List<StudentClassroom> studentClassrooms){
 
-        return studentClassrooms.stream().map(ClassroomDto::of).collect(Collectors.toList());
+        return studentClassrooms.stream().map(StudentClassroomDto::of).collect(Collectors.toList());
     }
 
 }

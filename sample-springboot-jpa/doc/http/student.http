@@ -47,7 +47,7 @@ Content-Type: application/json
   "classroom_names": [
     "햇님반"
   ],
-  "teachers": [
+  "teacher_seqs": [
     1
   ]
 }

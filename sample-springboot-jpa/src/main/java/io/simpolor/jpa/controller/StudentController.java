@@ -35,7 +35,7 @@ public class StudentController {
 	@PostMapping
 	public void register(@RequestBody StudentDto request) {
 
-		studentService.create(request.toEntity());
+		studentService.create(request.toEntity(), request.getClassroomNames(), request.getTeacherSeqs());
 	}
 
 	@PutMapping(value="/{seq}")

@@ -117,8 +117,7 @@ public class StudentServiceTest {
         when(studentRepository.save(any())).thenReturn(student);
 
         // when
-        // studentService.register(student, Collections.EMPTY_LIST, Collections.EMPTY_LIST);
-        studentService.create(student);
+        studentService.create(student, Collections.EMPTY_LIST, Collections.EMPTY_LIST);
 
         // then
         verify(studentRepository, times(1)).saveAndFlush(any());

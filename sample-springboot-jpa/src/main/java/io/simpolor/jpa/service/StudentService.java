@@ -41,30 +41,30 @@ public class StudentService {
         return studentOptional.get();
     }
 
-    public void create(Student student) {
+    public void create(Student student, List<String> classroomNames, List<Long> teacherSeqs) {
 
         studentRepository.saveAndFlush(student);
         if(Objects.nonNull(student.getTag())) {
             tagService.create(student.getTag(), student);
         }
 
-        /*List<Classroom> classrooms = classroomService.saveAndGet(classroomNames);
+        List<Classroom> classrooms = classroomService.saveAndGet(classroomNames);
         if(!CollectionUtils.isEmpty(classrooms)){
             List<StudentClassroom> studentClassrooms = new ArrayList<>();
             for(Classroom classroom : classrooms){
                 studentClassrooms.add(StudentClassroom.builder().student(student).classroom(classroom).build());
             }
-            studentClassroomService.register(studentClassrooms);
-        }*/
+            studentClassroomService.create(studentClassrooms);
+        }
 
-        /*List<Teacher> teachers = teacherService.getAll(teacherSequences);
+        List<Teacher> teachers = teacherService.getAll(teacherSeqs);
         if(!CollectionUtils.isEmpty(teachers)){
             List<StudentTeacher> studentTeachers = new ArrayList<>();
             for(Teacher teacher : teachers){
                 studentTeachers.add(StudentTeacher.builder().student(student).teacher(teacher).build());
             }
-            studentTeacherService.register(studentTeachers);
-        }*/
+            studentTeacherService.create(studentTeachers);
+        }
     }
 
     public void update(Student student) {

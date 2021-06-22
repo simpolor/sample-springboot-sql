@@ -1,34 +1,42 @@
 package io.simpolor.jpa.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import io.simpolor.jpa.repository.entity.Student;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Data
+@Setter
+@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class StudentDto {
 
-    private long seq;
+    private Long seq;
     private String name;
-    private int grade;
-    private int age;
+    private Integer grade;
+    private Integer age;
+
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     private Set<String> favoriteFoods = new HashSet<>();
     private List<String> hobbies = new ArrayList<>();
     private List<PetDto> pets;
     private ParentDto parent;
     private TagDto tag;
-    private List<ClassroomDto> classrooms;
-    private List<TeacherDto> teachers;
+    private List<String> classroomNames;
+    private List<StudentClassroomDto> classrooms;
+    private List<Long> teacherSeqs;
+    private List<StudentTeacherDto> teachers;
 
     public Student toEntity(){
 
@@ -52,13 +60,15 @@ public class StudentDto {
                 .name(student.getName())
                 .grade(student.getGrade())
                 .age(student.getAge())
+                .createdAt(student.getCreatedAt())
+                .updatedAt(student.getUpdatedAt())
                 .favoriteFoods(student.getFoodNames())
                 .hobbies(student.getHobbies())
                 .pets((Objects.nonNull(student.getPets())) ? PetDto.of(student.getPets()) : null)
                 .tag((Objects.nonNull(student.getTag())) ? TagDto.of(student.getTag()) : null)
                 .parent((Objects.nonNull(student.getParent())) ? ParentDto.of(student.getParent()) : null)
-                .classrooms(ClassroomDto.of(student.getStudentClassrooms()))
-                .teachers(TeacherDto.ofStudent(student.getStudentTeachers()))
+                .classrooms(StudentClassroomDto.of(student.getStudentClassrooms()))
+                .teachers(StudentTeacherDto.of(student.getStudentTeachers()))
                 .build();
     }
 

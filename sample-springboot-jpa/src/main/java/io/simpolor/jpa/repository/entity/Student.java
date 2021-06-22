@@ -11,20 +11,21 @@ import java.util.*;
 @Entity(name = "student")
 @Table(name = "student")
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Student {
+public class Student extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long seq;
+	private Long seq;
 
 	private String name;
 
-	private int grade;
+	private Integer grade;
 
-	private int age;
+	private Integer age;
 
 	/**
 	 * 리스트를 스트링 문자열로 저장
