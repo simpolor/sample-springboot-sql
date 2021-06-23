@@ -1,9 +1,12 @@
 package io.simpolor.querydsl.repository.querydsl;
 
 import com.querydsl.core.QueryResults;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.StringPath;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import io.simpolor.querydsl.repository.entity.Student;
 import lombok.RequiredArgsConstructor;
+import org.springframework.util.StringUtils;
 
 import static io.simpolor.querydsl.repository.entity.QStudent.student;
 
@@ -19,5 +22,11 @@ public class StudentRepositoryImpl implements StudentRepositoryCustom {
                 .selectFrom(student)
                 .where(student.name.like("%"+name+"%"))
                 .fetchResults();
+    }
+
+    public static BooleanExpression likeOperation(StringPath column, String value) {
+        if (StringUtils.isEmpty(value)) return null;
+
+        return column.upper().like(value);
     }
 }

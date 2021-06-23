@@ -9,7 +9,8 @@ GET http://127.0.0.1:8080/students
 ###
 
 # Student 리스트 ( listByName )
-GET http://127.0.0.1:8080/students/search?name=석영
+GET http://127.0.0.1:8080/students/search?name=하
+
 ###
 
 # Student 조회
