@@ -1,25 +1,24 @@
 # Student 전체 카운트
-GET http://127.0.0.1:8080/student/totalCount
+GET http://127.0.0.1:8080/students/total-count
 
 ###
 
 # Student 리스트
-GET http://127.0.0.1:8080/student/list
+GET http://127.0.0.1:8080/students
 
 ###
 
 # Student 리스트 ( listByName )
-GET http://127.0.0.1:8080/student/listByName
-
+GET http://127.0.0.1:8080/students/search?name=석영
 ###
 
 # Student 조회
-GET http://127.0.0.1:8080/student/1
+GET http://127.0.0.1:8080/students/1
 
 ###
 
 # Student 등록
-POST http://127.0.0.1:8080/student
+POST http://127.0.0.1:8080/students
 Content-Type: application/json
 
 {
@@ -31,7 +30,7 @@ Content-Type: application/json
 ###
 
 # Student 수정
-PUT http://127.0.0.1:8080/student/1
+PUT http://127.0.0.1:8080/students/1
 Content-Type: application/json
 
 {
@@ -42,6 +41,6 @@ Content-Type: application/json
 ###
 
 # Student 삭제
-DELETE http://127.0.0.1:8080/student/1
+DELETE http://127.0.0.1:8080/students/1
 
 ###

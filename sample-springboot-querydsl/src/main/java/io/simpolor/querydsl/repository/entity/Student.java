@@ -17,12 +17,12 @@ public class Student {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long seq;
+	private Long seq;
 
 	private String name;
 
-	private int grade;
+	private Integer grade;
 
-	private int age;
+	private Integer age;
 
 }

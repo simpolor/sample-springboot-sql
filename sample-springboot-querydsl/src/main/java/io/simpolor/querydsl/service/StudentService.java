@@ -24,8 +24,8 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
-    public QueryResults<Student> getAllByName(String name) {
-        return studentRepository.findAllBySearch(name);
+    public QueryResults<Student> search(String name) {
+        return studentRepository.search(name);
     }
 
     public Student get(long seq) {
@@ -38,12 +38,12 @@ public class StudentService {
         return studentOptional.get();
     }
 
-    public void register(Student student) {
+    public void create(Student student) {
 
         studentRepository.save(student);
     }
 
-    public void modify(Student student) {
+    public void update(Student student) {
 
         studentRepository.findById(student.getSeq())
                 .orElseThrow(() -> new IllegalArgumentException("seq : "+student.getSeq()));

@@ -5,5 +5,5 @@ import io.simpolor.querydsl.repository.entity.Student;
 
 public interface StudentRepositoryCustom {
 
-    QueryResults<Student> findAllBySearch(String name);
+    QueryResults<Student> search(String name);
 }

@@ -34,8 +34,8 @@ public class StudentServiceTest {
     public void testStuentTotalcount() {
 
         // given
-        long reuturnValue = 3L;
-        when(studentRepository.count()).thenReturn(reuturnValue);
+        Long retValue = 3L;
+        when(studentRepository.count()).thenReturn(retValue);
 
         // when
         long actual = studentService.getTotalCount();
@@ -50,7 +50,7 @@ public class StudentServiceTest {
 
         // given
         Student student = Student.builder()
-                .seq(1)
+                .seq(1L)
                 .name("홍길동")
                 .grade(1)
                 .age(17)
@@ -71,10 +71,10 @@ public class StudentServiceTest {
     public void testStudentView() {
 
         // given
-        long seq = 1;
+        Long seq = 1L;
 
         Student student = Student.builder()
-                .seq(1)
+                .seq(seq)
                 .name("홍길동")
                 .grade(1)
                 .age(17)
@@ -95,7 +95,7 @@ public class StudentServiceTest {
     public void testStudentSave() {
 
         // given
-        long seq = 1;
+        Long seq = 1L;
         Student student = Student.builder()
                 .seq(seq)
                 .name("홍길동")
@@ -106,7 +106,7 @@ public class StudentServiceTest {
         when(studentRepository.save(any())).thenReturn(student);
 
         // when
-        studentService.register(student);
+        studentService.create(student);
 
         // then
         verify(studentRepository, times(1)).save(any());
@@ -116,7 +116,7 @@ public class StudentServiceTest {
     public void testStudentModify() {
 
         // given
-        long seq = 1;
+        Long seq = 1L;
         Student student = Student.builder()
                 .seq(seq)
                 .name("홍길동")
@@ -128,7 +128,7 @@ public class StudentServiceTest {
         when(studentRepository.save(any())).thenReturn(student);
 
         // when
-        studentService.modify(student);
+        studentService.update(student);
 
         // then
         verify(studentRepository, times(1)).findById(anyLong());
@@ -139,7 +139,7 @@ public class StudentServiceTest {
     public void testDeleteById() {
 
         // given
-        long seq = 1;
+        Long seq = 1L;
 
         // when
         studentService.delete(seq);

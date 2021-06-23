@@ -1,62 +1,66 @@
 package io.simpolor.querydsl.controller;
 
-import io.simpolor.querydsl.domain.student.StudentRequest;
-import io.simpolor.querydsl.domain.student.StudentResponse;
+import com.querydsl.core.QueryResults;
+import io.simpolor.querydsl.model.StudentDto;
+import io.simpolor.querydsl.repository.entity.Student;
 import io.simpolor.querydsl.service.StudentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/student")
 @RestController
+@RequestMapping("/students")
+@RequiredArgsConstructor
 public class StudentController {
 
-	@Autowired
-	private StudentService studentService;
+	private final StudentService studentService;
 
-	@RequestMapping(value="/totalCount", method=RequestMethod.GET)
+	@RequestMapping(value="/total-count", method=RequestMethod.GET)
 	public long totalCount() {
 
 		return studentService.getTotalCount();
 	}
 
-	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public List<StudentResponse> getList() {
-
-		return StudentResponse.of(studentService.getAll());
+	@GetMapping
+	public List<StudentDto> list() {
+		return StudentDto.of(studentService.getAll());
 	}
 
-	@RequestMapping(value="/listByName", method=RequestMethod.GET)
-	public List<StudentResponse> getListByName() {
+	@GetMapping(value="/search")
+	public List<StudentDto> search(@RequestParam String name) {
 
-		return StudentResponse.of(studentService.getAll());
+		QueryResults<Student> queryResults = studentService.search(name);
+
+		return StudentDto.of(queryResults.getResults());
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.GET)
-	public StudentResponse get(@PathVariable long seq) {
+	@GetMapping(value="/{seq}")
+	public StudentDto get(@PathVariable Long seq) {
 
-		return StudentResponse.of(studentService.get(seq));
+		return StudentDto.of(studentService.get(seq));
 	}
 
-	@RequestMapping(value="", method=RequestMethod.POST)
-	public void post(@RequestBody StudentRequest request) {
+	@PostMapping
+	public void register(@RequestBody StudentDto request) {
 
-		studentService.register(request.toStudent());
+		studentService.create(request.toEntity());
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.PUT)
-	public void put(@PathVariable int seq,
-					@RequestBody StudentRequest request) {
+	@PutMapping(value="/{seq}")
+	public void modify(@PathVariable Long seq,
+					   @RequestBody StudentDto request) {
 
-		studentService.modify(request.toStudent(seq));
+		request.setSeq(seq);
+		studentService.update(request.toEntity());
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.DELETE)
-	public void delete(@PathVariable long seq) {
+	@DeleteMapping(value="/{seq}")
+	public void delete(@PathVariable Long seq) {
 
 		studentService.delete(seq);
 	}
 
 
 }
+
