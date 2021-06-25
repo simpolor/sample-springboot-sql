@@ -5,3 +5,11 @@ CREATE TABLE `student` (
   `age` INT(11) NULL DEFAULT NULL COMMENT '나이',
   PRIMARY KEY (`seq`)
 );
+
+
+CREATE TABLE `tuition` (
+  `seq` INT(11) NOT NULL AUTO_INCREMENT COMMENT '번호',
+  `student_seq` INT(11) NOT NULL COMMENT '학생 번호',
+  `fees` INT(11) NULL DEFAULT NULL COMMENT '회비',
+  PRIMARY KEY (`seq`)
+);
