@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+# 개발자가 설정하지 않으면 아래 정보로 기본값이 설정됨
+spring:
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+  jpa:
+    database: H2
+    hibernate:
+      ddl-auto: none # DB를 초기화하는 속성
+      # none : 초기화하지 않음
+      # create : 시작할 때 스키마를 지우고 다시 생성
+      # create-drop : create와 동일하나, 종료될때 스키마 삭제 ( 내장 기본값 )
+      # update :도메인 객체와 db 스키마를 비교하여 스키마 업데이트
+      # validate : 도메인 객체가 DB 스키마와 일치하는지 검사
+
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    # initialization-mode: always # 다른 데이터 베이스 초기화를 사용하기 위한 옵션 ( H2는 자동 실행 )
+    # schema: schema.sql
+    # data: data.sql
+
+  h2:
+    console:
+      enabled: true # 콘솔 활성화 여부
+      path: /h2-console # 콘솔 주소변경
