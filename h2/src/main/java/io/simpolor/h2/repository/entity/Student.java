@@ -19,14 +19,6 @@ public class Student {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long studentId;
 
-	/* @Id
-	@GeneratedValue(generator = "UUID")
-	@GenericGenerator(
-			name = "UUID",
-			strategy = "org.hibernate.id.UUIDGenerator"
-	)
-	private long id; */
-
 	private String name;
 	private int grade;
 	private int age;

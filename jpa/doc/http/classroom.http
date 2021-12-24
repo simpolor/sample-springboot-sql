@@ -1,0 +1,39 @@
+# classrooms 전체 카운트
+GET http://127.0.0.1:8080/classrooms/total-count
+
+###
+
+# classrooms 목록 조회
+GET http://127.0.0.1:8080/classrooms
+
+###
+
+# classrooms 단건 조회
+GET http://127.0.0.1:8080/classrooms/1
+
+###
+
+# classrooms 등록
+POST http://127.0.0.1:8080/classrooms
+Content-Type: application/json
+
+{
+  "name": "꽃님반"
+}
+
+###
+
+# classrooms 수정
+PUT http://127.0.0.1:8080/classrooms/2
+Content-Type: application/json
+
+{
+  "name": "꽃님이반"
+}
+
+###
+
+# classrooms 삭제
+DELETE http://127.0.0.1:8080/classrooms/2
+
+###
