@@ -1,8 +1,3 @@
-# students 전체 카운트
-GET http://127.0.0.1:8080/students/total-count
-
-###
-
 # students 목록 조회
 GET http://127.0.0.1:8080/students
 
@@ -21,7 +16,20 @@ Content-Type: application/json
   "name": "박석영",
   "grade": 2,
   "age": 18,
-  "classroom_id": 1
+  "hobbies": [
+    "축구",
+    "사색"
+  ],
+  "favorite_foods": [
+    "치킨",
+    "피자"
+  ],
+  "classroom_id": 1,
+  "parent": {
+    "father_name": "박하늘",
+    "mother_name": "정새볔"
+
+  }
 }
 
 ###
@@ -34,7 +42,19 @@ Content-Type: application/json
   "name": "박석영",
   "grade": 2,
   "age": 19,
-  "classroom_id": 1
+  "hobbies": [
+    "축구"
+  ],
+  "favorite_foods": [
+    "치킨"
+  ],
+  "classroom_id": 1,
+  "parent": {
+    "id": 2,
+    "father_name": "박강철",
+    "mother_name": "정저녘"
+
+  }
 }
 ###
 

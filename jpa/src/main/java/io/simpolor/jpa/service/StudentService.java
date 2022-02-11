@@ -1,5 +1,6 @@
 package io.simpolor.jpa.service;
 
+import io.simpolor.jpa.model.ResultDto;
 import io.simpolor.jpa.repository.StudentRepository;
 import io.simpolor.jpa.repository.entity.Student;
 import lombok.RequiredArgsConstructor;
@@ -13,11 +14,6 @@ import java.util.Optional;
 public class StudentService {
 
     private final StudentRepository studentRepository;
-    private final ClassroomService classroomService;
-
-    public long getTotalCount() {
-        return studentRepository.count();
-    }
 
     public List<Student> getAll() {
 
@@ -34,9 +30,9 @@ public class StudentService {
         return studentOptional.get();
     }
 
-    public void create(Student student) {
+    public Student create(Student student) {
 
-        studentRepository.saveAndFlush(student);
+        return studentRepository.saveAndFlush(student);
     }
 
     public void update(Student student) {

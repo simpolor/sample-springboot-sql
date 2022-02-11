@@ -1,24 +1,38 @@
 package io.simpolor.jpa.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.simpolor.jpa.repository.entity.Classroom;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.util.CollectionUtils;
 
+import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Data
+@Setter
+@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ClassroomDto {
 
     private long id;
     private String name;
-    private List<StudentDto> students;
+    private Long studentCount;
+
+    public static ClassroomDto of(Classroom classroom){
+        return ClassroomDto.builder()
+                .id(classroom.getClassroomId())
+                .name(classroom.getName())
+                .studentCount(
+                        !CollectionUtils.isEmpty(classroom.getStudents())
+                        ? classroom.getStudents().stream().count()
+                        : 0L
+                )
+                .build();
+    }
 
     public Classroom toEntity() {
 
@@ -28,23 +42,38 @@ public class ClassroomDto {
                 .build();
     }
 
-    public static ClassroomDto of(Classroom classroom){
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public static class ClassroomDetail {
 
-        return ClassroomDto.builder()
-                .id(classroom.getClassroomId())
-                .name(classroom.getName())
-                .students(
-                        !CollectionUtils.isEmpty(classroom.getStudents())
-                                ? classroom.getStudents().stream().map(StudentDto::of).collect(Collectors.toList())
-                                : null)
-                .build();
+        private long id;
+        private String name;
+        private LocalDateTime createdAt;
+        private LocalDateTime updatedAt;
+        private List<StudentDto.StudentDetail> students;
+
+        public static ClassroomDetail of(Classroom classroom){
+            return ClassroomDetail.builder()
+                    .id(classroom.getClassroomId())
+                    .name(classroom.getName())
+                    .createdAt(classroom.getCreatedAt())
+                    .updatedAt(classroom.getUpdatedAt())
+                    .students(
+                            !CollectionUtils.isEmpty(classroom.getStudents())
+                            ? classroom.getStudents().stream().map(StudentDto.StudentDetail::ofClassroom).collect(Collectors.toList())
+                            : Collections.EMPTY_LIST
+                    )
+                    .build();
+        }
+
+        public static ClassroomDetail ofStudent(Classroom classroom){
+            return ClassroomDetail.builder()
+                    .id(classroom.getClassroomId())
+                    .name(classroom.getName())
+                    .build();
+        }
     }
-
-    public static List<ClassroomDto> of(List<Classroom> parents){
-
-        return parents.stream()
-                .map(ClassroomDto::of)
-                .collect(Collectors.toList());
-    }
-
 }

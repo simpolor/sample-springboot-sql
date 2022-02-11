@@ -1,11 +1,16 @@
 package io.simpolor.jpa.controller;
 
+import io.simpolor.jpa.model.ResultDto;
 import io.simpolor.jpa.model.StudentDto;
+import io.simpolor.jpa.repository.entity.Student;
 import io.simpolor.jpa.service.StudentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequestMapping("/students")
 @RestController
@@ -14,28 +19,35 @@ public class StudentController {
 
 	private final StudentService studentService;
 
-	@GetMapping(value="/total-count")
-	public Long totalCount() {
-
-		return studentService.getTotalCount();
-	}
-
 	@GetMapping
 	public List<StudentDto> list() {
 
-		return StudentDto.of(studentService.getAll());
+		List<Student> students = studentService.getAll();
+		if(CollectionUtils.isEmpty(students)){
+			return Collections.EMPTY_LIST;
+		}
+
+		return students.stream()
+				.map(StudentDto::of)
+				.collect(Collectors.toList());
 	}
 
 	@GetMapping(value="/{studentId}")
-	public StudentDto detail(@PathVariable Long studentId) {
+	public StudentDto.StudentDetail detail(@PathVariable Long studentId) {
 
-		return StudentDto.of(studentService.get(studentId));
+		Student student = studentService.get(studentId);
+
+		return StudentDto.StudentDetail.of(student);
 	}
 
 	@PostMapping
-	public void register(@RequestBody StudentDto request) {
+	public ResultDto register(@RequestBody StudentDto request) {
 
-		studentService.create(request.toEntity());
+		Student student = studentService.create(request.toEntity());
+
+		return ResultDto.builder()
+				.id(student.getStudentId())
+				.build();
 	}
 
 	@PutMapping(value="/{studentId}")

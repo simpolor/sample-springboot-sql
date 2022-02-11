@@ -14,10 +14,6 @@ public class ClassroomService {
 
     private final ClassroomRepository classroomRepository;
 
-    public long getTotalCount() {
-        return classroomRepository.count();
-    }
-
     public List<Classroom> getAll() {
 
         return classroomRepository.findAll();
@@ -33,9 +29,9 @@ public class ClassroomService {
         return optionalClassroom.get();
     }
 
-    public void create(Classroom classroom) {
+    public Classroom create(Classroom classroom) {
 
-        classroomRepository.saveAndFlush(classroom);
+        return classroomRepository.saveAndFlush(classroom);
     }
 
     public void update(Classroom classroom) {

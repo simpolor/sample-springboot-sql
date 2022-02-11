@@ -1,8 +1,3 @@
-# classrooms 전체 카운트
-GET http://127.0.0.1:8080/classrooms/total-count
-
-###
-
 # classrooms 목록 조회
 GET http://127.0.0.1:8080/classrooms
 
