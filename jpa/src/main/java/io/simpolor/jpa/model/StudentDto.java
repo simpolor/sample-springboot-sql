@@ -1,15 +1,16 @@
 package io.simpolor.jpa.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.simpolor.jpa.repository.entity.Classroom;
-import io.simpolor.jpa.repository.entity.Parent;
-import io.simpolor.jpa.repository.entity.Student;
+import io.simpolor.jpa.repository.entity.*;
 import lombok.*;
+import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Setter
 @Getter
@@ -26,6 +27,7 @@ public class StudentDto {
     private List<String> hobbies;
     private Set<String> favoriteFoods;
     private Long classroomId;
+    private List<Long> teacherIds;
     private ParentDto parent;
 
     public static StudentDto of(Student student){
@@ -47,6 +49,14 @@ public class StudentDto {
                                 ? student.getClassroom().getClassroomId()
                                 : null
                 )
+                .teacherIds(
+                        !CollectionUtils.isEmpty(student.getStudentTeachers())
+                            ? student.getStudentTeachers().stream()
+                                .map(StudentTeacher::getTeacher)
+                                .map(Teacher::getTeacherId)
+                                .collect(Collectors.toList())
+                            : null
+                )
                 .build();
     }
 
@@ -60,6 +70,13 @@ public class StudentDto {
                 .hobbies(this.hobbies)
                 .favoriteFoods(this.favoriteFoods)
                 .classroom(Classroom.builder().classroomId(this.classroomId).build())
+                .studentTeachers(
+                        !CollectionUtils.isEmpty(this.teacherIds)
+                                ? teacherIds.stream()
+                                    .map(id -> new StudentTeacher(id))
+                                    .collect(Collectors.toList())
+                                : null
+                )
                 .parent(Objects.nonNull(parent) ? parent.toEntity() : null)
                 .build();
     }
@@ -79,6 +96,7 @@ public class StudentDto {
         private Set<String> favoriteFoods;
         private ClassroomDto.ClassroomDetail classroom;
         private ParentDto.ParentDetail parent;
+        private List<TeacherDto> teachers;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
 
@@ -99,6 +117,14 @@ public class StudentDto {
                             Objects.nonNull(student.getParent())
                                     ? ParentDto.ParentDetail.of(student.getParent())
                                     : null)
+                    .teachers(
+                            !CollectionUtils.isEmpty(student.getStudentTeachers())
+                                    ? student.getStudentTeachers().stream()
+                                    .map(StudentTeacher::getTeacher)
+                                    .map(TeacherDto::of)
+                                    .collect(Collectors.toList())
+                                    : null
+                    )
                     .createdAt(student.getCreatedAt())
                     .updatedAt(student.getUpdatedAt())
                     .build();

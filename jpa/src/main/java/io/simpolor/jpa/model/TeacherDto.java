@@ -3,9 +3,6 @@ package io.simpolor.jpa.model;
 import io.simpolor.jpa.repository.entity.Teacher;
 import lombok.*;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Setter
 @Getter
 @Builder
@@ -15,11 +12,14 @@ public class TeacherDto {
 
     private Long id;
     private String name;
+    private String subject;
 
     public Teacher toEntity(){
 
         return Teacher.builder()
-                .teacherName(this.name)
+                .teacherId(this.id)
+                .name(this.name)
+                .subject(this.subject)
                 .build();
     }
 
@@ -27,7 +27,8 @@ public class TeacherDto {
 
         return TeacherDto.builder()
                 .id(teacher.getTeacherId())
-                .name(teacher.getTeacherName())
+                .name(teacher.getName())
+                .subject(teacher.getSubject())
                 .build();
     }
 }

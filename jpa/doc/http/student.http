@@ -25,6 +25,9 @@ Content-Type: application/json
     "피자"
   ],
   "classroom_id": 1,
+  "teacher_ids": [
+    2
+  ],
   "parent": {
     "father_name": "박하늘",
     "mother_name": "정새볔"
@@ -47,6 +50,9 @@ Content-Type: application/json
   ],
   "favorite_foods": [
     "치킨"
+  ],
+  "teacher_ids": [
+    1
   ],
   "classroom_id": 1,
   "parent": {

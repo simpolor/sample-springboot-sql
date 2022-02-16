@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
+@ToString
 @Entity
 @Setter
 @Getter
@@ -24,8 +25,7 @@ public class StudentTeacher {
 	@JoinColumn(name = "teacher_id")
 	private Teacher teacher;
 
-	public StudentTeacher(Long studentId, Long teacherId){
-		this.student = new Student(studentId);
+	public StudentTeacher(Long teacherId){
 		this.teacher = new Teacher(teacherId);
 	}
 }

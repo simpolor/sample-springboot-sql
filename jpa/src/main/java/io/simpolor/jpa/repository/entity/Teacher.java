@@ -1,14 +1,12 @@
 package io.simpolor.jpa.repository.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@ToString
 @Entity
 @Builder
 @Getter
@@ -20,9 +18,12 @@ public class Teacher {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long teacherId;
 
-	private String teacherName;
+	private String name;
+	private String subject;
 
-	@OneToMany(mappedBy = "teacher")
+	// @OneToMany(mappedBy = "teacher")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
+	@JoinColumn(name = "teacher_id")
 	private List<StudentTeacher> studentTeachers = new ArrayList<>();
 
 	public Teacher(Long teacherId){

@@ -32,3 +32,21 @@ CREATE TABLE `classroom` (
   `updated_at` DATETIME NULL DEFAULT NULL COMMENT '수정일',
   PRIMARY KEY (`classroom_id`)
 );
+
+CREATE TABLE `teacher` (
+  `teacher_id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '교사 아이디',
+  `name` VARCHAR(50) NOT NULL COMMENT '이름',
+  `subject` VARCHAR(50) NOT NULL COMMENT '과목',
+  `created_at` DATETIME NULL DEFAULT NULL COMMENT '등록일',
+  `updated_at` DATETIME NULL DEFAULT NULL COMMENT '수정일',
+  PRIMARY KEY (`teacher_id`)
+);
+
+CREATE TABLE `student_teacher` (
+  `student_teacher_id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '학생 교사 아이디',
+  `student_id` BIGINT(20) NULL COMMENT '학생 아이디',
+  `teacher_id` BIGINT(20) NULL COMMENT '교사 아이디',
+  `created_at` DATETIME NULL DEFAULT NULL COMMENT '등록일',
+  `updated_at` DATETIME NULL DEFAULT NULL COMMENT '수정일',
+  PRIMARY KEY (`student_teacher_id`)
+);

@@ -1,0 +1,36 @@
+# teachers 목록 조회
+GET http://127.0.0.1:8080/teachers
+
+###
+
+# teachers 단건 조회
+GET http://127.0.0.1:8080/teachers/1
+
+###
+
+# teachers 등록
+POST http://127.0.0.1:8080/teachers
+Content-Type: application/json
+
+{
+  "name": "박순자",
+  "subject": "체육"
+}
+
+###
+
+# teachers 수정
+PUT http://127.0.0.1:8080/teachers/3
+Content-Type: application/json
+
+{
+  "name": "박순희",
+  "subject": "음악"
+}
+
+###희
+
+# teachers 삭제
+DELETE http://127.0.0.1:8080/teachers/3
+
+###

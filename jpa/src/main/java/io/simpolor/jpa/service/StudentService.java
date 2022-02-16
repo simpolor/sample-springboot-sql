@@ -1,11 +1,13 @@
 package io.simpolor.jpa.service;
 
-import io.simpolor.jpa.model.ResultDto;
 import io.simpolor.jpa.repository.StudentRepository;
+import io.simpolor.jpa.repository.StudentTeacherRepository;
 import io.simpolor.jpa.repository.entity.Student;
+import io.simpolor.jpa.repository.entity.StudentTeacher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +16,7 @@ import java.util.Optional;
 public class StudentService {
 
     private final StudentRepository studentRepository;
+    private final StudentTeacherRepository studentTeacherRepository;
 
     public List<Student> getAll() {
 
@@ -32,7 +35,7 @@ public class StudentService {
 
     public Student create(Student student) {
 
-        return studentRepository.saveAndFlush(student);
+        return studentRepository.save(student);
     }
 
     public void update(Student student) {
