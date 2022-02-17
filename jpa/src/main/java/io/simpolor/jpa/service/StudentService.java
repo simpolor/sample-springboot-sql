@@ -43,7 +43,7 @@ public class StudentService {
         studentRepository.findById(student.getStudentId())
                 .orElseThrow(() -> new IllegalArgumentException("studentId : "+student.getStudentId()));
 
-        studentRepository.saveAndFlush(student);
+        studentRepository.save(student);
     }
 
     public void delete(long studentId) {

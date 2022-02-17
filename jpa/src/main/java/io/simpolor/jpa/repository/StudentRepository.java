@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
-    @Query(value = "SELECT s.* FROM student s WHERE seq = ?1", nativeQuery = true)
-    Student selectStudent(long seq);
+    @Query(value = "SELECT s.* FROM student s WHERE student_id = ?1", nativeQuery = true)
+    Student selectStudent(Long studentId);
 }
