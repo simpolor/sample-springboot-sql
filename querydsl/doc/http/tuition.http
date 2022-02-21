@@ -1,0 +1,14 @@
+# Tuition 리스트
+GET http://127.0.0.1:8080/tuitions
+
+###
+
+# Tuitions 리스트 ( 역정렬 )
+GET http://127.0.0.1:8080/tuitions/order-desc
+
+###
+
+# Tuitions 리스트 ( Student의 fees 합계 )
+GET http://127.0.0.1:8080/tuitions/student-group
+
+###
