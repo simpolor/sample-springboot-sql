@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/demo_db?serverTimezone=UTC
+    username: demo
+    password: demo
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+      show-sql: true
+      database: mysql
+    # database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  sql:
+    init:
+#      schema-locations: classpath:schema.sql
+#      data-locations: classpath:data.sql
+#      mode: always
