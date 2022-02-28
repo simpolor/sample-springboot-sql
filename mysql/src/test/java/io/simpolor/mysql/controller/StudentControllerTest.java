@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.util.Arrays;
 
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -52,7 +53,7 @@ public class StudentControllerTest {
 
         // when, then
         this.mockMvc.perform(
-                get("/student/list")
+                get("/students")
         )
         .andDo(MockMvcResultHandlers.print())
         .andExpect(status().isOk())
@@ -80,7 +81,7 @@ public class StudentControllerTest {
 
         // when, then
         this.mockMvc.perform(
-                get("/student/1")
+                get("/students/1")
         )
         .andDo(MockMvcResultHandlers.print())
         .andExpect(status().isOk())
@@ -96,11 +97,18 @@ public class StudentControllerTest {
     public void testRegister() throws Exception {
 
         // given
-        String json = "{ \"id\": 1, \"name\":\"하니\", \"grade\": 2, \"age\": 18 }";
+        String json = "{ \"id\": 3, \"name\":\"하니\", \"grade\": 2, \"age\": 18 }";
+        Student student = Student.builder()
+                .studentId(3L)
+                .name("하니")
+                .grade(2)
+                .age(18)
+                .build();
+        when(studentService.register(any())).thenReturn(student);
 
         // when, then
         this.mockMvc.perform(
-                post("/student")
+                post("/students")
                     .header("Accept", "application/json")
                     .contentType((MediaType.APPLICATION_JSON))
                     .content(json)
@@ -118,7 +126,7 @@ public class StudentControllerTest {
 
         // when, then
         this.mockMvc.perform(
-                put("/student/1")
+                put("/students/1")
                     .header("Accept", "application/json")
                     .contentType((MediaType.APPLICATION_JSON))
                     .content(json)
@@ -136,7 +144,7 @@ public class StudentControllerTest {
 
         // when, then
         this.mockMvc.perform(
-            delete("/student/{id}", id)
+            delete("/students/{id}", id)
         )
         .andDo(MockMvcResultHandlers.print())
         .andExpect(status().isOk())

@@ -17,5 +17,5 @@ spring:
   sql:
     init:
       mode: always
-#      schema-locations: classpath:mysql-schema.sql
+      #      schema-locations: classpath:mysql-mysql-schema.sql
       data-locations: classpath:mysql-data.sql

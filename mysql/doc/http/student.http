@@ -21,7 +21,7 @@ Content-Type: application/json
 ###
 
 # Student 수정
-PUT http://127.0.0.1:8080/students/1
+PUT http://127.0.0.1:8080/students/3
 Content-Type: application/json
 
 {
@@ -32,6 +32,6 @@ Content-Type: application/json
 ###
 
 # Student 삭제
-DELETE http://127.0.0.1:8080/students/1
+DELETE http://127.0.0.1:8080/students/3
 
 ###
