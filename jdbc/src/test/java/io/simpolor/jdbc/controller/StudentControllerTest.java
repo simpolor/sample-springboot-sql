@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.util.Arrays;
 
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -86,6 +87,8 @@ public class StudentControllerTest {
 
         // given
         String json = "{ \"id\": 1, \"name\":\"하니\", \"grade\": 2, \"age\": 18 }";
+        Student student = new Student(1L, "하니", 2, 18, Arrays.asList("독서"));
+        when(studentService.create(any())).thenReturn(student);
 
         // when, then
         this.mockMvc.perform(

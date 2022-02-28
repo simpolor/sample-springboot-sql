@@ -29,7 +29,7 @@ public class StudentService {
         return student;
     }
 
-    public Long create(Student student) {
+    public Student create(Student student) {
 
         return studentRepository.insert(student);
     }

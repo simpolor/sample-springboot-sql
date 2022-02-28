@@ -64,10 +64,10 @@ public class StudentRepositoryTest {
         Student student = new Student(studentId, "사나", 1, 17, Arrays.asList("달리기"));
 
         // when
-        long actual = studentRepository.insert(student);
+        Student actual = studentRepository.insert(student);
 
         // then
-        Assertions.assertThat(actual).isEqualTo(3L);
+        Assertions.assertThat(actual.getStudentId()).isEqualTo(3L);
     }
 
     @Test

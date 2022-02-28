@@ -64,7 +64,7 @@ public class StudentRepository {
         return null;
     }
 
-    public long insert(Student student){
+    public Student insert(Student student){
 
         StringBuilder query = new StringBuilder();
         query.append("INSERT INTO student ( name, grade, age, hobbies) ");
@@ -88,8 +88,9 @@ public class StudentRepository {
                 }, keyHolder);
 
         Number key = keyHolder.getKey();
+        student.setStudentId(key.longValue());
 
-        return key.longValue();
+        return student;
     }
 
     public void update(Student student){

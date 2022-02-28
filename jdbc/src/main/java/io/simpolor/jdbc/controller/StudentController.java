@@ -1,5 +1,6 @@
 package io.simpolor.jdbc.controller;
 
+import io.simpolor.jdbc.model.ResultDto;
 import io.simpolor.jdbc.model.StudentDto;
 import io.simpolor.jdbc.repository.entity.Student;
 import io.simpolor.jdbc.service.StudentService;
@@ -41,9 +42,11 @@ public class StudentController {
 	}
 
 	@PostMapping
-	public Long register(@RequestBody StudentDto studentDto) {
+	public ResultDto register(@RequestBody StudentDto studentDto) {
 
-		return studentService.create(studentDto.toEntity());
+		Student student = studentService.create(studentDto.toEntity());
+
+		return ResultDto.of(student.getStudentId());
 	}
 
 	@PutMapping(value="/{studentId}")

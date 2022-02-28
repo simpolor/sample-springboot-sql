@@ -1,6 +1,7 @@
 package io.simpolor.querydsl.controller;
 
 import com.querydsl.core.QueryResults;
+import io.simpolor.querydsl.model.ResultDto;
 import io.simpolor.querydsl.model.StudentDto;
 import io.simpolor.querydsl.repository.entity.Student;
 import io.simpolor.querydsl.service.StudentService;
@@ -36,9 +37,11 @@ public class StudentController {
 	}
 
 	@PostMapping
-	public void register(@RequestBody StudentDto request) {
+	public ResultDto register(@RequestBody StudentDto request) {
 
-		studentService.create(request.toEntity());
+		Student student = studentService.create(request.toEntity());
+
+		return ResultDto.of(student.getStudentId());
 	}
 
 	@PutMapping(value="/{studentId}")

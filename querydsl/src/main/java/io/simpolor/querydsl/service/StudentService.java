@@ -35,9 +35,9 @@ public class StudentService {
         return studentOptional.get();
     }
 
-    public void create(Student student) {
+    public Student create(Student student) {
 
-        studentRepository.save(student);
+        return studentRepository.save(student);
     }
 
     public void update(Student student) {

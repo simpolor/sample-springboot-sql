@@ -1,10 +1,11 @@
-package io.simpolor.h2.controller;
+package io.simpolor.querydsl.controller;
 
-import io.simpolor.h2.repository.entity.Student;
-import io.simpolor.h2.service.StudentService;
+import io.simpolor.querydsl.repository.entity.Student;
+import io.simpolor.querydsl.service.StudentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -17,8 +18,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.Arrays;
 
+import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -40,31 +41,15 @@ public class StudentControllerTest {
     }
 
     @Test
-    public void testTotalCount() throws Exception {
-
-        // given
-        Long totalCount = 3L;
-        when(studentService.getTotalCount()).thenReturn(totalCount);
-
-        // when, then
-        this.mockMvc.perform(
-                get("/students/total-count")
-        )
-        .andDo(MockMvcResultHandlers.print())
-        .andExpect(status().isOk())
-        .andExpect(
-                MockMvcResultMatchers
-                        .jsonPath("$")
-                        .value(is(3))
-        )
-        .andReturn();
-    }
-
-    @Test
     public void testList() throws Exception {
 
         // given
-        Student student = new Student(1, "하니", 2, 18);
+        Student student = Student.builder()
+                .studentId(1L)
+                .name("하니")
+                .grade(1)
+                .age(17)
+                .build();
         when(studentService.getAll()).thenReturn(Arrays.asList(student));
 
         // when, then
@@ -83,10 +68,15 @@ public class StudentControllerTest {
     }
 
     @Test
-    public void testDetail() throws Exception {
+    public void testView() throws Exception {
 
         // given
-        Student student = new Student(1, "하니", 2, 18);
+        Student student = Student.builder()
+                .studentId(1L)
+                .name("하니")
+                .grade(1)
+                .age(17)
+                .build();
         when(studentService.get(anyLong())).thenReturn(student);
 
 
@@ -108,10 +98,14 @@ public class StudentControllerTest {
     public void testRegister() throws Exception {
 
         // given
-        Student student = new Student(1, "하니", 2, 18);
-        when(studentService.create(any())).thenReturn(student);
-
-        String json = "{ \"seq\": 1, \"name\":\"하니\", \"grade\": 2, \"age\": 18 }";
+        String json = "{ \"id\": 1, \"name\":\"하니\", \"grade\": 2, \"age\": 18 }";
+        Student student = Student.builder()
+                .studentId(1L)
+                .name("하니")
+                .grade(1)
+                .age(17)
+                .build();
+        when(studentService.create(ArgumentMatchers.any())).thenReturn(student);
 
         // when, then
         this.mockMvc.perform(
@@ -129,10 +123,7 @@ public class StudentControllerTest {
     public void testModify() throws Exception {
 
         // given
-        Student student = new Student(1, "하니", 2, 19);
-        when(studentService.update(student)).thenReturn(student);
-
-        String json = "{ \"seq\": 1, \"name\":\"하니\", \"grade\": 2, \"age\": 19 }";
+        String json = "{ \"id\": 1, \"name\":\"하니\", \"grade\": 2, \"age\": 19 }";
 
         // when, then
         this.mockMvc.perform(
@@ -150,12 +141,11 @@ public class StudentControllerTest {
     public void testDelete() throws Exception {
 
         // given
-        long seq = 1L;
-        when(studentService.delete(seq)).thenReturn(seq);
+        long studentId = 1L;
 
         // when, then
         this.mockMvc.perform(
-            delete("/students/1")
+            delete("/students/{studentId}", studentId)
         )
         .andDo(MockMvcResultHandlers.print())
         .andExpect(status().isOk())
