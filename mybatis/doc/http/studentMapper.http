@@ -1,0 +1,39 @@
+# Student 전체 리스트
+GET http://127.0.0.1:8080/mapper/students
+
+###
+
+# Student 조회
+GET http://127.0.0.1:8080/mapper/students/1
+
+###
+
+# Student 등록
+POST http://127.0.0.1:8080/mapper/students
+Content-Type: application/json
+
+{
+  "name": "박석영",
+  "grade": 2,
+  "age": 18,
+  "hobbies": ["축구"]
+}
+
+###
+
+# Student 수정
+PUT http://127.0.0.1:8080/mapper/students/3
+Content-Type: application/json
+
+{
+  "name": "박석영",
+  "grade": 2,
+  "age": 19,
+  "hobbies": ["축구", "프로그래밍"]
+}
+###
+
+# Student 삭제
+DELETE http://127.0.0.1:8080/mapper/students/3
+
+###
