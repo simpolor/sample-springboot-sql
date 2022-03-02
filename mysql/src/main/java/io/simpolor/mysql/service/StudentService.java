@@ -29,12 +29,12 @@ public class StudentService {
         return optionalStudent.get();
     }
 
-    public Student register(Student student) {
+    public Student create(Student student) {
 
         return studentRepository.save(student);
     }
 
-    public void modify(Student student) {
+    public void update(Student student) {
 
         Optional<Student> optionalStudent = studentRepository.findById(student.getStudentId());
         if(!optionalStudent.isPresent()){

@@ -40,7 +40,7 @@ public class StudentController {
 	@PostMapping
 	public ResultDto register(@RequestBody StudentDto studentDto) {
 
-		Student student = studentService.register(studentDto.toEntity());
+		Student student = studentService.create(studentDto.toEntity());
 
 		return ResultDto.of(student.getStudentId());
 	}
@@ -50,7 +50,7 @@ public class StudentController {
 					   @RequestBody StudentDto studentDto) {
 
 		studentDto.setId(studentId);
-		studentService.modify(studentDto.toEntity());
+		studentService.update(studentDto.toEntity());
 	}
 
 	@DeleteMapping(value="/{studentId}")
