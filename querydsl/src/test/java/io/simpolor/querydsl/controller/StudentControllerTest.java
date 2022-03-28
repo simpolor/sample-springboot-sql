@@ -68,7 +68,7 @@ public class StudentControllerTest {
     }
 
     @Test
-    public void testView() throws Exception {
+    public void testDetail() throws Exception {
 
         // given
         Student student = Student.builder()

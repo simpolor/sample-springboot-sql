@@ -67,7 +67,7 @@ public class StudentControllerTest {
     }
 
     @Test
-    public void testView() throws Exception {
+    public void testDetail() throws Exception {
 
         // given
         Student student = Student.builder()
@@ -104,7 +104,7 @@ public class StudentControllerTest {
                 .grade(2)
                 .age(18)
                 .build();
-        when(studentService.register(any())).thenReturn(student);
+        when(studentService.get(any())).thenReturn(student);
 
         // when, then
         this.mockMvc.perform(

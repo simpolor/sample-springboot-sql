@@ -31,7 +31,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testStudentList() {
+    public void testGetAll() {
 
         // given
         Student student = Student.builder()
@@ -53,7 +53,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testStudentView() {
+    public void testGet() {
 
         // given
         long id = 1;
@@ -77,7 +77,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testStudentSave() {
+    public void testCreate() {
 
         // given
         long id = 1;
@@ -91,14 +91,14 @@ public class StudentServiceTest {
         when(studentRepository.save(any())).thenReturn(student);
 
         // when
-        studentService.register(student);
+        studentService.create(student);
 
         // then
         verify(studentRepository, times(1)).save(any());
     }
 
     @Test
-    public void testStudentModify() {
+    public void testUpdate() {
 
         // given
         long id = 1;
@@ -113,7 +113,7 @@ public class StudentServiceTest {
         when(studentRepository.save(any())).thenReturn(student);
 
         // when
-        studentService.modify(student);
+        studentService.update(student);
 
         // then
         verify(studentRepository, times(1)).findById(anyLong());
@@ -121,7 +121,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testDeleteById() {
+    public void testDelete() {
 
         // given
         long id = 1;

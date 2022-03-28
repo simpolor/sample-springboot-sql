@@ -31,7 +31,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testStudentList() {
+    public void testGetAll() {
 
         // given
         Student student = Student.builder()
@@ -53,7 +53,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testStudentView() {
+    public void testGet() {
 
         // given
         Long studentId = 1L;
@@ -77,7 +77,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testStudentSave() {
+    public void testCreate() {
 
         // given
         Long studentId = 1L;
@@ -98,7 +98,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testStudentModify() {
+    public void testUpdate() {
 
         // given
         Long studentId = 1L;
@@ -121,7 +121,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testDeleteById() {
+    public void testDelete() {
 
         // given
         Long studentId = 1L;

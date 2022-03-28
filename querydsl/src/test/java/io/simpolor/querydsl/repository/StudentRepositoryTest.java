@@ -30,7 +30,7 @@ public class StudentRepositoryTest {
 
     @BeforeEach
     public void setup() {
-        studentRepository.deleteAll();
+        /*studentRepository.deleteAll();
 
         Student student = Student.builder()
                 .studentId(1L)
@@ -48,7 +48,7 @@ public class StudentRepositoryTest {
 
         List<Student> students = Lists.newArrayList(student, student2);
 
-        studentRepository.saveAll(students);
+        studentRepository.saveAll(students);*/
     }
 
     @Test
