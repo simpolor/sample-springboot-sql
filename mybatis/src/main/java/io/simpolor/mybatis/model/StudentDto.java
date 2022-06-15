@@ -15,8 +15,8 @@ public class StudentDto {
 
 	private Long id;
 	private String name;
-	private int grade;
-	private int age;
+	private Integer grade;
+	private Integer age;
 	private List<String> hobbies;
 
 	public Student toEntity(){

@@ -35,7 +35,7 @@ public class StudentServiceTest {
 
         // given
         Student student = Student.builder()
-                .studentId(1)
+                .studentId(1L)
                 .name("홍길동")
                 .grade(1)
                 .age(17)
@@ -56,7 +56,7 @@ public class StudentServiceTest {
     public void testGet() {
 
         // given
-        long id = 1;
+        Long id = 1L;
 
         Student student = Student.builder()
                 .studentId(id)
@@ -80,7 +80,7 @@ public class StudentServiceTest {
     public void testCreate() {
 
         // given
-        long id = 1;
+        Long id = 1L;
         Student student = Student.builder()
                 .studentId(id)
                 .name("홍길동")
@@ -101,7 +101,7 @@ public class StudentServiceTest {
     public void testUpdate() {
 
         // given
-        long id = 1;
+        Long id = 1L;
         Student student = Student.builder()
                 .studentId(id)
                 .name("홍길동")
@@ -124,7 +124,7 @@ public class StudentServiceTest {
     public void testDelete() {
 
         // given
-        long id = 1;
+        Long id = 1L;
 
         // when
         studentService.delete(id);

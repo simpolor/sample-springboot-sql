@@ -64,7 +64,7 @@ public class StudentControllerTest {
     public void testList() throws Exception {
 
         // given
-        Student student = new Student(1, "하니", 2, 18);
+        Student student = new Student(1L, "하니", 2, 18);
         when(studentService.getAll()).thenReturn(Arrays.asList(student));
 
         // when, then
@@ -86,7 +86,7 @@ public class StudentControllerTest {
     public void testDetail() throws Exception {
 
         // given
-        Student student = new Student(1, "하니", 2, 18);
+        Student student = new Student(1L, "하니", 2, 18);
         when(studentService.get(anyLong())).thenReturn(student);
 
 
@@ -108,7 +108,7 @@ public class StudentControllerTest {
     public void testRegister() throws Exception {
 
         // given
-        Student student = new Student(1, "하니", 2, 18);
+        Student student = new Student(1L, "하니", 2, 18);
         when(studentService.create(any())).thenReturn(student);
 
         String json = "{ \"seq\": 1, \"name\":\"하니\", \"grade\": 2, \"age\": 18 }";
@@ -129,7 +129,7 @@ public class StudentControllerTest {
     public void testModify() throws Exception {
 
         // given
-        Student student = new Student(1, "하니", 2, 19);
+        Student student = new Student(1L, "하니", 2, 19);
         when(studentService.update(student)).thenReturn(student);
 
         String json = "{ \"seq\": 1, \"name\":\"하니\", \"grade\": 2, \"age\": 19 }";

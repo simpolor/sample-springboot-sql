@@ -7,7 +7,7 @@ import lombok.Getter;
 @Builder
 public class ResultDto {
 
-    private long id;
+    private Long id;
 
     public static ResultDto of(Long id){
         return ResultDto.builder()

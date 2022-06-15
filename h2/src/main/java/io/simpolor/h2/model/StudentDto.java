@@ -11,10 +11,10 @@ import java.util.stream.Collectors;
 @Getter
 public class StudentDto {
 
-	private long id;
+	private Long id;
 	private String name;
-	private int grade;
-	private int age;
+	private Integer grade;
+	private Integer age;
 
 	public Student toEntity(){
 

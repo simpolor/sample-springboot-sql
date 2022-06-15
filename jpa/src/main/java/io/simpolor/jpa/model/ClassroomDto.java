@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ClassroomDto {
 
-    private long id;
+    private Long id;
     private String name;
     private Long studentCount;
 

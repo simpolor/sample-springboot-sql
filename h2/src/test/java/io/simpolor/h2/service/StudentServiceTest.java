@@ -48,7 +48,7 @@ public class StudentServiceTest {
     public void testGetAll() {
 
         // given
-        Student student = new Student(1, "홍길동", 2, 18);
+        Student student = new Student(1L, "홍길동", 2, 18);
         when(studentRepository.findAll()).thenReturn(Arrays.asList(student));
 
         // when
@@ -85,7 +85,7 @@ public class StudentServiceTest {
         // given
         long studentId = 1;
 
-        Student student = new Student(0, "홍길동", 2, 18);
+        Student student = new Student(0L, "홍길동", 2, 18);
         Student response = new Student(studentId, "홍길동", 2, 18);
 
         when(studentRepository.save(student)).thenReturn(response);

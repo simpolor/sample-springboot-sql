@@ -15,7 +15,7 @@ public class Student {
 
 	private Long studentId;
 	private String name;
-	private int grade;
-	private int age;
+	private Integer grade;
+	private Integer age;
 	private List<String> hobbies;
 }
