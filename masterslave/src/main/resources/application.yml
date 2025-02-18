@@ -11,7 +11,7 @@ application:
   datasources:
     master:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://localhost:3306/master
+      jdbc-url: jdbc:mysql://localhost:3306/master_db
       username: demo
       password: demo
       connection-timeout: 20000
@@ -24,7 +24,7 @@ application:
       read-only: false
     slave:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://localhost:3306/slave
+      jdbc-url: jdbc:mysql://localhost:3306/slave_db
       username: demo
       password: demo
       connection-timeout: 20000
